@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build artifacts (regenerate with `npm run build`)
+# NOTE: dist/ is intentionally NOT ignored — dist/index.html is the product and
+# is committed so it can be opened directly or served (e.g. GitHub Pages).
+# If you later publish releases from CI, move dist/ here.
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Coverage
+coverage/
+
+# Environment & secrets
+.env
+.env.*
+
+# macOS
+.DS_Store
+
+# Editors (uncomment to ignore workspace-local editor state)
+# .vscode/

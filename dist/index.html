@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'none'; font-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; navigate-to 'none'">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Ching — a consultation for reflection</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #faf7f0;
+  --fg: #1f1d18;          /* 14.9:1 on --bg */
+  --muted: #5c574d;       /* 6.3:1 */
+  --line: #1f1d18;
+  --accent: #6b4c00;      /* 7.1:1 */
+  --card: #ffffff;
+  --border: #d8d2c4;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16150f;
+    --fg: #ece7d8;        /* 12.8:1 */
+    --muted: #b3ac99;     /* 7.0:1 */
+    --line: #ece7d8;
+    --accent: #e8c766;    /* 9.9:1 */
+    --card: #1f1d15;
+    --border: #3d3a2e;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  line-height: 1.55;
+  font-size: 17px;
+}
+main {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+h1, h2 { font-weight: 600; line-height: 1.2; }
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.3rem; margin-top: 0; }
+.masthead { text-align: center; margin: 0.75rem 0 2rem; }
+.masthead h1 { font-size: clamp(2.1rem, 8vw, 2.7rem); letter-spacing: 0.06em; margin: 0; }
+.masthead-subtitle {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+.masthead-tagline { font-size: 1.2rem; font-weight: 500; margin: 1.4rem 0 0; }
+.masthead-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+.masthead-rule::before, .masthead-rule::after {
+  content: "";
+  height: 1px;
+  width: 3.5rem;
+  background: var(--border);
+}
+p { margin: 0.75rem 0; }
+.muted { color: var(--muted); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  margin: 1rem 0;
+}
+label { display: block; margin: 0.75rem 0 0.25rem; }
+textarea, input[type="text"] {
+  width: 100%;
+  font: inherit;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+}
+textarea { min-height: 5.5rem; }
+button {
+  font: inherit;
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button:disabled { cursor: not-allowed; opacity: 0.65; }
+button:focus-visible, textarea:focus-visible, input:focus-visible, a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 0.75rem 0;
+  padding: 0.5rem 0.9rem;
+}
+input[type="radio"], input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 1.05rem;
+  height: 1.05rem;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+.radio-row { margin: 0.35rem 0; }
+.consent-row { margin-top: 0.7rem; border-top: 1px solid var(--border); padding-top: 0.7rem; }
+legend { padding: 0 0.4rem; }
+.controls { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1.1rem 0; }
+figure.hexagram { margin: 1rem auto; width: fit-content; }
+/* The result's single visual: the Unicode hexagram as the figure, with the
+   classical Chinese name beneath it, both centered.
+   The accessible name lives on the figure's aria-label (set at render time). */
+.figure-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.result-figure { margin: 0; }
+.hexagram-symbol {
+  font-size: 12rem; /* glyph ink at this size ~= the 6-bar figure height (measured in Chrome at desktop) */
+  line-height: 1;
+  color: var(--fg);
+  user-select: none;
+}
+/* hanzi caption beneath the symbol */
+.hexagram-chinese {
+  font-family: "Songti SC", "Songti TC", STSong, "Noto Serif CJK SC", "Noto Serif CJK TC", "SimSun", serif;
+  font-size: 4.75rem;
+  line-height: 1.1;
+  letter-spacing: 0.15em; /* hanzi want air, not kerning */
+  text-indent: 0.15em;    /* re-centre the trailing letter-space */
+  color: var(--muted);
+  margin: 0;
+}
+@media (max-width: 30rem) {
+  .hexagram-symbol { font-size: 9rem; }
+  .hexagram-chinese { font-size: 3.5rem; }
+}
+/* Casting figure geometry mirrors the Unicode hexagram glyph so the cast
+   lines visually mature INTO the result symbol (measured from glyph ink at
+   144px: bar 10x85, five even 7.2px gaps -> ratios of font-size below).
+   Desktop glyph ink at 12rem font is ~7.1rem x 8.1rem; bars match it. */
+.hex-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0.58rem 0; /* collapses to the glyph's inter-bar gap */
+}
+.hex-bar { width: 7.1rem; height: 0.85rem; display: flex; }
+.hex-bar .seg { background: var(--line); height: 100%; }
+.hex-bar.yang .seg { flex: 1; }
+.hex-bar.yin { justify-content: space-between; }
+.hex-bar.yin .seg { width: 44%; }
+.changing-mark {
+  position: absolute;
+  left: calc(100% + 0.6rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  gap: 0.35rem;
+  color: var(--accent);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+blockquote {
+  margin: 0.75rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid var(--border);
+  font-style: normal;
+}
+blockquote p { margin: 0.3rem 0; }
+.stable-note { font-style: italic; }
+.question-echo { white-space: pre-wrap; }
+.visually-live {
+  /* live region stays in the accessibility tree and always displayed (announcements
+     must fire) — but collapse to zero height while empty so it adds no dead space */
+  font-size: 0.95rem;
+  color: var(--muted);
+  min-height: 0;
+  margin: 0;
+}
+/* Status text appears only in #live; reserving height while non-empty is enough,
+   and the step sections below it are swapped as whole blocks anyway. */
+.visually-live:not(:empty) { min-height: 1.4em; margin: 0.75rem 0; }
+section[hidden] { display: none; }
+[hidden] { display: none !important; }
+footer { margin-top: 2.5rem; }
+/* Attribution link: --accent meets AA on both backgrounds (contrast.test.ts). */
+footer a { color: var(--accent); }
+@media (max-width: 30rem) {
+  /* same profile as the 9rem mobile glyph: bar 5.3rem x 0.62rem, gap .46rem */
+  .hex-bar { width: 5.5rem; height: 0.62rem; }
+  .hex-row { margin: 0.45rem 0; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="masthead">
+    <h1>I&nbsp;Ching</h1>
+    <p class="masthead-subtitle">The Book of Changes</p>
+    <h2 class="masthead-tagline">A consultation for reflection, not prediction.</h2>
+    <div class="masthead-rule" aria-hidden="true">&#x2630;</div>
+  </header>
+
+  <div id="live" class="visually-live" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <section id="step-question" aria-labelledby="question-heading">
+    <div class="card" id="intro-card"></div>
+    <h2 id="question-heading">Hold a question (optional)</h2>
+    <label for="question">Your question, in your own words. It stays on this page and in memory only — never saved, never sent.</label>
+    <textarea id="question" maxlength="500" rows="4"></textarea>
+    <p class="muted" id="question-help">Up to 500 characters. Anything longer is shortened to 500.</p>
+    <p id="truncation-notice" class="muted" hidden></p>
+    <fieldset id="method-fieldset">
+      <legend>Casting method</legend>
+      <div class="radio-row">
+        <label><input type="radio" name="method" id="method-coins" value="coins" checked>
+          Three coins — quicker, the later custom</label>
+      </div>
+      <div class="radio-row">
+        <label><input type="radio" name="method" id="method-yarrow" value="yarrow">
+          Yarrow stalks — the older probability profile</label>
+      </div>
+      <div class="radio-row consent-row">
+        <label><input type="checkbox" id="remember-method">
+          Remember my method on this device</label>
+      </div>
+      <p class="muted" id="method-disclosure">Remembering stores exactly one word — your method
+        choice — in this browser's local storage, on this device only. Unchecking deletes it
+        immediately. Your question, your casts, and everything else are never stored or sent.</p>
+    </fieldset>
+    <div class="controls">
+      <button id="cast" type="button">Cast the hexagram</button>
+    </div>
+    <p id="no-random" class="muted" role="note" hidden></p>
+  </section>
+
+  <section id="step-casting" aria-labelledby="casting-heading" hidden>
+    <h2 id="casting-heading" tabindex="-1">Casting</h2>
+    <p class="muted" id="casting-sub">Six lines arrive from the bottom up, as they were always cast.</p>
+    <figure class="hexagram" id="casting-figure" role="img" aria-label="The emerging hexagram" data-placeholder="true"></figure>
+    <div class="controls">
+      <button id="reveal-all" type="button">Reveal all</button>
+    </div>
+  </section>
+
+  <section id="step-result" aria-labelledby="result-heading" hidden>
+    <h2 id="result-heading" tabindex="-1">The hexagram</h2>
+    <div class="card">
+      <div class="figure-row">
+        <figure class="result-figure" id="primary-figure" role="img" aria-label="">
+          <span class="hexagram-symbol" id="primary-symbol" aria-hidden="true"></span>
+        </figure>
+        <p class="hexagram-chinese" id="primary-chinese" lang="zh-Hant"></p>
+      </div>
+      <p id="primary-identity"></p>
+      <p class="muted" id="primary-trigrams"></p>
+      <blockquote id="primary-judgement"><p></p></blockquote>
+      <blockquote id="primary-image"><p></p></blockquote>
+    </div>
+    <div class="card" id="related-card" hidden>
+      <h3 id="related-heading" tabindex="-1">The changing lines bring forth</h3>
+      <div class="figure-row">
+        <figure class="result-figure" id="related-figure" role="img" aria-label="">
+          <span class="hexagram-symbol" id="related-symbol" aria-hidden="true"></span>
+        </figure>
+        <p class="hexagram-chinese" id="related-chinese" lang="zh-Hant"></p>
+      </div>
+      <p id="related-identity"></p>
+      <p class="muted" id="related-trigrams"></p>
+      <blockquote id="related-judgement"><p></p></blockquote>
+      <blockquote id="related-image"><p></p></blockquote>
+    </div>
+    <p class="stable-note muted" id="stable-message" hidden></p>
+    <div class="card" id="echo-card" hidden>
+      <h3>Your question</h3>
+      <p id="question-echo" class="question-echo"></p>
+    </div>
+    <div class="controls">
+      <button id="cast-again" type="button">Cast again</button>
+      <button id="explain-toggle" type="button" aria-expanded="false">What is this about?</button>
+    </div>
+    <div class="card" id="re-explanation" hidden></div>
+  </section>
+
+  <footer>
+    <p class="muted" id="app-attribution"></p>
+  </footer>
+</main>
+<script>"use strict";(()=>{function o(t){let e=document.getElementById(t);if(e===null)throw new Error(`shell node missing: ${t}`);return e}function b(t){let e=o(t);if(e instanceof HTMLButtonElement)return e;throw new Error(`shell button missing: ${t}`)}function v(t){let e=o(t);if(e instanceof HTMLInputElement)return e;throw new Error(`shell input missing: ${t}`)}function F(){let t=o("step-question"),e=o("step-casting"),n=o("step-result"),r=o("question");if(!(r instanceof HTMLTextAreaElement))throw new Error("question must be a textarea");return{live:o("live"),steps:{question:t,casting:e,result:n},introCard:o("intro-card"),questionHeading:o("question-heading"),questionInput:r,truncationNotice:o("truncation-notice"),castButton:b("cast"),noRandom:o("no-random"),castingHeading:o("casting-heading"),castingFigure:o("casting-figure"),revealAllButton:b("reveal-all"),resultSection:n,resultHeading:o("result-heading"),primaryFigure:o("primary-figure"),primarySymbol:o("primary-symbol"),primaryChinese:o("primary-chinese"),primaryIdentity:o("primary-identity"),primaryTrigrams:o("primary-trigrams"),primaryJudgement:o("primary-judgement"),primaryImage:o("primary-image"),relatedCard:o("related-card"),relatedFigure:o("related-figure"),relatedSymbol:o("related-symbol"),relatedChinese:o("related-chinese"),relatedIdentity:o("related-identity"),relatedTrigrams:o("related-trigrams"),relatedJudgement:o("related-judgement"),relatedImage:o("related-image"),stableMessage:o("stable-message"),echoCard:o("echo-card"),questionEcho:o("question-echo"),castAgainButton:b("cast-again"),explainToggle:b("explain-toggle"),reExplanation:o("re-explanation"),appAttribution:o("app-attribution"),methodCoins:v("method-coins"),methodYarrow:v("method-yarrow"),rememberMethod:v("remember-method")}}function y(t,e){t.steps.question.hidden=e!=="question",t.steps.casting.hidden=e!=="casting",t.steps.result.hidden=e!=="result",(e==="question"?t.questionHeading:e==="casting"?t.castingHeading:t.resultHeading).focus()}function T(t){return(t&1)===1}function p(t){return t===6||t===9}function x(t){if(t===6||t===7||t===8||t===9)return t;throw new Error(`not a line value: ${String(t)}`)}var Ee=["first","second","third","fourth","fifth","top"];function K(t,e){let n=Ee[e-1];return`${T(t)?"nine":"six"} in the ${n} place`}var W="○",P="✕";function Y(t){return`${T(t)?"unbroken line":"broken line"}${p(t)?", changing":""}`}function G(t){let e=n=>{t.textContent=n};return{announceLine(n,r){e(`Line ${String(n)}: ${K(r,n)} - ${Y(r)}.`)},announceHexagram(n,r){e(`Hexagram ${String(n)} - ${r}.`)},announceStatus(n){e(n)}}}function V(t){t.textContent="";for(let e=6;e>=1;e--){let n=document.createElement("div");n.className="hex-row",n.dataset.position=String(e),n.hidden=!0,t.appendChild(n)}}function Le(t){let e=document.createElement("div");e.className=`hex-bar ${t?"yang":"yin"}`;let n=t?1:2;for(let r=0;r<n;r++){let i=document.createElement("div");i.className="seg",e.appendChild(i)}return e}function D(t,e){let n=t.querySelector(`.hex-row[data-position="${String(e.position)}"]`);if(n instanceof HTMLElement){if(n.textContent="",n.appendChild(Le(e.value===7||e.value===9)),e.changing){let r=document.createElement("span");r.className="changing-mark";let i=document.createElement("span");i.setAttribute("aria-hidden","true"),i.textContent=e.value===9?W:P,r.appendChild(i);let h=document.createElement("span");h.textContent="changing",r.appendChild(h),n.appendChild(r)}n.hidden=!1}}function C(t,e,n,r){t.setAttribute("aria-label",Me(e,n,r))}function Me(t,e,n){let r=n.length===0?"":`; changing ${n.length===1?"line":"lines"} in position${n.length===1?"":"s"} ${n.join(", ")}`;return`Hexagram ${String(t)} - ${e}${r}.`}function U(t,e,n){t.textContent=n??"",e.hidden=n===null}function J(t,e){t.textContent="",e.hidden=!0}function Q(t){let e=0;for(let n of t)T(n.value)&&(e|=1<<n.position-1);return e}function E(t){let e=0;for(let n of t)p(n.value)&&(e|=1<<n.position-1);return e}function Ie(t){return(t&1)+(t>>1&1)+(t>>2&1)|0}var X={id:"coins",label:"Three coins",probs:{6:1/8,7:3/8,8:3/8,9:1/8},draw(t){return x(6+Ie(t&7))}},z={id:"yarrow",label:"Yarrow stalks",probs:{6:1/16,7:5/16,8:7/16,9:3/16},draw(t){let e=t&15,n=e<=2?9:e<=7?7:e<=14?8:6;return x(n)}};function Z(t,e){let n=new Uint8Array(1);e.randomBytes(n);let r=n[0];return t.draw(r)}var He=[[1,7,7],[2,0,0],[3,2,1],[4,4,2],[5,2,7],[6,7,2],[7,0,2],[8,2,0],[9,6,7],[10,7,3],[11,0,7],[12,7,0],[13,7,5],[14,5,7],[15,0,4],[16,1,0],[17,3,1],[18,4,6],[19,0,3],[20,6,0],[21,5,1],[22,4,5],[23,4,0],[24,0,1],[25,7,1],[26,4,7],[27,4,1],[28,3,6],[29,2,2],[30,5,5],[31,3,4],[32,1,6],[33,7,4],[34,1,7],[35,5,0],[36,0,5],[37,6,5],[38,5,3],[39,2,4],[40,1,2],[41,4,3],[42,6,1],[43,3,7],[44,7,6],[45,3,0],[46,0,6],[47,3,2],[48,2,6],[49,3,5],[50,5,6],[51,1,1],[52,4,4],[53,6,4],[54,1,3],[55,1,5],[56,5,4],[57,6,6],[58,3,3],[59,6,2],[60,2,3],[61,6,3],[62,1,4],[63,2,5],[64,5,2]];function Se(){let t=new Array(64),e=new Array(64);for(let[n,r,i]of He){let h=(r<<3|i)&63;t[h]=n,e[n-1]=h}if(new Set(t).size!==64||t.some(n=>n===void 0||n<1||n>64))throw new Error("king-wen table malformed: not a bijection");return{p2k:t,k2p:e}}var ee=Se(),te=Object.freeze(ee.p2k),ke=Object.freeze(ee.k2p);var ne=[{id:0,name:"K'un",nature:"Earth",bits:0},{id:1,name:"Chen",nature:"Thunder",bits:1},{id:2,name:"K'an",nature:"Water",bits:2},{id:3,name:"Tui",nature:"Lake",bits:3},{id:4,name:"Ken",nature:"Mountain",bits:4},{id:5,name:"Li",nature:"Fire",bits:5},{id:6,name:"Hsün",nature:"Wind",bits:6},{id:7,name:"Ch'ien",nature:"Heaven",bits:7}];var re=[null,"Ch'ien / The Creative","K'uen / The Field","Chun / Difficulty","Meng / Youthful Folly","Hsu / Waiting","Sung / Conflict","Shih / The Army","Pi / Holding Together","Hsiao Ch'u / The Taming Power of the Small","Lu / Treading","T'ai / Peace","Pi / Standstill","T'ung Jên / Fellowship with Men","Ta Yu / Possession in Great Measure","Ch'ien / Modesty","Yü / Enthusiasm","Sui / Following","Ku / Work upon What Is Spoiled","Lin / Approach","Kuan / Contemplation","Shih Ho / Biting Through","Pi / Adornment","Po / Splitting Apart","Fu / Return","Wu Wang / Innocence","Ta Ch'u / The Taming Power of the Great","I / The Jaw (Nourishment)","Ta Kuo / Preponderance of the Great","K'an / The Abysmic (Water)","Li / The Beam (Fire)","Hsien / Influence","Hêng / Duration","T'un / Retreat","Ta Chuang / Power of the Great","Chin / Progress","Ming I / Darkening of the Light","Chia Jên / The Family","K'uei / Opposition","Chien / Obstruction","Hsieh / Deliverance","Sun / Diminution","I / Increase","Kuai / Break-through","Kou / Coming to Meet","Ts'ui / Gathering Together","Shêng / Pushing Upward","K'un / Oppression","Ching / The Well","Ko / Revolution (Molting)","Ting / The Cauldron","Chên / The Arouser (Thunder)","Kên / Keeping Still (Mountain)","Chien / Gradual Progress","Kuei Mei / The Marrying Maiden","Fêng / Abundance","Lu / The Wanderer","Hsün / The Yielding (Wind)","Tui / The Joyous (Lake)","Huan / Dispersion","Chieh / Limitation","Chung Fu / Internal Truth","Hsiao Kuo / Preponderance of the Small","Chi Chi / After Completion","Wei Chi / Before Completion"];var ae=[null,{judgement:"The Creative works sublime success, furthering through perseverance.",image:"The movement of Heaven is one that strongly stirs its own native character. So the ruler of all, strenuously labors to perfect his own virtue, and does not intermit his efforts."},{judgement:"The Field works supreme success, furthering through the firm correctness of the mare. If a man attempt to take the lead in any movement, he will go astray; if he follow his proper chief, he will afterwards find a guide. There will be advantage in obtaining friends in the plain paths of duty. Firm correctness is demanded.",image:"The earth's capacity is that of equanimity (and support). Thus the great man lays in a large store of virtue, and thus sustains all."},{judgement:"Ch'un indicates that in such a case as it contemplates there will be great progress and success, and that it will be advantageous to be firmly correct. It will not be advantageous to go anywhere unaided, but it will be advantageous to appoint helpers.",image:"Clouds and the moving thunder precede the fall of the rain. The superior man seeks to put everything in order, and set each thing right in its proper position."},{judgement:"Meng will have success. It is not I who go to the young and ask information; these young come to me. The first response I declare to them; if they ask a second and a third time, it is troublesome, and to the troublesome I do not respond. There will be advantage in being firm and correct.",image:"A perilous spring flows at the foot of the mountain. The superior man strives to be self-fulfilled, and cultivates his virtuous conduct."},{judgement:"With the confiding trust of an honest heart there is brilliant perspicuity, while its subject is firm and correct, waiting by the great stream in its proper channel, and there will be sublime success.",image:"The waters in the sky wait for the (time appointed by) Heaven. Thus the superior man eats and drinks, feasts in cheerfulness and merriment, and (so) keeps himself unanxious."},{judgement:"Sung shows that in such a case as it contemplates there will be difficulty in obtaining a hearing. If we look to the real state of the doubtful question, with a moderate and cautious treatment there will be fortunate result; if the case be carried to an issue there will be evil. It will be advantageous to see the great man; it will not be advantageous (to attempt) to cross the great stream.",image:"Heaven and water go their ways in opposite directions. The superior man, at the beginning of every affair, takes thought as to the root of possible disputes, and so keeps litigation from arising."},{judgement:"Shih (leads us) to put ourselves in trust with (such an one as can command) many soldiers, firm and correct, and there will be no error.",image:"In the middle of the earth is water. Thus does the ruler of a people cherish his people, and thus he nourishes the multitude."},{judgement:"Pi (denotes) him to whom all (do rightly) hold. He will be pronounced (worthy of) the great (submission). It will be further advantageous to be firm and correct. Those who come to him, as it were, without stop, will meet with no (cause for) sorrow; he whose period is not yet arrived will meet with evil.",image:"The waters are by the side of the lake. Thus did the ancient kings (draw) to (them) the various states, and gave encouragement to their friendship towards their lords."},{judgement:"Hsiao Ch'u (denotes) that the course will be carried out. Dense clouds, but no rain! They come from our western region.",image:"The (vast) clouds move over Heaven. The superior man studies to make (the display of) his (virtuous) character varied and elegant."},{judgement:"Lu treads on the tiger's tail; the tiger does not bite the man: sublime success.",image:"Heaven above, the lake below. The superior man discriminates properly between high and low, and settles the (proper) plans (of the) people."},{judgement:"The little goes and the great comes: good fortune and (abundance of) success.",image:"It is Heaven that sends down (its influences) and Earth that ascends (to meet them). Thus (the great) ruler completes (the ideas of) heaven and earth, and (thus) he assists (their) operations, so that peace and harmony reach through all beneath."},{judgement:"The great go away and the little come, and the (men of) virtue cease (to be employed); (the time) is not one favorable to the advance of the superior man.",image:"It is Heaven and Earth which do not hold (intercourse). Thus the (ruler) limits himself by his (moderate) measures of rule, and thus he tries to avoid (the difficulties of) his charge."},{judgement:"Fellowship with men in an open way brings success. It will be advantageous (to attempt to) cross the great stream. (In such work) the firm correctness of the superior man (is required).",image:"Heaven and fire unite in the same tendency. The superior man discriminates properly between the families (of men), and gives an accurate survey of the differences of things."},{judgement:"Ta Yu (indicates) sublime success.",image:"Fire is High in Heaven. The superior man represses what is evil, exalts what is good, and thus yields obediently to the benign (ordinance of Heaven)."},{judgement:"Modesty (possesses) creative (elements), success, and the (due) regard to the firm correctness (of its course). (The superior man) carries (his work) to completion.",image:"In the (bosom of the) earth is a mountain. The superior man takes away from what in himself is excessive, and adds to what in himself is little; he weighs the (various) cases (with care), and deals equitably with them."},{judgement:"Yü (indicates) favorable event in the installation of auxiliaries and the (moving of) armies.",image:"Thunder comes quickly forth from the earth in the spring. Thus the ancient kings (ordered their) music, did honor to (all) virtue, and thereby made (their) offering to (Heaven), and (so) made their (great) ancestor (to appear) and (accept) the (sacrifice)."},{judgement:"Sui possessed (the attributes of) creative (energy), untiring progress, and (a) true (heart), (and the) joy of (an) upright (course): it had no (cause for) error.",image:"Thunder hidden in the lake (and) resting. The superior man, when night approaches, goes in (to his chamber) for rest, (and gives himself) to quiet."},{judgement:"Ku (denotes) that there will be great progress and success; (and that it will be) advantageous to cross the great stream. (In such work) three days before (the beginning), and three days after (the end).",image:"Below the mountain (bloweth) the wind. The superior man stirs the dull (spirit of the people), and (so) braces their (souls)."},{judgement:"Lin (has the attributes of the) creative and progress and that which is true and correct, and there (comes) success. (But) in the eighth (month) evil will appear (in the time).",image:"Over the lake is the earth. Thus (unexhausted) is the purpose of the teacher, and the method of his instruction of the people, and his (wise) government of them."},{judgement:"The (presiding) host washed his hands in the ablutions, (and) had not (yet) presented his offering; (his) sincerity and dignity (were before all): from those above down to those below all were grave and composed.",image:"The (wind) moves within the region of the earth. Thus the ancient kings visited the various states (of the kingdom), and (so) gave their instructions to the people."},{judgement:"Shih Ho (indicates) success. It will be advantageous to let judgments be (duly) carried out.",image:"Thunder and lightning. Thus the ancient kings made (their) penalties complete, and (their) laws clear and manifest."},{judgement:"Adornment (shows) success. In (everything) which is not the (essential) business, (that) should be ornamented and adorned.",image:"Fire (blazes) at the foot of the mountain. The superior man, while he takes care to show clearly all (the details of his) government, does not (presume), on slight (ground), to decide (any) real litigation."},{judgement:"Po (indicates that there will not be the advantage) to go anywhere (and seek for gain).",image:"The mountain rests upon the earth. Thus those in high places make sure of their (own) resting-places, and (so) find tranquillity for the people beneath them."},{judgement:"Fu (indicates) success. (Men) go forth and come in without (perceiving any) injury; friends come, and there is no error. The (proper) course is repeated and completed; on the seventh (day) comes the return (of the departing Yang). It will be advantageous (to go) whithersoever (the subject of the hexagram) may (go).",image:"The thunder rolls and moves in the middle of the earth. Thus the ancient kings, on the (day of the) Solstice, shut (the passes); merchants did not pursue their gains, and (the rulers) did not stir (the people to any) enterprises."},{judgement:"Wu Wang possesses (the attributes of) creative (energy), untiring progress, and that which is true and correct. (But where the hexagram tells of) the calamity of the (merely) self-cultivator, (that calamity is not) his (proper) occupation.",image:"Under the sky the thunder (moves), and all things (follow). The ancient Kings, in accordance with this, flourished and nourished all things, timing their operations with the (advance of the) seasons."},{judgement:"Ta Ch'u favors (the maintenance of) firm correctness. (To one in such a position it is) fortunate not to remain at home (seeking only his own support). It will be advantageous to cross the great stream.",image:"In the mountain is (the storing energy of) Heaven. The superior man studies the speech and deeds of antiquity, and by them builds (the fabric of) his (virtuous) character."},{judgement:"I (should be thought of and inspected). We see the nourishing (favor) which (the subject) enjoys, and (learn) what it is which the (wise) man seeks to nourish (in himself).",image:"Below the mountain is the thunder. The superior man is careful of his words, and temperate in his eating and drinking."},{judgement:"Ta Kuo (represents) the ridgepole of the roof (as) bending in the middle. (For such a case) there will be advantage in (energetic action); (thus to act is) success. (The hexagram presents the idea of) free intercourse (with the times).",image:"The lake rises above the trees. The superior man, (though) standing alone, (feels) no dread; (though he were to) quit the world, he (would feel) no grief."},{judgement:"K'an (indicates the reappearance of) what is dangerous. (However, if) with sincerity (the heart) is bound (to what is right, one will) get (through the difficulty); (and) what is thus done will be valued.",image:"Water, pressing on (and following on) in successive waves of volume and depth. The superior man (is) constant in virtuous course, and (so) in the practice of (his) virtue (he finds his) lesson."},{judgement:"Li favors (the maintenance of) firm correctness: (so we find) success. (The care of) the cow (is the emblem here presented to us).",image:"The series of flames (illuminating) the region of Li. Thus the great man carries on (the series of his) bright (intelligence), and (so) his light is spread abroad over the four (quarters)."},{judgement:"Hsien (has) progress and success. Firm correctness is fortunate. To take a wife (brings) good fortune.",image:"Beneath the mountain is the lake. Thus the superior man (with a vacant heart) receives (the influence of) men."},{judgement:"Hêng (indicates) success. (In this there is) no error. (It favors) firm correctness. (It is the maintenance of the) permanent (under all the changes of circumstances). It will be advantageous (to go) whithersoever (the subject of the hexagram) may (go).",image:"Thunder (succeeding) the wind. The superior man (stands firm), though he (may) change (the direction of his march for the time)."},{judgement:"T'un (has) growth and progress (still); (but in) what is firm and correct (we see) the (only wise) retreat (for the superior man) in (such times).",image:"Under Heaven (is the mountain). The superior man (keeps bad men) at a distance, and (while he maintains) proper relations with them (is severe in his) manner (towards them)."},{judgement:"Ta Chuang (indicates) the advantage (arising from a man's) firm correctness.",image:"The thunder is in Heaven. The superior man does not (attempt to) tread (a course) which (his conduct) does not (qualify him to) follow."},{judgement:"Chin (represents) the prince who (conferred on his minister the) horses (drawn by) three (teams), and who three times in one day (loaded him with marks of) distinction. (Thus we see in this hexagram) the (minister's) acceptance (by the) king.",image:"The sun (goes forth) over the earth. The superior man (thus) brightens his own (bright) virtue."},{judgement:"In the (use of this) hexagram (the advance) is difficult. (The idea is) the maintenance of firm correctness (under difficulties).",image:"(The light has gone down) into the middle of the earth. Thus the superior man (rules) with a (mind refulgent with wisdom), (but) veils (his brightness) as it were from the crowd, (and so keeps the multitude) in a (proper) submission."},{judgement:"Chia Jên (indicates the success arising from) the due management of a family. (In it) the (influence of) the woman (is made apparent). Firm correctness (is required of) the wife (and mother).",image:"From the fire (comes forth) the (wind and) the family. The superior man (has) certainty in his words (and) constancy in his conduct."},{judgement:"K'uei (indicates that in) small (matters there will be) success.",image:"Above and below move in contrary directions. With (different) natures (things live) together: (different) females (dwell) in the same household. The superior man (preserves the appearance of) agreement, while his (thoughts go to the) minute (differences of) things."},{judgement:"Chien (has) progress and success. (It is) advantageous to see the great man. (In this hexagram) the southwest is the (region of) advantage; the northeast is the (region of) disadvantage. (Still) firm correctness is fortunate.",image:"Upon the mountain is water. The superior man turns his attention to himself, and (so) makes his (own) character more complete."},{judgement:"Hsieh has progress and success. (Its) northeast gives (us) no (goal to) go to; (while) if he go (to the southwest) there is (a goal to go to in) advance. There is (the delay of) the morning after the (time of) the new moon.",image:"Thunder and rain. The superior man forgives (mis)actions, and moderates (the) punishment (of) offences."},{judgement:"Sun (with its idea of) sincerity (is) sublime and without error. (The idea that the diminution can) only be (that) of the two (outer lines, while) the (inner pair) remain complete, (is sufficient for) the good (result).",image:"Beneath the lake is the mountain. The superior man curbs (his) anger, and (so) bridle his (passionate) desires."},{judgement:"I (indicates) that it will be advantageous to undertake (great) things, and that it will be (even) advantageous to cross the great stream.",image:"When (the) fire (is) below and the wind (is) above, one (looks) to (see) the (benefit) received. The superior man (hastens) to (emulate) virtue, and (as) if (he were running from) his (own) shadow, he puts away (his) errors."},{judgement:"Kuai (must be announced) to the court. (There is the danger of) a collision. (One must) declare (the) truth (and) give (the) notice (of the) emergency. (As for all private) commands, (they lead to the idea of arms: the first announcement) must be (made) to (one's own) city (first).",image:"(The waters of the) lake rise to Heaven. The superior man (in accordance, distributes his) favors, and (if he do so) he (may) carry (his point) without (coming to any) triumph."},{judgement:"Kou represents us with a sow that is fierce. (With this idea of) the advancement, the (Yin) nature (of the hexagram) grows.",image:"Beneath Heaven the wind (moves). Thus (the ruler of) a state sends his orders (to) the four (quarters), and gives them (knowledge) to the people."},{judgement:"Ts'ui (indicates) success. The king approaches his temple. By the free use of great (sacrificial victims) we see great success. This is furthered by what is firm and correct. (In it) appears the great man: if the seeker approaches (him), there will be no error. (There may be some) small (sorrow), but (it will not prevent the attainment of) the great (result).",image:"Over the lake (is gathered) the water. The superior man (thinks) of his arms and weapons, and thus keeps (the causes of) disorder under control."},{judgement:"Sheng (has) supreme success. In the course of firm correctness we see the appearance of (what brings) good fortune. The appearance of the great man will leave (the seeker after) no cause to fear. The celebration (of a great sacrifice will be) fortunate.",image:"In the earth (grows) the tree. The superior man follows (the course of) small (and increasing virtue), and thus he hews up his (character to what is) high and great."},{judgement:"K'un (possesses the virtues of the) creative, progress, and that which is true and correct. (In such circumstances the) great man (may have) success and fortune; the firm and correct (may have) fortune. But circumstances will not permit (all) announcements of one's (purpose).",image:"There is no water in the lake. The superior man (is ready to) sacrifice his life (in the prosecution of) his aim."},{judgement:"(Men) may change (the site of) a city; they do not change (the site of) a well. There is no (cause for) regret; there is no cause (for exultation): those who go and those who come on business of theirs (draw) from the well (and find it always) at hand. But if (before we have reached the supply and) the well is nearly exhausted, and there is not (water enough) to wet the (handle of) the bottle, there will be misfortune.",image:"Water above the wood. The superior man urges his people to (the diligent pursuit of) their calling, and excites them to seek mutual help (from one another)."},{judgement:"On one's own (day, the seeker after change) will be believed. (This change) is sublime, and is furthered through firm correctness; regret (will then disappear).",image:"In the lake is fire. The superior man regulates (the) calendar, and (so) makes clear the (succession of the) seasons and (the appointed) times."},{judgement:"Ting (has) supreme success.",image:"Above the wood (is the fire which it supports: the preparation of the food in) the Ting. The superior man (is) correct (in) his position, and (so) firmly (maintains the charge committed to him)."},{judgement:"Chên comes (with danger) alarming! (But afterwards) laughing words (are heard), (and the terror is) lost. The alarming (power of) the thunder extends over a hundred (leagues); (yet the man of self-awe) does not drop (the sacrificial) ladle (with which he draws) the libation.",image:"Double thunder (rolls on). The superior man, amid fear and trembling, (sees to it that) his own (moral life is) reformed and his character (established)."},{judgement:"(It is) the back (which is) made still: (so that one feels) as if he had no (body) to him, (and went) into his (own) apartment, and did not see (the people who were in) it. (Thus there is) no error.",image:"Closely joined (and connected) mountains. The superior man, while thinking (at all), does not go (in his thoughts) beyond his (own proper) position."},{judgement:"(The maiden who is married by) gradual (stages of ceremony) will (have) good fortune. Firm correctness (is) fortunate.",image:"On the mountain (grows) the tree. The superior man (holds) his virtuous (worth), and (so) improves the (character of the) times."},{judgement:"(In the case of) the (maiden) marrying there will be evil in (all onward) movement. Nothing that will be advantageous (is seen).",image:"Above the lake (is heard) the thunder. The superior man (recognizes the permanence of the proper union) in view of the (ever-enduring) issue (it contemplates), and (so) apprehends (the possibility that) evil (may arise) in (marriage)."},{judgement:"Fêng has (attained) success. (When) the king (has attained this) he is (counted) great. (What is sought in it is) the (noon of the) day; it is not (the evening).",image:"Both thunder and lightning come. The superior man (sits for the judgment) of lawsuits, and (with suitable) consideration (inflicts) punishments."},{judgement:"(In the case of) the traveller there will be small (achievements of) success; if (he do) what is firm and correct, there will be good fortune.",image:"On the mountain (burns) the fire. The superior man (is intelligent and careful) in his use of punishments, and does not drag out (the hearing of) lawsuits."},{judgement:"Hsün (indicates that what is small and weak gets) success by its advance. It is favorable (to go) whithersoever one will; the (influence of) what is firm and correct is favorable; (it is) favorable to see the great man.",image:"Winds following one another. The superior man (repeats) his commands, and (so) carries out his (administration)."},{judgement:"The Joyous (has the virtues of) the creative; and what is (furthered through firmness and) correctness will be celebrated.",image:"Lakes (contemplating each other). The superior man, with his friends, discusses (what he has learned) and (so) practises (what is taught)."},{judgement:"Huan (has) progress. The king approaches his temple. It is advantageous to cross the great stream. What is firm and correct will be fortunate.",image:"The wind (moves) over the water. The ancient kings (by this) established (their) services, and (so) reared (their temples to) their (great) ancestors."},{judgement:"Chieh (has attained) success. There will be regret about the hard (self-) regulation.",image:"The water (measures) over the lake. The superior man, (originally) framing (his rules), makes his (plan) full and precise, and discusses (the details of) his (course of virtue)."},{judgement:"Chung Fu (will be illustrated as from the) pigs and fishes. (There is thereby the idea of that sincere) advance. (If one can attain) the Great Man's (confidence), (even to the supposed case of criminals) — it will be fortunate. It is advantageous to cross the great stream. (Under) firm correctness (there will be) good fortune.",image:"Over the lake (sweeps) the wind. The superior man, (after) discussion (revised), delays (the execution of) punishments."},{judgement:"Hsiao Kuo (has) progress. What is small (may attain success); what is great, no. For what is small there is advance; for what is great no advance. (In such a case) there is need of the (utmost) firm correctness. (Then the case will be) as of the flying bird, (which), sending his note (down to the lower world), does not venture to soar upward but keeps to the lower (regions), and so meets with great good fortune.",image:"Above the lake (sounds) the thunder. The superior man, in his (conduct), is (more than) courteous; in his (services careful beyond the) ordinary, and in (the disposal of) his (finances) exceeds (only) in (the) economy (he uses)."},{judgement:"Chi Chi (will be found) small (and weak); what is firm and correct (will find) fortune. (There will be good fortune) at the commencement, (but) disorder in the termination.",image:"(The water is) above the fire. The superior man takes thought of, and provides against, the (occurrence of) calamity (through) continuance (of things in their present state)."},{judgement:"Wei Chi has (attained) progress. (Let us suppose the case of) the little fox (when he has nearly crossed over the stream), and (then) he wetting his tail! (Thus) there is nothing in all this that would be (of any) advantage.",image:"Fire (is seen) over the water (but) does not act on (what is below it) in accordance with its nature). The superior man (is) cautious (in the) distinguishing of (things), and (so keeps each in the place) proper for it."}],L='Texts: James Legge, "The Yi King", Sacred Books of the East, Vol. XVI (1882) — public domain.';function ie(t){if(!Number.isInteger(t)||t<0||t>63)throw new Error(`bad pattern: ${String(t)}`);let e=te[t];if(e===void 0||e<1||e>64)throw new Error(`no King Wen number for pattern ${t}`);let n=re[e],r=ae[e]??null;if(n==null||r===null)throw new Error(`missing static data for hexagram ${e}`);return{kwNumber:e,pattern:t,name:n,lower:oe(t&7),upper:oe(t>>3&7),judgement:r.judgement,image:r.image}}function oe(t){for(let e of ne)if(e.bits===t)return e;throw new Error(`no trigram for bits ${t}`)}var se=ie;function he(t,e){return e===0?null:ie((t^e)&63)}function M(t){if(!Number.isInteger(t)||t<1||t>64)throw new Error(`kw out of range: ${t}`);return String.fromCodePoint(19904+t-1)}var f=500;function I(t){let{method:e,random:n}=t,r=t.question,i=null,h=!1;r!==null&&r.trim()!==""&&(i=r.length>f?r.slice(0,f):r,h=r.length>f);let u=[];function l(){return u.length===6}function d(){if(!l())throw new Error("consultation not complete: derived fields unavailable");return Q(u)}function m(){let s=d(),g=E(u);return{hexagram:se(s),related:he(s,g)}}return{get state(){return l()?"complete":u.length>0?"casting":"asking"},method:e,get question(){return i},get questionTruncated(){return h},get lines(){return u.slice()},get revealedCount(){return u.length},get pattern(){return d()},get changingMask(){return d(),E(u)},get hexagram(){return m().hexagram},get related(){return m().related},castNextLine(){if(l())throw new Error("consultation already complete");let s=u.length+1,g=Z(e,n),w={position:s,value:g,changing:p(g)};return u.push(w),w},castAgain(){return I({method:e,random:n,question:null})}}}var Ae=[null,"乾","坤","屯","蒙","需","訟","師","比","小畜","履","泰","否","同人","大有","謙","豫","隨","蠱","臨","觀","噬嗑","賁","剝","復","无妄","大畜","頤","大過","坎","離","咸","恆","遯","大壯","晉","明夷","家人","睽","蹇","解","損","益","夬","姤","萃","升","困","井","革","鼎","震","艮","漸","歸妹","豐","旅","巽","兌","渙","節","中孚","小過","既濟","未濟"];function H(t){let e=t>=1&&t<=64?Ae[t]:void 0;if(typeof e!="string")throw new Error(`no Chinese name for KW ${t}`);return e}var S=[{text:"This is a single-purpose meditation on the I Ching, the ancient Chinese Book of Changes. You may hold a question in mind — or not — and cast six lines to arrive at one of the sixty-four hexagrams."},{text:"Each hexagram carries a classical judgement and image, quoted here from James Legge's 1882 public-domain translation, offered as a mirror for your own reflection."},{text:"This app makes no predictions, gives no advice on medical, legal or financial matters, and claims to know nothing about your future.",strong:!0},{text:"What you read is an old text; what it means to you is yours to decide."}],ue="Casting is unavailable on this device: it offers no secure random source (crypto.getRandomValues), and this app will not cast from a weaker one. Nothing else about the page is affected.",le="Your question was shortened to the first 500 characters for this cast.",de="No changing lines — the hexagram is stable. Nothing is missing from this cast; stillness is its own text.",k=" Rendered for reflection only; this app makes no predictions.",A='James Legge, "The Yi King"',me="https://en.wikipedia.org/wiki/James_Legge",ce='Opens in a new tab: Wikipedia article on James Legge, translator of "The Yi King"',ge="Your method choice will be remembered on this device.",pe="Your stored method choice has been deleted from this device.";function fe(){return"Casting begins. The bottom line arrives first."}function j(t,e,n){return n===null?`Hexagram ${String(t)} - ${e}, stable.`:`Hexagram ${String(t)} - ${e}, becoming hexagram ${String(n.num)} - ${n.name}.`}function N(t,e){return`${String(t)} · ${e}`}function R(t,e){return`Trigrams: ${t} above · ${e} below`}var je=400;function be(t){let{shell:e,announcer:n}=t,r=null,i=null;function h(){i!==null&&(clearInterval(i),i=null)}function u(){if(r===null||r.state==="complete")return!1;let a=r.castNextLine();return D(e.castingFigure,a),n.announceLine(a.position,a.value),r.revealedCount<6}function l(){if(r===null)return;let a=r.hexagram,s=r.related,g=r.changingMask;e.primaryIdentity.textContent=N(a.kwNumber,a.name),e.primaryTrigrams.textContent=R(`${a.upper.name} (${a.upper.nature})`,`${a.lower.name} (${a.lower.nature})`),c(e.primaryJudgement,a.judgement),c(e.primaryImage,a.image),e.primarySymbol.textContent=M(a.kwNumber),e.primaryChinese.textContent=H(a.kwNumber);let w=Ne(r.lines.flatMap(q=>q.changing?[q.position]:[]));C(e.primaryFigure,a.kwNumber,a.name,w),s!==null&&g!==0?(e.relatedCard.hidden=!1,e.stableMessage.hidden=!0,e.relatedIdentity.textContent=N(s.kwNumber,s.name),e.relatedTrigrams.textContent=R(`${s.upper.name} (${s.upper.nature})`,`${s.lower.name} (${s.lower.nature})`),c(e.relatedJudgement,s.judgement),c(e.relatedImage,s.image),C(e.relatedFigure,s.kwNumber,s.name,[]),e.relatedSymbol.textContent=M(s.kwNumber),e.relatedChinese.textContent=H(s.kwNumber),n.announceStatus(j(a.kwNumber,a.name,{num:s.kwNumber,name:s.name}))):(e.relatedSymbol.textContent="",e.relatedChinese.textContent="",e.relatedCard.hidden=!0,e.stableMessage.hidden=!1,e.stableMessage.textContent=de,n.announceStatus(j(a.kwNumber,a.name,null))),U(e.questionEcho,e.echoCard,r.question),y(e,"result")}function d(){h(),i=setInterval(()=>{u()||(h(),l())},je)}let m={showQuestion(){h(),r=null,e.castButton.disabled=!we(),y(e,"question")},startCast(){if(!we())return;let a=e.questionInput.value;a.length>f?(e.truncationNotice.textContent=le,e.truncationNotice.hidden=!1):e.truncationNotice.hidden=!0,r=t.beginConsultation(a),V(e.castingFigure),e.castingFigure.removeAttribute("aria-label"),y(e,"casting"),n.announceStatus(fe()),u()?d():l()},revealAll(){for(h();r!==null&&r.state!=="complete";)u();l()},castAgain(){h(),r=null,e.questionInput.value="",e.truncationNotice.textContent="",e.truncationNotice.hidden=!0,e.primarySymbol.textContent="",e.primaryChinese.textContent="",e.primaryIdentity.textContent="",e.primaryTrigrams.textContent="",c(e.primaryJudgement,""),c(e.primaryImage,""),e.relatedSymbol.textContent="",e.relatedChinese.textContent="",e.relatedIdentity.textContent="",e.relatedTrigrams.textContent="",c(e.relatedJudgement,""),c(e.relatedImage,""),e.relatedCard.hidden=!0,e.stableMessage.textContent="",e.stableMessage.hidden=!0,J(e.questionEcho,e.echoCard),e.reExplanation.hidden=!0,e.explainToggle.setAttribute("aria-expanded","false"),n.announceStatus(""),m.showQuestion()},toggleExplanation(){let a=e.reExplanation.hidden;e.reExplanation.hidden=!a,e.explainToggle.setAttribute("aria-expanded",a?"true":"false")}};return m}function c(t,e){let n=t.firstElementChild;n instanceof HTMLParagraphElement&&(n.textContent=e)}function we(){return typeof crypto<"u"&&typeof crypto.getRandomValues=="function"}function Ne(t){return t.filter(e=>Number.isInteger(e)&&e>=1&&e<=6).sort((e,n)=>e-n)}function O(t,e){t.replaceChildren();for(let n of e){let r=document.createElement("p");if(n.strong===!0){let i=document.createElement("strong");i.textContent=n.text,r.appendChild(i)}else r.textContent=n.text;t.appendChild(r)}}function ye(t){t.replaceChildren();let e=L.split(A),[n,r]=e;if(e.length!==2||n===void 0||r===void 0){t.textContent=L+k;return}let i=document.createElement("a");i.href=me,i.target="_blank",i.rel="noopener noreferrer",i.title=ce,i.textContent=A,t.appendChild(document.createTextNode(n)),t.appendChild(i),t.appendChild(document.createTextNode(r+k))}var Re=Object.freeze(["iching.method"]),_=Re[0],Oe=64;function $(t){try{t()}catch{}}function _e(t){try{let e=globalThis,n=e.localStorage?.getItem(t)??null;return n!==null&&n.length>Oe?($(()=>e.localStorage?.removeItem(t)),null):n}catch{return null}}function Te(){let t=_e(_);return t==="coins"||t==="yarrow"?t:null}function B(t){$(()=>{globalThis.localStorage?.setItem(_,t)})}function ve(){$(()=>{globalThis.localStorage?.removeItem(_)})}function xe(t){let e=F(),n=G(e.live),r=t.initialMethodId,i=a=>a==="yarrow"?z:X,h=Te(),u=h!==null;h!==null&&(r=h),e.methodCoins.checked=r==="coins",e.methodYarrow.checked=r==="yarrow",e.rememberMethod.checked=u,(!t.secureRandomAvailable||t.randomSource===null)&&(e.castButton.disabled=!0,e.noRandom.textContent=ue,e.noRandom.hidden=!1),O(e.introCard,S),O(e.reExplanation,S);let l=be({shell:e,announcer:n,beginConsultation(a){let s=t.randomSource;if(s===null)throw new Error("casting without a secure source is refused");return I({method:i(r),random:s,question:a})}});ye(e.appAttribution),e.castButton.addEventListener("click",()=>{l.startCast()}),e.revealAllButton.addEventListener("click",()=>{l.revealAll()}),e.castAgainButton.addEventListener("click",()=>{l.castAgain()}),e.explainToggle.addEventListener("click",()=>{l.toggleExplanation()});let d=()=>e.methodYarrow.checked?"yarrow":"coins",m=()=>{r=d(),e.rememberMethod.checked&&B(r)};return e.methodCoins.addEventListener("change",m),e.methodYarrow.addEventListener("change",m),e.rememberMethod.addEventListener("change",()=>{e.rememberMethod.checked?(r=d(),B(r),n.announceStatus(ge)):(ve(),n.announceStatus(pe))}),l.showQuestion(),{steps:l,shell:e,setMethod(a){r=a},methodId(){return r}}}function Ce(){return typeof crypto<"u"&&typeof crypto.getRandomValues=="function"}function $e(){return Ce()?{randomBytes(t){return crypto.getRandomValues(t),t}}:null}var Be=Ce();xe({secureRandomAvailable:Be,randomSource:$e(),initialMethodId:"coins"});})();
+</script>
+</body>
+</html>

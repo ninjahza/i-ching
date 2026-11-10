@@ -1,0 +1,25 @@
+{
+  "name": "iching-consultation",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Single-file, offline I Ching consultation app (feature 001)",
+  "type": "module",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/",
+    "build": "node scripts/build.mjs",
+    "verify": "node scripts/verify-dist.mjs dist/index.html",
+    "gen:deploy": "node scripts/gen-deploy.mjs",
+    "verify:deploy": "node scripts/verify-deploy.mjs",
+    "corpus": "node scripts/gen-corpus.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  }
+}

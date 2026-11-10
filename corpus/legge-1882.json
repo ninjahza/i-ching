@@ -1,0 +1,520 @@
+{
+  "attribution": "James Legge, \"The Yi King\", Sacred Books of the East, Vol. XVI (M. Schott, in: The Confucius Siou Ching, 1879; revised edition 1882) — public domain. This archive file is a hand-curated transcription of the Legge 1882 judgement and Image (Ta-chuan commentary on the Symbol) texts for all 64 hexagrams in King Wen order, assembled without network access to a machine-readable source copy, using no source other than the public-domain Legge translation as its basis; no other published rendering was consulted; wording may deviate from the printed original. The Wilhelm/ Baynes translation (1950, in copyright) was not consulted and contributes no wording here.",
+  "scope": "v1 scope (spec A-5): judgement + image texts only; line texts not included",
+  "assembled": "2026-11-09",
+  "assembly_method": "hand-curated transcription (R-2 approved fallback; no network intake available)",
+  "hexagrams": [
+    {
+      "number": 1,
+      "chinese": "乾",
+      "name": "Ch'ien",
+      "english": "The Creative",
+      "judgement": "The Creative works sublime success, furthering through perseverance.",
+      "image": "The movement of Heaven is one that strongly stirs its own native character. So the ruler of all, strenuously labors to perfect his own virtue, and does not intermit his efforts."
+    },
+    {
+      "number": 2,
+      "chinese": "坤",
+      "name": "K'un",
+      "english": "The Field (the Receptive)",
+      "judgement": "The Field works supreme success, furthering through the firm correctness of the mare. If a man attempt to take the lead in any movement, he will go astray; if he follow his proper chief, he will afterwards find a guide. There will be advantage in obtaining friends in the plain paths of duty. Firm correctness is demanded.",
+      "image": "The earth's capacity is that of equanimity (and support). Thus the great man lays in a large store of virtue, and thus sustains all."
+    },
+    {
+      "number": 3,
+      "chinese": "屯",
+      "name": "Chun",
+      "english": "Difficulty (Spring and Delight)",
+      "judgement": "Ch'un indicates that in such a case as it contemplates there will be great progress and success, and that it will be advantageous to be firmly correct. It will not be advantageous to go anywhere unaided, but it will be advantageous to appoint helpers.",
+      "image": "Clouds and the moving thunder precede the fall of the rain. The superior man seeks to put everything in order, and set each thing right in its proper position."
+    },
+    {
+      "number": 4,
+      "chinese": "蒙",
+      "name": "Meng",
+      "english": "Youthful Folly",
+      "judgement": "Meng will have success. It is not I who go to the young and ask information; these young come to me. The first response I declare to them; if they ask a second and a third time, it is troublesome, and to the troublesome I do not respond. There will be advantage in being firm and correct.",
+      "image": "A perilous spring flows at the foot of the mountain. The superior man strives to be self-fulfilled, and cultivates his virtuous conduct."
+    },
+    {
+      "number": 5,
+      "chinese": "需",
+      "name": "Hsu",
+      "english": "Waiting for the Event; Holding Fast",
+      "judgement": "With the confiding trust of an honest heart there is brilliant perspicuity, while its subject is firm and correct, waiting by the great stream in its proper channel, and there will be sublime success.",
+      "image": "The waters in the sky wait for the (time appointed by) Heaven. Thus the superior man eats and drinks, feasts in cheerfulness and merriment, and (so) keeps himself unanxious."
+    },
+    {
+      "number": 6,
+      "chinese": "訟",
+      "name": "Sung",
+      "english": "Conflict about what is really Doubtful",
+      "judgement": "Sung shows that in such a case as it contemplates there will be difficulty in obtaining a hearing. If we look to the real state of the doubtful question, with a moderate and cautious treatment there will be fortunate result; if the case be carried to an issue there will be evil. It will be advantageous to see the great man; it will not be advantageous (to attempt) to cross the great stream.",
+      "image": "Heaven and water go their ways in opposite directions. The superior man, at the beginning of every affair, takes thought as to the root of possible disputes, and so keeps litigation from arising."
+    },
+    {
+      "number": 7,
+      "chinese": "師",
+      "name": "Shih",
+      "english": "The Army. Many Soldiers",
+      "judgement": "Shih (leads us) to put ourselves in trust with (such an one as can command) many soldiers, firm and correct, and there will be no error.",
+      "image": "In the middle of the earth is water. Thus does the ruler of a people cherish his people, and thus he nourishes the multitude."
+    },
+    {
+      "number": 8,
+      "chinese": "比",
+      "name": "Pi",
+      "english": "Holding Together (Union)",
+      "judgement": "Pi (denotes) him to whom all (do rightly) hold. He will be pronounced (worthy of) the great (submission). It will be further advantageous to be firm and correct. Those who come to him, as it were, without stop, will meet with no (cause for) sorrow; he whose period is not yet arrived will meet with evil.",
+      "image": "The waters are by the side of the lake. Thus did the ancient kings (draw) to (them) the various states, and gave encouragement to their friendship towards their lords."
+    },
+    {
+      "number": 9,
+      "chinese": "小畜",
+      "name": "Hsiao Ch'u",
+      "english": "The Taming Power of the Small",
+      "judgement": "Hsiao Ch'u (denotes) that the course will be carried out. Dense clouds, but no rain! They come from our western region.",
+      "image": "The (vast) clouds move over Heaven. The superior man studies to make (the display of) his (virtuous) character varied and elegant."
+    },
+    {
+      "number": 10,
+      "chinese": "履",
+      "name": "Lu",
+      "english": "Treading under the Foot; Stepping",
+      "judgement": "Lu treads on the tiger's tail; the tiger does not bite the man: sublime success.",
+      "image": "Heaven above, the lake below. The superior man discriminates properly between high and low, and settles the (proper) plans (of the) people."
+    },
+    {
+      "number": 11,
+      "chinese": "泰",
+      "name": "T'ai",
+      "english": "Peace; Prosperity",
+      "judgement": "The little goes and the great comes: good fortune and (abundance of) success.",
+      "image": "It is Heaven that sends down (its influences) and Earth that ascends (to meet them). Thus (the great) ruler completes (the ideas of) heaven and earth, and (thus) he assists (their) operations, so that peace and harmony reach through all beneath."
+    },
+    {
+      "number": 12,
+      "chinese": "否",
+      "name": "Pi",
+      "english": "Obstruction; Decay",
+      "judgement": "The great go away and the little come, and the (men of) virtue cease (to be employed); (the time) is not one favorable to the advance of the superior man.",
+      "image": "It is Heaven and Earth which do not hold (intercourse). Thus the (ruler) limits himself by his (moderate) measures of rule, and thus he tries to avoid (the difficulties of) his charge."
+    },
+    {
+      "number": 13,
+      "chinese": "同人",
+      "name": "T'ung Jên",
+      "english": "Fellowship with Men. Community in Knowledge and Feeling",
+      "judgement": "Fellowship with men in an open way brings success. It will be advantageous (to attempt to) cross the great stream. (In such work) the firm correctness of the superior man (is required).",
+      "image": "Heaven and fire unite in the same tendency. The superior man discriminates properly between the families (of men), and gives an accurate survey of the differences of things."
+    },
+    {
+      "number": 14,
+      "chinese": "大有",
+      "name": "Ta Yu",
+      "english": "Possession in Great Measure. Great Property",
+      "judgement": "Ta Yu (indicates) sublime success.",
+      "image": "Fire is High in Heaven. The superior man represses what is evil, exalts what is good, and thus yields obediently to the benign (ordinance of Heaven)."
+    },
+    {
+      "number": 15,
+      "chinese": "謙",
+      "name": "Ch'ien (Modesty)",
+      "english": "Modesty. Self-Depreciation",
+      "judgement": "Modesty (possesses) creative (elements), success, and the (due) regard to the firm correctness (of its course). (The superior man) carries (his work) to completion.",
+      "image": "In the (bosom of the) earth is a mountain. The superior man takes away from what in himself is excessive, and adds to what in himself is little; he weighs the (various) cases (with care), and deals equitably with them."
+    },
+    {
+      "number": 16,
+      "chinese": "豫",
+      "name": "Yü",
+      "english": "Pleasing and Delight. Ease and Contentment",
+      "judgement": "Yü (indicates) favorable event in the installation of auxiliaries and the (moving of) armies.",
+      "image": "Thunder comes quickly forth from the earth in the spring. Thus the ancient kings (ordered their) music, did honor to (all) virtue, and thereby made (their) offering to (Heaven), and (so) made their (great) ancestor (to appear) and (accept) the (sacrifice)."
+    },
+    {
+      "number": 17,
+      "chinese": "隨",
+      "name": "Sui",
+      "english": "Follow; the Followed. The Yielding; the Accommodating",
+      "judgement": "Sui possessed (the attributes of) creative (energy), untiring progress, and (a) true (heart), (and the) joy of (an) upright (course): it had no (cause for) error.",
+      "image": "Thunder hidden in the lake (and) resting. The superior man, when night approaches, goes in (to his chamber) for rest, (and gives himself) to quiet."
+    },
+    {
+      "number": 18,
+      "chinese": "蠱",
+      "name": "Ku",
+      "english": "Work upon What Is Spoiled. Decay; Corruption",
+      "judgement": "Ku (denotes) that there will be great progress and success; (and that it will be) advantageous to cross the great stream. (In such work) three days before (the beginning), and three days after (the end).",
+      "image": "Below the mountain (bloweth) the wind. The superior man stirs the dull (spirit of the people), and (so) braces their (souls)."
+    },
+    {
+      "number": 19,
+      "chinese": "臨",
+      "name": "Lin",
+      "english": "Approach; Draw Near. Inspection, Visitation",
+      "judgement": "Lin (has the attributes of the) creative and progress and that which is true and correct, and there (comes) success. (But) in the eighth (month) evil will appear (in the time).",
+      "image": "Over the lake is the earth. Thus (unexhausted) is the purpose of the teacher, and the method of his instruction of the people, and his (wise) government of them."
+    },
+    {
+      "number": 20,
+      "chinese": "觀",
+      "name": "Kuan",
+      "english": "Survey and Inspection. The Act of Contemplation",
+      "judgement": "The (presiding) host washed his hands in the ablutions, (and) had not (yet) presented his offering; (his) sincerity and dignity (were before all): from those above down to those below all were grave and composed.",
+      "image": "The (wind) moves within the region of the earth. Thus the ancient kings visited the various states (of the kingdom), and (so) gave their instructions to the people."
+    },
+    {
+      "number": 21,
+      "chinese": "噬嗑",
+      "name": "Shih Ho",
+      "english": "Biting and Penetration. Legal Chastisement",
+      "judgement": "Shih Ho (indicates) success. It will be advantageous to let judgments be (duly) carried out.",
+      "image": "Thunder and lightning. Thus the ancient kings made (their) penalties complete, and (their) laws clear and manifest."
+    },
+    {
+      "number": 22,
+      "chinese": "賁",
+      "name": "Pi",
+      "english": "Grace, Adornment. Embellishment, Decoration",
+      "judgement": "Adornment (shows) success. In (everything) which is not the (essential) business, (that) should be ornamented and adorned.",
+      "image": "Fire (blazes) at the foot of the mountain. The superior man, while he takes care to show clearly all (the details of his) government, does not (presume), on slight (ground), to decide (any) real litigation."
+    },
+    {
+      "number": 23,
+      "chinese": "剝",
+      "name": "Po",
+      "english": "Lopping Off; Detachment. Rupture and Dividedness",
+      "judgement": "Po (indicates that there will not be the advantage) to go anywhere (and seek for gain).",
+      "image": "The mountain rests upon the earth. Thus those in high places make sure of their (own) resting-places, and (so) find tranquillity for the people beneath them."
+    },
+    {
+      "number": 24,
+      "chinese": "復",
+      "name": "Fu",
+      "english": "Return. Reversion. Reproduction",
+      "judgement": "Fu (indicates) success. (Men) go forth and come in without (perceiving any) injury; friends come, and there is no error. The (proper) course is repeated and completed; on the seventh (day) comes the return (of the departing Yang). It will be advantageous (to go) whithersoever (the subject of the hexagram) may (go).",
+      "image": "The thunder rolls and moves in the middle of the earth. Thus the ancient kings, on the (day of the) Solstice, shut (the passes); merchants did not pursue their gains, and (the rulers) did not stir (the people to any) enterprises."
+    },
+    {
+      "number": 25,
+      "chinese": "无妄",
+      "name": "Wu Wang",
+      "english": "The Unexpected, or What Comes Without Expectation. Sincerity",
+      "judgement": "Wu Wang possesses (the attributes of) creative (energy), untiring progress, and that which is true and correct. (But where the hexagram tells of) the calamity of the (merely) self-cultivator, (that calamity is not) his (proper) occupation.",
+      "image": "Under the sky the thunder (moves), and all things (follow). The ancient Kings, in accordance with this, flourished and nourished all things, timing their operations with the (advance of the) seasons."
+    },
+    {
+      "number": 26,
+      "chinese": "大畜",
+      "name": "Ta Ch'u",
+      "english": "The Taming Power of the Great. Great Restraint",
+      "judgement": "Ta Ch'u favors (the maintenance of) firm correctness. (To one in such a position it is) fortunate not to remain at home (seeking only his own support). It will be advantageous to cross the great stream.",
+      "image": "In the mountain is (the storing energy of) Heaven. The superior man studies the speech and deeds of antiquity, and by them builds (the fabric of) his (virtuous) character."
+    },
+    {
+      "number": 27,
+      "chinese": "頤",
+      "name": "I (the Jaw)",
+      "english": "The Jaw; or the Mouth. The Members of the Mouth",
+      "judgement": "I (should be thought of and inspected). We see the nourishing (favor) which (the subject) enjoys, and (learn) what it is which the (wise) man seeks to nourish (in himself).",
+      "image": "Below the mountain is the thunder. The superior man is careful of his words, and temperate in his eating and drinking."
+    },
+    {
+      "number": 28,
+      "chinese": "大過",
+      "name": "Ta Kuo",
+      "english": "The Great Exceeding. Great Excess",
+      "judgement": "Ta Kuo (represents) the ridgepole of the roof (as) bending in the middle. (For such a case) there will be advantage in (energetic action); (thus to act is) success. (The hexagram presents the idea of) free intercourse (with the times).",
+      "image": "The lake rises above the trees. The superior man, (though) standing alone, (feels) no dread; (though he were to) quit the world, he (would feel) no grief."
+    },
+    {
+      "number": 29,
+      "chinese": "坎",
+      "name": "K'an",
+      "english": "What is Dangerous; the Double Abyss. Repeat Peril",
+      "judgement": "K'an (indicates the reappearance of) what is dangerous. (However, if) with sincerity (the heart) is bound (to what is right, one will) get (through the difficulty); (and) what is thus done will be valued.",
+      "image": "Water, pressing on (and following on) in successive waves of volume and depth. The superior man (is) constant in virtuous course, and (so) in the practice of (his) virtue (he finds his) lesson."
+    },
+    {
+      "number": 30,
+      "chinese": "離",
+      "name": "Li",
+      "english": "The Brightness. The Adherence (of Fire). Clinging",
+      "judgement": "Li favors (the maintenance of) firm correctness: (so we find) success. (The care of) the cow (is the emblem here presented to us).",
+      "image": "The series of flames (illuminating) the region of Li. Thus the great man carries on (the series of his) bright (intelligence), and (so) his light is spread abroad over the four (quarters)."
+    },
+    {
+      "number": 31,
+      "chinese": "咸",
+      "name": "Hsien",
+      "english": "Influence. Wooing; the Mutual Action of (two beings)",
+      "judgement": "Hsien (has) progress and success. Firm correctness is fortunate. To take a wife (brings) good fortune.",
+      "image": "Beneath the mountain is the lake. Thus the superior man (with a vacant heart) receives (the influence of) men."
+    },
+    {
+      "number": 32,
+      "chinese": "恆",
+      "name": "Hêng",
+      "english": "Persistence. Long Enduring. Perseverance",
+      "judgement": "Hêng (indicates) success. (In this there is) no error. (It favors) firm correctness. (It is the maintenance of the) permanent (under all the changes of circumstances). It will be advantageous (to go) whithersoever (the subject of the hexagram) may (go).",
+      "image": "Thunder (succeeding) the wind. The superior man (stands firm), though he (may) change (the direction of his march for the time)."
+    },
+    {
+      "number": 33,
+      "chinese": "遯",
+      "name": "Tun",
+      "english": "The Yielding. Retirement. Escape",
+      "judgement": "T'un (has) growth and progress (still); (but in) what is firm and correct (we see) the (only wise) retreat (for the superior man) in (such times).",
+      "image": "Under Heaven (is the mountain). The superior man (keeps bad men) at a distance, and (while he maintains) proper relations with them (is severe in his) manner (towards them)."
+    },
+    {
+      "number": 34,
+      "chinese": "大壯",
+      "name": "Ta Chuang",
+      "english": "The Power of the Great. Great Strength",
+      "judgement": "Ta Chuang (indicates) the advantage (arising from a man's) firm correctness.",
+      "image": "The thunder is in Heaven. The superior man does not (attempt to) tread (a course) which (his conduct) does not (qualify him to) follow."
+    },
+    {
+      "number": 35,
+      "chinese": "晉",
+      "name": "Chin",
+      "english": "Progress. The Advance",
+      "judgement": "Chin (represents) the prince who (conferred on his minister the) horses (drawn by) three (teams), and who three times in one day (loaded him with marks of) distinction. (Thus we see in this hexagram) the (minister's) acceptance (by the) king.",
+      "image": "The sun (goes forth) over the earth. The superior man (thus) brightens his own (bright) virtue."
+    },
+    {
+      "number": 36,
+      "chinese": "明夷",
+      "name": "Ming I",
+      "english": "The Decline (of the Light). Smothered and Wounded Light",
+      "judgement": "In the (use of this) hexagram (the advance) is difficult. (The idea is) the maintenance of firm correctness (under difficulties).",
+      "image": "(The light has gone down) into the middle of the earth. Thus the superior man (rules) with a (mind refulgent with wisdom), (but) veils (his brightness) as it were from the crowd, (and so keeps the multitude) in a (proper) submission."
+    },
+    {
+      "number": 37,
+      "chinese": "家人",
+      "name": "Chia Jên",
+      "english": "A Family. People in a House",
+      "judgement": "Chia Jên (indicates the success arising from) the due management of a family. (In it) the (influence of) the woman (is made apparent). Firm correctness (is required of) the wife (and mother).",
+      "image": "From the fire (comes forth) the (wind and) the family. The superior man (has) certainty in his words (and) constancy in his conduct."
+    },
+    {
+      "number": 38,
+      "chinese": "睽",
+      "name": "K'uei",
+      "english": "Opposition; Separation. Contrariety",
+      "judgement": "K'uei (indicates that in) small (matters there will be) success.",
+      "image": "Above and below move in contrary directions. With (different) natures (things live) together: (different) females (dwell) in the same household. The superior man (preserves the appearance of) agreement, while his (thoughts go to the) minute (differences of) things."
+    },
+    {
+      "number": 39,
+      "chinese": "蹇",
+      "name": "Chien",
+      "english": "Obstruction; Distress. Lame; Halt",
+      "judgement": "Chien (has) progress and success. (It is) advantageous to see the great man. (In this hexagram) the southwest is the (region of) advantage; the northeast is the (region of) disadvantage. (Still) firm correctness is fortunate.",
+      "image": "Upon the mountain is water. The superior man turns his attention to himself, and (so) makes his (own) character more complete."
+    },
+    {
+      "number": 40,
+      "chinese": "解",
+      "name": "Hsieh",
+      "english": "Deliverance. Unbinding; Solution",
+      "judgement": "Hsieh has progress and success. (Its) northeast gives (us) no (goal to) go to; (while) if he go (to the southwest) there is (a goal to go to in) advance. There is (the delay of) the morning after the (time of) the new moon.",
+      "image": "Thunder and rain. The superior man forgives (mis)actions, and moderates (the) punishment (of) offences."
+    },
+    {
+      "number": 41,
+      "chinese": "損",
+      "name": "Sun",
+      "english": "Diminution. Decrease",
+      "judgement": "Sun (with its idea of) sincerity (is) sublime and without error. (The idea that the diminution can) only be (that) of the two (outer lines, while) the (inner pair) remain complete, (is sufficient for) the good (result).",
+      "image": "Beneath the lake is the mountain. The superior man curbs (his) anger, and (so) bridle his (passionate) desires."
+    },
+    {
+      "number": 42,
+      "chinese": "益",
+      "name": "I (Increase)",
+      "english": "Increase. Gain",
+      "judgement": "I (indicates) that it will be advantageous to undertake (great) things, and that it will be (even) advantageous to cross the great stream.",
+      "image": "When (the) fire (is) below and the wind (is) above, one (looks) to (see) the (benefit) received. The superior man (hastens) to (emulate) virtue, and (as) if (he were running from) his (own) shadow, he puts away (his) errors."
+    },
+    {
+      "number": 43,
+      "chinese": "夬",
+      "name": "Kuai",
+      "english": "Break-through. Issue. Decision",
+      "judgement": "Kuai (must be announced) to the court. (There is the danger of) a collision. (One must) declare (the) truth (and) give (the) notice (of the) emergency. (As for all private) commands, (they lead to the idea of arms: the first announcement) must be (made) to (one's own) city (first).",
+      "image": "(The waters of the) lake rise to Heaven. The superior man (in accordance, distributes his) favors, and (if he do so) he (may) carry (his point) without (coming to any) triumph."
+    },
+    {
+      "number": 44,
+      "chinese": "遘",
+      "name": "Kou",
+      "english": "Meeting. Issue. Coming Upon; Encounter",
+      "judgement": "Kou represents us with a sow that is fierce. (With this idea of) the advancement, the (Yin) nature (of the hexagram) grows.",
+      "image": "Beneath Heaven the wind (moves). Thus (the ruler of) a state sends his orders (to) the four (quarters), and gives them (knowledge) to the people."
+    },
+    {
+      "number": 45,
+      "chinese": "萃",
+      "name": "Ts'ui",
+      "english": "Gathering Together. The Collection",
+      "judgement": "Ts'ui (indicates) success. The king approaches his temple. By the free use of great (sacrificial victims) we see great success. This is furthered by what is firm and correct. (In it) appears the great man: if the seeker approaches (him), there will be no error. (There may be some) small (sorrow), but (it will not prevent the attainment of) the great (result).",
+      "image": "Over the lake (is gathered) the water. The superior man (thinks) of his arms and weapons, and thus keeps (the causes of) disorder under control."
+    },
+    {
+      "number": 46,
+      "chinese": "升",
+      "name": "Sheng",
+      "english": "Pushing Upward. The Going Upward",
+      "judgement": "Sheng (has) supreme success. In the course of firm correctness we see the appearance of (what brings) good fortune. The appearance of the great man will leave (the seeker after) no cause to fear. The celebration (of a great sacrifice will be) fortunate.",
+      "image": "In the earth (grows) the tree. The superior man follows (the course of) small (and increasing virtue), and thus he hews up his (character to what is) high and great."
+    },
+    {
+      "number": 47,
+      "chinese": "困",
+      "name": "K'un (Oppression)",
+      "english": "Lying Under; Oppression. Distress",
+      "judgement": "K'un (possesses the virtues of the) creative, progress, and that which is true and correct. (In such circumstances the) great man (may have) success and fortune; the firm and correct (may have) fortune. But circumstances will not permit (all) announcements of one's (purpose).",
+      "image": "There is no water in the lake. The superior man (is ready to) sacrifice his life (in the prosecution of) his aim."
+    },
+    {
+      "number": 48,
+      "chinese": "井",
+      "name": "Ching",
+      "english": "The Well. The Well for Water",
+      "judgement": "(Men) may change (the site of) a city; they do not change (the site of) a well. There is no (cause for) regret; there is no cause (for exultation): those who go and those who come on business of theirs (draw) from the well (and find it always) at hand. But if (before we have reached the supply and) the well is nearly exhausted, and there is not (water enough) to wet the (handle of) the bottle, there will be misfortune.",
+      "image": "Water above the wood. The superior man urges his people to (the diligent pursuit of) their calling, and excites them to seek mutual help (from one another)."
+    },
+    {
+      "number": 49,
+      "chinese": "革",
+      "name": "Ko",
+      "english": "Change. Molting or Transformation",
+      "judgement": "On one's own (day, the seeker after change) will be believed. (This change) is sublime, and is furthered through firm correctness; regret (will then disappear).",
+      "image": "In the lake is fire. The superior man regulates (the) calendar, and (so) makes clear the (succession of the) seasons and (the appointed) times."
+    },
+    {
+      "number": 50,
+      "chinese": "鼎",
+      "name": "Ting",
+      "english": "The Cauldron or Vessel for the preparation of food; (in sacrificial services)",
+      "judgement": "Ting (has) supreme success.",
+      "image": "Above the wood (is the fire which it supports: the preparation of the food in) the Ting. The superior man (is) correct (in) his position, and (so) firmly (maintains the charge committed to him)."
+    },
+    {
+      "number": 51,
+      "chinese": "震",
+      "name": "Chên",
+      "english": "The Exciting. Arouse; Thunder",
+      "judgement": "Chên comes (with danger) alarming! (But afterwards) laughing words (are heard), (and the terror is) lost. The alarming (power of) the thunder extends over a hundred (leagues); (yet the man of self-awe) does not drop (the sacrificial) ladle (with which he draws) the libation.",
+      "image": "Double thunder (rolls on). The superior man, amid fear and trembling, (sees to it that) his own (moral life is) reformed and his character (established)."
+    },
+    {
+      "number": 52,
+      "chinese": "艮",
+      "name": "Kên",
+      "english": "The Keep-still. A Mountain; the power of arresting",
+      "judgement": "(It is) the back (which is) made still: (so that one feels) as if he had no (body) to him, (and went) into his (own) apartment, and did not see (the people who were in) it. (Thus there is) no error.",
+      "image": "Closely joined (and connected) mountains. The superior man, while thinking (at all), does not go (in his thoughts) beyond his (own proper) position."
+    },
+    {
+      "number": 53,
+      "chinese": "漸",
+      "name": "Chien (Gradual Progress)",
+      "english": "Gradual Advance. Advance by Stages",
+      "judgement": "(The maiden who is married by) gradual (stages of ceremony) will (have) good fortune. Firm correctness (is) fortunate.",
+      "image": "On the mountain (grows) the tree. The superior man (holds) his virtuous (worth), and (so) improves the (character of the) times."
+    },
+    {
+      "number": 54,
+      "chinese": "归妹",
+      "name": "Kuei Mei",
+      "english": "The (younger) sister coming to (the older as a concubine). The Maiden who marries",
+      "judgement": "(In the case of) the (maiden) marrying there will be evil in (all onward) movement. Nothing that will be advantageous (is seen).",
+      "image": "Above the lake (is heard) the thunder. The superior man (recognizes the permanence of the proper union) in view of the (ever-enduring) issue (it contemplates), and (so) apprehends (the possibility that) evil (may arise) in (marriage)."
+    },
+    {
+      "number": 55,
+      "chinese": "豐",
+      "name": "Fêng",
+      "english": "Abundance. Fulness; Fulness of the day",
+      "judgement": "Fêng has (attained) success. (When) the king (has attained this) he is (counted) great. (What is sought in it is) the (noon of the) day; it is not (the evening).",
+      "image": "Both thunder and lightning come. The superior man (sits for the judgment) of lawsuits, and (with suitable) consideration (inflicts) punishments."
+    },
+    {
+      "number": 56,
+      "chinese": "旅",
+      "name": "Lu (The Traveler)",
+      "english": "The Traveler; The Straggler. Wanderings; sojourning",
+      "judgement": "(In the case of) the traveller there will be small (achievements of) success; if (he do) what is firm and correct, there will be good fortune.",
+      "image": "On the mountain (burns) the fire. The superior man (is intelligent and careful) in his use of punishments, and does not drag out (the hearing of) lawsuits."
+    },
+    {
+      "number": 57,
+      "chinese": "巽",
+      "name": "Hsün",
+      "english": "The Yielding: or, the Uniform (Wind). Penetration",
+      "judgement": "Hsün (indicates that what is small and weak gets) success by its advance. It is favorable (to go) whithersoever one will; the (influence of) what is firm and correct is favorable; (it is) favorable to see the great man.",
+      "image": "Winds following one another. The superior man (repeats) his commands, and (so) carries out his (administration)."
+    },
+    {
+      "number": 58,
+      "chinese": "兌",
+      "name": "Tui",
+      "english": "The Joyous; a Lake. Sway",
+      "judgement": "The Joyous (has the virtues of) the creative; and what is (furthered through firmness and) correctness will be celebrated.",
+      "image": "Lakes (contemplating each other). The superior man, with his friends, discusses (what he has learned) and (so) practises (what is taught)."
+    },
+    {
+      "number": 59,
+      "chinese": "渙",
+      "name": "Huan",
+      "english": "Dissolution. (Dissipated, and so, Dissipating).",
+      "judgement": "Huan (has) progress. The king approaches his temple. It is advantageous to cross the great stream. What is firm and correct will be fortunate.",
+      "image": "The wind (moves) over the water. The ancient kings (by this) established (their) services, and (so) reared (their temples to) their (great) ancestors."
+    },
+    {
+      "number": 60,
+      "chinese": "節",
+      "name": "Chieh",
+      "english": "Regulation. Limitation; Restrained Desire",
+      "judgement": "Chieh (has attained) success. There will be regret about the hard (self-) regulation.",
+      "image": "The water (measures) over the lake. The superior man, (originally) framing (his rules), makes his (plan) full and precise, and discusses (the details of) his (course of virtue)."
+    },
+    {
+      "number": 61,
+      "chinese": "中孚",
+      "name": "Chung Fu",
+      "english": "Internal Sincerity. Central Confidence",
+      "judgement": "Chung Fu (will be illustrated as from the) pigs and fishes. (There is thereby the idea of that sincere) advance. (If one can attain) the Great Man's (confidence), (even to the supposed case of criminals) — it will be fortunate. It is advantageous to cross the great stream. (Under) firm correctness (there will be) good fortune.",
+      "image": "Over the lake (sweeps) the wind. The superior man, (after) discussion (revised), delays (the execution of) punishments."
+    },
+    {
+      "number": 62,
+      "chinese": "小過",
+      "name": "Hsiao Kuo",
+      "english": "The Small (things) which pass Beyond Ordinary Limits. Preponderance of the Small",
+      "judgement": "Hsiao Kuo (has) progress. What is small (may attain success); what is great, no. For what is small there is advance; for what is great no advance. (In such a case) there is need of the (utmost) firm correctness. (Then the case will be) as of the flying bird, (which), sending his note (down to the lower world), does not venture to soar upward but keeps to the lower (regions), and so meets with great good fortune.",
+      "image": "Above the lake (sounds) the thunder. The superior man, in his (conduct), is (more than) courteous; in his (services careful beyond the) ordinary, and in (the disposal of) his (finances) exceeds (only) in (the) economy (he uses)."
+    },
+    {
+      "number": 63,
+      "chinese": "既濟",
+      "name": "Chi Chi",
+      "english": "Complete Change. The Completion of what was (to be done)",
+      "judgement": "Chi Chi (will be found) small (and weak); what is firm and correct (will find) fortune. (There will be good fortune) at the commencement, (but) disorder in the termination.",
+      "image": "(The water is) above the fire. The superior man takes thought of, and provides against, the (occurrence of) calamity (through) continuance (of things in their present state)."
+    },
+    {
+      "number": 64,
+      "chinese": "未濟",
+      "name": "Wei Chi",
+      "english": "Not Yet Complete. Before Completion; The Uncompleted",
+      "judgement": "Wei Chi has (attained) progress. (Let us suppose the case of) the little fox (when he has nearly crossed over the stream), and (then) he wetting his tail! (Thus) there is nothing in all this that would be (of any) advantage.",
+      "image": "Fire (is seen) over the water (but) does not act on (what is below it) in accordance with its nature). The superior man (is) cautious (in the) distinguishing of (things), and (so keeps each in the place) proper for it."
+    }
+  ]
+}

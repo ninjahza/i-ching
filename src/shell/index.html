@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'none'; font-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; navigate-to 'none'">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Ching — a consultation for reflection</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #faf7f0;
+  --fg: #1f1d18;          /* 14.9:1 on --bg */
+  --muted: #5c574d;       /* 6.3:1 */
+  --line: #1f1d18;
+  --accent: #6b4c00;      /* 7.1:1 */
+  --card: #ffffff;
+  --border: #d8d2c4;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16150f;
+    --fg: #ece7d8;        /* 12.8:1 */
+    --muted: #b3ac99;     /* 7.0:1 */
+    --line: #ece7d8;
+    --accent: #e8c766;    /* 9.9:1 */
+    --card: #1f1d15;
+    --border: #3d3a2e;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-serif, Georgia, "Times New Roman", serif;
+  line-height: 1.55;
+  font-size: 17px;
+}
+main {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+h1, h2 { font-weight: 600; line-height: 1.2; }
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.3rem; margin-top: 0; }
+.masthead { text-align: center; margin: 0.75rem 0 2rem; }
+.masthead h1 { font-size: clamp(2.1rem, 8vw, 2.7rem); letter-spacing: 0.06em; margin: 0; }
+.masthead-subtitle {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+.masthead-tagline { font-size: 1.2rem; font-weight: 500; margin: 1.4rem 0 0; }
+.masthead-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+.masthead-rule::before, .masthead-rule::after {
+  content: "";
+  height: 1px;
+  width: 3.5rem;
+  background: var(--border);
+}
+p { margin: 0.75rem 0; }
+.muted { color: var(--muted); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  margin: 1rem 0;
+}
+label { display: block; margin: 0.75rem 0 0.25rem; }
+textarea, input[type="text"] {
+  width: 100%;
+  font: inherit;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+}
+textarea { min-height: 5.5rem; }
+button {
+  font: inherit;
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button:disabled { cursor: not-allowed; opacity: 0.65; }
+button:focus-visible, textarea:focus-visible, input:focus-visible, a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 0.75rem 0;
+  padding: 0.5rem 0.9rem;
+}
+input[type="radio"], input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 1.05rem;
+  height: 1.05rem;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+.radio-row { margin: 0.35rem 0; }
+.consent-row { margin-top: 0.7rem; border-top: 1px solid var(--border); padding-top: 0.7rem; }
+legend { padding: 0 0.4rem; }
+.controls { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1.1rem 0; }
+figure.hexagram { margin: 1rem auto; width: fit-content; }
+/* The result's single visual: the Unicode hexagram as the figure, with the
+   classical Chinese name beneath it, both centered.
+   The accessible name lives on the figure's aria-label (set at render time). */
+.figure-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.result-figure { margin: 0; }
+.hexagram-symbol {
+  font-size: 12rem; /* glyph ink at this size ~= the 6-bar figure height (measured in Chrome at desktop) */
+  line-height: 1;
+  color: var(--fg);
+  user-select: none;
+}
+/* hanzi caption beneath the symbol */
+.hexagram-chinese {
+  font-family: "Songti SC", "Songti TC", STSong, "Noto Serif CJK SC", "Noto Serif CJK TC", "SimSun", serif;
+  font-size: 4.75rem;
+  line-height: 1.1;
+  letter-spacing: 0.15em; /* hanzi want air, not kerning */
+  text-indent: 0.15em;    /* re-centre the trailing letter-space */
+  color: var(--muted);
+  margin: 0;
+}
+@media (max-width: 30rem) {
+  .hexagram-symbol { font-size: 9rem; }
+  .hexagram-chinese { font-size: 3.5rem; }
+}
+/* Casting figure geometry mirrors the Unicode hexagram glyph so the cast
+   lines visually mature INTO the result symbol (measured from glyph ink at
+   144px: bar 10x85, five even 7.2px gaps -> ratios of font-size below).
+   Desktop glyph ink at 12rem font is ~7.1rem x 8.1rem; bars match it. */
+.hex-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0.58rem 0; /* collapses to the glyph's inter-bar gap */
+}
+.hex-bar { width: 7.1rem; height: 0.85rem; display: flex; }
+.hex-bar .seg { background: var(--line); height: 100%; }
+.hex-bar.yang .seg { flex: 1; }
+.hex-bar.yin { justify-content: space-between; }
+.hex-bar.yin .seg { width: 44%; }
+.changing-mark {
+  position: absolute;
+  left: calc(100% + 0.6rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  gap: 0.35rem;
+  color: var(--accent);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+blockquote {
+  margin: 0.75rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid var(--border);
+  font-style: normal;
+}
+blockquote p { margin: 0.3rem 0; }
+.stable-note { font-style: italic; }
+.question-echo { white-space: pre-wrap; }
+.visually-live {
+  /* live region stays in the accessibility tree and always displayed (announcements
+     must fire) — but collapse to zero height while empty so it adds no dead space */
+  font-size: 0.95rem;
+  color: var(--muted);
+  min-height: 0;
+  margin: 0;
+}
+/* Status text appears only in #live; reserving height while non-empty is enough,
+   and the step sections below it are swapped as whole blocks anyway. */
+.visually-live:not(:empty) { min-height: 1.4em; margin: 0.75rem 0; }
+section[hidden] { display: none; }
+[hidden] { display: none !important; }
+footer { margin-top: 2.5rem; }
+/* Attribution link: --accent meets AA on both backgrounds (contrast.test.ts). */
+footer a { color: var(--accent); }
+@media (max-width: 30rem) {
+  /* same profile as the 9rem mobile glyph: bar 5.3rem x 0.62rem, gap .46rem */
+  .hex-bar { width: 5.5rem; height: 0.62rem; }
+  .hex-row { margin: 0.45rem 0; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="masthead">
+    <h1>I&nbsp;Ching</h1>
+    <p class="masthead-subtitle">The Book of Changes</p>
+    <h2 class="masthead-tagline">A consultation for reflection, not prediction.</h2>
+    <div class="masthead-rule" aria-hidden="true">&#x2630;</div>
+  </header>
+
+  <div id="live" class="visually-live" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <section id="step-question" aria-labelledby="question-heading">
+    <div class="card" id="intro-card"></div>
+    <h2 id="question-heading">Hold a question (optional)</h2>
+    <label for="question">Your question, in your own words. It stays on this page and in memory only — never saved, never sent.</label>
+    <textarea id="question" maxlength="500" rows="4"></textarea>
+    <p class="muted" id="question-help">Up to 500 characters. Anything longer is shortened to 500.</p>
+    <p id="truncation-notice" class="muted" hidden></p>
+    <fieldset id="method-fieldset">
+      <legend>Casting method</legend>
+      <div class="radio-row">
+        <label><input type="radio" name="method" id="method-coins" value="coins" checked>
+          Three coins — quicker, the later custom</label>
+      </div>
+      <div class="radio-row">
+        <label><input type="radio" name="method" id="method-yarrow" value="yarrow">
+          Yarrow stalks — the older probability profile</label>
+      </div>
+      <div class="radio-row consent-row">
+        <label><input type="checkbox" id="remember-method">
+          Remember my method on this device</label>
+      </div>
+      <p class="muted" id="method-disclosure">Remembering stores exactly one word — your method
+        choice — in this browser's local storage, on this device only. Unchecking deletes it
+        immediately. Your question, your casts, and everything else are never stored or sent.</p>
+    </fieldset>
+    <div class="controls">
+      <button id="cast" type="button">Cast the hexagram</button>
+    </div>
+    <p id="no-random" class="muted" role="note" hidden></p>
+  </section>
+
+  <section id="step-casting" aria-labelledby="casting-heading" hidden>
+    <h2 id="casting-heading" tabindex="-1">Casting</h2>
+    <p class="muted" id="casting-sub">Six lines arrive from the bottom up, as they were always cast.</p>
+    <figure class="hexagram" id="casting-figure" role="img" aria-label="The emerging hexagram" data-placeholder="true"></figure>
+    <div class="controls">
+      <button id="reveal-all" type="button">Reveal all</button>
+    </div>
+  </section>
+
+  <section id="step-result" aria-labelledby="result-heading" hidden>
+    <h2 id="result-heading" tabindex="-1">The hexagram</h2>
+    <div class="card">
+      <div class="figure-row">
+        <figure class="result-figure" id="primary-figure" role="img" aria-label="">
+          <span class="hexagram-symbol" id="primary-symbol" aria-hidden="true"></span>
+        </figure>
+        <p class="hexagram-chinese" id="primary-chinese" lang="zh-Hant"></p>
+      </div>
+      <p id="primary-identity"></p>
+      <p class="muted" id="primary-trigrams"></p>
+      <blockquote id="primary-judgement"><p></p></blockquote>
+      <blockquote id="primary-image"><p></p></blockquote>
+    </div>
+    <div class="card" id="related-card" hidden>
+      <h3 id="related-heading" tabindex="-1">The changing lines bring forth</h3>
+      <div class="figure-row">
+        <figure class="result-figure" id="related-figure" role="img" aria-label="">
+          <span class="hexagram-symbol" id="related-symbol" aria-hidden="true"></span>
+        </figure>
+        <p class="hexagram-chinese" id="related-chinese" lang="zh-Hant"></p>
+      </div>
+      <p id="related-identity"></p>
+      <p class="muted" id="related-trigrams"></p>
+      <blockquote id="related-judgement"><p></p></blockquote>
+      <blockquote id="related-image"><p></p></blockquote>
+    </div>
+    <p class="stable-note muted" id="stable-message" hidden></p>
+    <div class="card" id="echo-card" hidden>
+      <h3>Your question</h3>
+      <p id="question-echo" class="question-echo"></p>
+    </div>
+    <div class="controls">
+      <button id="cast-again" type="button">Cast again</button>
+      <button id="explain-toggle" type="button" aria-expanded="false">What is this about?</button>
+    </div>
+    <div class="card" id="re-explanation" hidden></div>
+  </section>
+
+  <footer>
+    <p class="muted" id="app-attribution"></p>
+  </footer>
+</main>
+<script>__SPEC_APP_BUNDLE__</script>
+</body>
+</html>
