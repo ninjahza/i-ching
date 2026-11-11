@@ -17,6 +17,7 @@
   --accent: #6b4c00;      /* 7.1:1 */
   --card: #ffffff;
   --border: #d8d2c4;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* exponential settle */
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -30,6 +31,8 @@
   }
 }
 * { box-sizing: border-box; }
+html { scrollbar-color: var(--border) var(--bg); }
+::selection { background: color-mix(in srgb, var(--accent) 28%, transparent); color: var(--fg); }
 body {
   margin: 0;
   background: var(--bg);
@@ -46,6 +49,16 @@ main {
 h1, h2 { font-weight: 600; line-height: 1.2; }
 h1 { font-size: 1.6rem; }
 h2 { font-size: 1.3rem; margin-top: 0; }
+/* Step headings: more room above than below (masthead h2s keep their own margins). */
+#question-heading, #casting-heading, #result-heading { margin-top: 2rem; }
+/* Card sub-headings are one system, not the browser default. */
+.card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0.2rem 0 1rem;
+}
 .masthead { text-align: center; margin: 0.75rem 0 2rem; }
 .masthead h1 { font-size: clamp(2.1rem, 8vw, 2.7rem); letter-spacing: 0.06em; margin: 0; }
 .masthead-subtitle {
@@ -88,6 +101,7 @@ textarea, input[type="text"] {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.5rem 0.6rem;
+  caret-color: var(--accent);
 }
 textarea { min-height: 5.5rem; }
 button {
@@ -101,6 +115,31 @@ button {
 }
 button:hover { border-color: var(--accent); }
 button:disabled { cursor: not-allowed; opacity: 0.65; }
+button { padding: 0.7rem 1.3rem; }
+/* Quiet buttons settle their border like everything else settles. */
+button:not(.primary) {
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+}
+button:not(.primary):active:not(:disabled) { background: var(--bg); }
+/* A disclosure at rest is quiet; open, it stays marked while expanded. */
+#explain-toggle[aria-expanded="true"] { border-color: var(--accent); }
+/* The primary act of its step: casting, and casting again. */
+.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);           /* same pair as accent-on-bg, reversed */
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.7rem 1.6rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+.primary:hover:not(:disabled) {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+.primary:active:not(:disabled) { transform: translateY(0); box-shadow: 0 1px 2px rgb(0 0 0 / 0.15); }
 button:focus-visible, textarea:focus-visible, input:focus-visible, a:focus-visible,
 [tabindex]:focus-visible {
   outline: 3px solid var(--accent);
@@ -136,10 +175,12 @@ figure.hexagram { margin: 1rem auto; width: fit-content; }
 }
 .result-figure { margin: 0; }
 .hexagram-symbol {
+  display: inline-block; /* lets the settle animation transform the glyph */
   font-size: 12rem; /* glyph ink at this size ~= the 6-bar figure height (measured in Chrome at desktop) */
   line-height: 1;
   color: var(--fg);
   user-select: none;
+  animation: ink-settle 1100ms var(--ease-out) both;
 }
 /* hanzi caption beneath the symbol */
 .hexagram-chinese {
@@ -150,6 +191,32 @@ figure.hexagram { margin: 1rem auto; width: fit-content; }
   text-indent: 0.15em;    /* re-centre the trailing letter-space */
   color: var(--muted);
   margin: 0;
+  animation: brush-down 900ms var(--ease-out) 280ms both;
+}
+/* The transformed hexagram arrives after the primary has settled. */
+#related-card .hexagram-symbol { animation-delay: 420ms; }
+#related-card .hexagram-chinese { animation-delay: 700ms; }
+@keyframes ink-settle {
+  from { opacity: 0.15; filter: blur(14px); transform: scale(1.05); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+/* hanzi revealed top-to-bottom, the direction the characters are written */
+@keyframes brush-down {
+  from { opacity: 0.3; clip-path: inset(0 0 100% 0); }
+  to { opacity: 1; clip-path: inset(0); }
+}
+#primary-identity, #related-identity {
+  text-align: center;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+  margin: 0.5rem 0 0;
+}
+#primary-trigrams, #related-trigrams {
+  text-align: center;
+  font-size: 0.95rem;
+  margin: 0.35rem 0 1.4rem;
 }
 @media (max-width: 30rem) {
   .hexagram-symbol { font-size: 9rem; }
@@ -170,6 +237,37 @@ figure.hexagram { margin: 1rem auto; width: fit-content; }
 .hex-bar.yang .seg { flex: 1; }
 .hex-bar.yin { justify-content: space-between; }
 .hex-bar.yin .seg { width: 44%; }
+/* Each line is drawn outward from its centre as it is cast; a yin line is
+   drawn whole, then breaks open. Changing (old) lines arrive in accent ink
+   and cool to the line colour. Rows replay this whenever they are un-hidden. */
+.hex-row .seg { animation: line-draw 620ms var(--ease-out) both; }
+.hex-bar.yin .seg:first-child { transform-origin: right; animation-name: yin-left; }
+.hex-bar.yin .seg:last-child { transform-origin: left; animation-name: yin-right; }
+.hex-row:has(.changing-mark) .seg {
+  animation-name: line-draw, changing-ink;
+  animation-duration: 620ms, 1600ms;
+}
+.hex-row:has(.changing-mark) .hex-bar.yin .seg:first-child { animation-name: yin-left, changing-ink; }
+.hex-row:has(.changing-mark) .hex-bar.yin .seg:last-child { animation-name: yin-right, changing-ink; }
+@keyframes line-draw {
+  from { opacity: 0.35; transform: scaleX(0.04); }
+  to { opacity: 1; transform: none; }
+}
+/* 13.6% of a 44%-wide half closes the 12% gap: the halves start joined. */
+@keyframes yin-left {
+  from { opacity: 0.35; transform: translateX(13.6%) scaleX(0.04); }
+  55% { opacity: 1; transform: translateX(13.6%); }
+  to { transform: none; }
+}
+@keyframes yin-right {
+  from { opacity: 0.35; transform: translateX(-13.6%) scaleX(0.04); }
+  55% { opacity: 1; transform: translateX(-13.6%); }
+  to { transform: none; }
+}
+@keyframes changing-ink {
+  from, 35% { background-color: var(--accent); }
+  to { background-color: var(--line); }
+}
 .changing-mark {
   position: absolute;
   left: calc(100% + 0.6rem);
@@ -180,6 +278,11 @@ figure.hexagram { margin: 1rem auto; width: fit-content; }
   color: var(--accent);
   font-size: 0.95rem;
   white-space: nowrap;
+  animation: mark-in 520ms var(--ease-out) 260ms both;
+}
+@keyframes mark-in {
+  from { opacity: 0; transform: translate(-0.5rem, -50%); }
+  to { opacity: 1; transform: translateY(-50%); }
 }
 blockquote {
   margin: 0.75rem 0;
@@ -188,7 +291,8 @@ blockquote {
   font-style: normal;
 }
 blockquote p { margin: 0.3rem 0; }
-.stable-note { font-style: italic; }
+/* The stable line stands alone after the primary card; give it its own air. */
+.stable-note { font-style: italic; margin: 1.6rem 0.25rem; }
 .question-echo { white-space: pre-wrap; }
 .visually-live {
   /* live region stays in the accessibility tree and always displayed (announcements
@@ -205,7 +309,11 @@ section[hidden] { display: none; }
 [hidden] { display: none !important; }
 footer { margin-top: 2.5rem; }
 /* Attribution link: --accent meets AA on both backgrounds (contrast.test.ts). */
-footer a { color: var(--accent); }
+footer a { color: var(--accent); text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+footer a:hover { text-decoration-thickness: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 @media (max-width: 30rem) {
   /* same profile as the 9rem mobile glyph: bar 5.3rem x 0.62rem, gap .46rem */
   .hex-bar { width: 5.5rem; height: 0.62rem; }
@@ -250,7 +358,7 @@ footer a { color: var(--accent); }
         immediately. Your question, your casts, and everything else are never stored or sent.</p>
     </fieldset>
     <div class="controls">
-      <button id="cast" type="button">Cast the hexagram</button>
+      <button id="cast" type="button" class="primary">Cast the hexagram</button>
     </div>
     <p id="no-random" class="muted" role="note" hidden></p>
   </section>
@@ -258,7 +366,7 @@ footer a { color: var(--accent); }
   <section id="step-casting" aria-labelledby="casting-heading" hidden>
     <h2 id="casting-heading" tabindex="-1">Casting</h2>
     <p class="muted" id="casting-sub">Six lines arrive from the bottom up, as they were always cast.</p>
-    <figure class="hexagram" id="casting-figure" role="img" aria-label="The emerging hexagram" data-placeholder="true"></figure>
+    <figure class="hexagram" id="casting-figure" role="img" aria-label="The emerging hexagram"></figure>
     <div class="controls">
       <button id="reveal-all" type="button">Reveal all</button>
     </div>
@@ -297,7 +405,7 @@ footer a { color: var(--accent); }
       <p id="question-echo" class="question-echo"></p>
     </div>
     <div class="controls">
-      <button id="cast-again" type="button">Cast again</button>
+      <button id="cast-again" type="button" class="primary">Cast again</button>
       <button id="explain-toggle" type="button" aria-expanded="false">What is this about?</button>
     </div>
     <div class="card" id="re-explanation" hidden></div>
