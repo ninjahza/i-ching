@@ -44,3 +44,54 @@ Wade-Giles transliteration), `english` (Legge's English title), `judgement`, and
   that module (R-2/B-12).
 - Manual spot-check of hexagrams 1, 2, 8, 63, 64 against the published Legge
   performed at generation time (T007), recorded in the feature checklist.
+
+---
+
+## Cleansed edition — `the_yi_king_clean.md`
+
+**Source**: `the_yi_king.txt`, a scanner's OCR text dump (with page furniture)
+of the Dover Publications reprint (first published 1950; this reproduction
+1963) of Legge, SBE Vol. XVI. Produced by `clean_yi_king.py` alongside this
+file; the raw source is preserved untouched.
+
+**Method** (all repairs derived from the book's own internal evidence —
+headers, folios, running heads, glosses and the printed tables of contents —
+plus this corpus' canonical `legge-1882.json` for the 64 hexagram names):
+
+- Publisher advertising, book-lists, scanning debris and the Dover
+  catalogue that follows p. 443 (Appendix VII) removed; folios, gathering
+  signatures, sigla and shelfmarks dropped.
+- Running heads (all SBE book/section/chapter/hexagram/appendix variants,
+  including OCR-garbled tokens and heads fused mid-line) eliminated without
+  dropping short paragraph-ending prose lines.
+- Two-band SBE pages separated by printed line measure before page-turn
+  rejoining: 12pt translation blocks (upper page) and 9pt commentary / 8pt
+  footnote blocks (lower page) rejoin independently across page breaks so
+  notes never splice mid-sentence into translation text, and each hexagram's
+  Duke of Chou lines (`1.`–`6.`, plus `7.` on Hexagrams I and II) are
+  cleanly separated above Legge's commentary for that hexagram.
+- Soft-hyphen (`¬`) breaks and line-end word splits repaired from an
+  internal concordance built solely from interior tokens of `the_yi_king.txt`;
+  unambiguous OCR quote-`1` openings and slash-closed quotes (`‘... ,’`)
+  restored where paired.
+- Structure rebuilt as markdown: reconstructed Contents tables (Introduction
+  Chapters 1–3, all 64 hexagrams, and Appendixes 1–7), Preface, Introduction
+  Chapters I–III (with page-bottom footnotes separated as blockquotes), the
+  Text (Sections I–II and all 64 hexagrams headed from `legge-1882.json`),
+  and Appendixes I–VII at their exact printed treatise and Section I/II
+  boundaries.
+- Appendix VII (Legge's English rhyme-version of the *Za Kwa*) re-laid
+  stanza by stanza with gutter residue stripped and hanging-indented rhyme
+  wraps rejoined onto their verse lines.
+
+**Known limitations** (inherent to the 1963 scan, faithful to it, and left
+uncorrected rather than guessed): SBE italicised transliterations (`Kh`,
+`Ch`, `Ts`, diacritics) and some plates/diagrams carry OCR character damage;
+a few inline trigrams and trigram-table cells were read as punctuation/ASCII
+runs by the scanner; a handful of outer-margin side-notes in the Introduction
+where the scanner interleaved margin and body glyphs on the same line remain
+visible inline rather than being guessed at.
+
+**Licence**: the underlying translation is public domain (see above); the
+cleansing is a factual, non-creative restoration, adding no new copyright
+claim. No external edition or online text was consulted at any point.
