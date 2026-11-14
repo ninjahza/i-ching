@@ -1,0 +1,27 @@
+{
+  "validReference": {
+    "document": "text",
+    "section": "The Text",
+    "hexagramNumber": 1,
+    "part": "line",
+    "linePosition": 1
+  },
+  "invalidReference": {
+    "document": "text",
+    "section": "The Text",
+    "hexagramNumber": 65,
+    "part": "line",
+    "linePosition": 7
+  },
+  "invalidPosition": {
+    "hexagramNumber": 1,
+    "lineIndex": 0,
+    "position": 2
+  },
+  "invalidExample": {
+    "initialHexagram": 1,
+    "lineValues": [7, 7, 7, 7, 9, 7],
+    "changingPositions": [5],
+    "relatingHexagram": 2
+  }
+}

@@ -21,7 +21,7 @@ declare module "node:assert/strict" {
     notEqual(actual: unknown, expected: unknown, message?: string): void;
     deepEqual(actual: unknown, expected: unknown, message?: string): void;
     notDeepEqual(actual: unknown, expected: unknown, message?: string): void;
-    throws(fn: () => unknown, message?: string): void;
+    throws(fn: () => unknown, expected?: RegExp | string, message?: string): void;
     doesNotThrow(fn: () => unknown, message?: string): void;
     match(value: string, regexp: RegExp, message?: string): void;
     fail(message?: string): never;
@@ -31,10 +31,19 @@ declare module "node:assert/strict" {
 }
 
 declare module "node:fs" {
+  export function readFileSync(path: string): Uint8Array;
   export function readFileSync(path: string, encoding: "utf8"): string;
   export function readdirSync(path: string, options?: { withFileTypes?: false }): string[];
   export function existsSync(path: string): boolean;
   export function statSync(path: string): { isDirectory(): boolean; isFile(): boolean };
+}
+
+declare module "node:crypto" {
+  interface Hash {
+    update(data: Uint8Array | string): Hash;
+    digest(encoding: "hex"): string;
+  }
+  export function createHash(algorithm: string): Hash;
 }
 
 // Node's ESM runtime surface (url/filename/dirname) without pulling @types/node.

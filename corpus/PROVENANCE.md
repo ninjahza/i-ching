@@ -104,3 +104,28 @@ visible inline rather than being guessed at.
 **Licence**: the underlying translation is public domain (see above); the
 cleansing is a factual, non-creative restoration, adding no new copyright
 claim. No external edition or online text was consulted at any point.
+
+---
+
+## Feature 003 — modern-prose guide
+
+`corpus/modern-prose.json` is a separate original editorial work: an English
+distillation of Legge's public-domain 1882 text, not a quotation set and not a
+rewrite of the feature 002 summaries. Its guide sections, glossary, 64
+judgements and images, 384 line readings, and the two all-lines-changing
+readings each name their Legge source location. The line readings use the
+cleansed edition's Duke of Chou paragraphs; the images use Appendix II, Section
+I; guide claims cite the Preface, Introduction, Great Appendix, or the relevant
+hexagram passage.
+
+The fixed reader-facing edition is **1.0.0**, dated **2026-11-14**. The source
+was written in contemporary, reflective language from the local Legge edition
+alone. It does not use wording from Wilhelm/Baynes or another in-copyright
+translation. The standalone HTML publication displays the SHA-256 of the exact
+JSON bytes from which it was built.
+
+The feature 003 original editorial prose is released under the MIT license,
+within the scope stated in `LICENSE.md`. That license does not apply to Legge's
+public-domain translation or to the separate feature 002 summaries. Review
+outcomes and source-reference coverage are recorded in
+`corpus/modern-prose-review.md`.

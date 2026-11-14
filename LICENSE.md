@@ -23,7 +23,9 @@ SOFTWARE.
 ---
 
 **Scope note**: this license covers the project's code, build scripts, tests,
-and app-authored copy. The bundled corpus of hexagram texts (see
-`corpus/PROVENANCE.md`) is James Legge's 1882 translation from Sacred Books of
-the East, Vol. XVI, which is **public domain** and not subject to this license
-— no copyright is claimed over the translation itself.
+app-authored copy, and the original feature 003 modern-prose work in
+`corpus/modern-prose.json`. The feature 003 license grant does not cover the
+preserved Legge corpus or alter the existing provenance/licensing of the
+feature 002 editorial summaries. James Legge's 1882 translation from Sacred
+Books of the East, Vol. XVI is **public domain** and not subject to this
+license — no copyright is claimed over the translation itself.

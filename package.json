@@ -13,6 +13,7 @@
     "test": "node --test tests/",
     "build": "node scripts/build.mjs",
     "verify": "node scripts/verify-dist.mjs dist/index.html",
+    "verify:modern": "node scripts/verify-modern.mjs",
     "gen:deploy": "node scripts/gen-deploy.mjs",
     "verify:deploy": "node scripts/verify-deploy.mjs",
     "corpus": "node scripts/gen-corpus.mjs"
