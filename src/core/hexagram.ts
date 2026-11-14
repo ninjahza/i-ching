@@ -15,6 +15,7 @@ export interface Hexagram {
   readonly lower: Trigram;
   readonly judgement: string;
   readonly image: string;
+  readonly summary: string;
 }
 
 function byPattern(pattern: number): Hexagram {
@@ -35,7 +36,8 @@ function byPattern(pattern: number): Hexagram {
     lower: trigramByBits(pattern & 0b111),
     upper: trigramByBits((pattern >> 3) & 0b111),
     judgement: texts.judgement,
-    image: texts.image
+    image: texts.image,
+    summary: texts.summary
   };
 }
 

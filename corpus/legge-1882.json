@@ -1,8 +1,8 @@
 {
   "attribution": "James Legge, \"The Yi King\", Sacred Books of the East, Vol. XVI (M. Schott, in: The Confucius Siou Ching, 1879; revised edition 1882) — public domain. This archive file is a hand-curated transcription of the Legge 1882 judgement and Image (Ta-chuan commentary on the Symbol) texts for all 64 hexagrams in King Wen order, assembled without network access to a machine-readable source copy, using no source other than the public-domain Legge translation as its basis; no other published rendering was consulted; wording may deviate from the printed original. The Wilhelm/ Baynes translation (1950, in copyright) was not consulted and contributes no wording here.",
-  "scope": "v1 scope (spec A-5): judgement + image texts only; line texts not included",
+  "scope": "Judgement and image texts and editorial summaries for all 64 hexagrams. Line texts are not included.",
   "assembled": "2026-11-09",
-  "assembly_method": "hand-curated transcription (R-2 approved fallback; no network intake available)",
+  "assembly_method": "Judgement and image: hand-curated transcription (R-2 approved fallback; no network intake available). Summaries: editorial syntheses based only on corpus/the_yi_king_clean.md; not verbatim quotations.",
   "hexagrams": [
     {
       "number": 1,
@@ -10,7 +10,8 @@
       "name": "Ch'ien",
       "english": "The Creative",
       "judgement": "The Creative works sublime success, furthering through perseverance.",
-      "image": "The movement of Heaven is one that strongly stirs its own native character. So the ruler of all, strenuously labors to perfect his own virtue, and does not intermit his efforts."
+      "image": "The movement of Heaven is one that strongly stirs its own native character. So the ruler of all, strenuously labors to perfect his own virtue, and does not intermit his efforts.",
+      "summary": "The Creative is formed by heaven above heaven. Legge describes it as the originating power to which things owe their beginning; the commentary connects its movement with the unfolding and renewal of the natural world. The repeated image of heaven also suggests sustained effort in the cultivation of character. Strength is not treated as a license to press without limit: the commentary distinguishes timely activity from the unchanging use of force. The figure brings creative power and the care with which it is exercised into view together."
     },
     {
       "number": 2,
@@ -18,7 +19,8 @@
       "name": "K'un",
       "english": "The Field (the Receptive)",
       "judgement": "The Field works supreme success, furthering through the firm correctness of the mare. If a man attempt to take the lead in any movement, he will go astray; if he follow his proper chief, he will afterwards find a guide. There will be advantage in obtaining friends in the plain paths of duty. Firm correctness is demanded.",
-      "image": "The earth's capacity is that of equanimity (and support). Thus the great man lays in a large store of virtue, and thus sustains all."
+      "image": "The earth's capacity is that of equanimity (and support). Thus the great man lays in a large store of virtue, and thus sustains all.",
+      "summary": "The Field consists of earth above earth. Legge contrasts its broad capacity to receive and sustain with the originating power of heaven: earth brings to birth and nourishes what has begun. The mare represents a combination of strength and docility, and the judgement places following rather than taking the lead at the center of the figure. The great symbolism turns the earth's breadth into an image of generous character that supports other beings. Quiet firmness and service, rather than a claim to personal glory, shape this account."
     },
     {
       "number": 3,
@@ -26,7 +28,8 @@
       "name": "Chun",
       "english": "Difficulty (Spring and Delight)",
       "judgement": "Ch'un indicates that in such a case as it contemplates there will be great progress and success, and that it will be advantageous to be firmly correct. It will not be advantageous to go anywhere unaided, but it will be advantageous to appoint helpers.",
-      "image": "Clouds and the moving thunder precede the fall of the rain. The superior man seeks to put everything in order, and set each thing right in its proper position."
+      "image": "Clouds and the moving thunder precede the fall of the rain. The superior man seeks to put everything in order, and set each thing right in its proper position.",
+      "summary": "Difficulty is the image of a plant struggling out of the earth. Legge relates that first emergence to the disorder attending the rise of a state, when the work of establishing order is only beginning. Water above thunder gives the image of clouds and a thunderous sky; the commentary also reads the combination as movement amid danger. The judgement brings firmness and the appointment of capable helpers into this unsettled situation. Its great symbolism compares the ordering of affairs to sorting the threads of a fabric."
     },
     {
       "number": 4,
@@ -34,7 +37,8 @@
       "name": "Meng",
       "english": "Youthful Folly",
       "judgement": "Meng will have success. It is not I who go to the young and ask information; these young come to me. The first response I declare to them; if they ask a second and a third time, it is troublesome, and to the troublesome I do not respond. There will be advantage in being firm and correct.",
-      "image": "A perilous spring flows at the foot of the mountain. The superior man strives to be self-fulfilled, and cultivates his virtuous conduct."
+      "image": "A perilous spring flows at the foot of the mountain. The superior man strives to be self-fulfilled, and cultivates his virtuous conduct.",
+      "summary": "Youthful Folly concerns inexperience and the work of education. Mountain above water suggests a spring at the mountain's foot; the commentary also sees a difficult stream and an obstacle to movement in the pairing. Legge associates the name with a young plant's undeveloped appearance. The judgement presents instruction as a meeting between a learner who seeks it and a teacher who responds to sincerity. The commentary emphasizes nourishing what is good in the young, while the great symbolism connects the figure with steady conduct and the cultivation of character."
     },
     {
       "number": 5,
@@ -42,7 +46,8 @@
       "name": "Hsu",
       "english": "Waiting for the Event; Holding Fast",
       "judgement": "With the confiding trust of an honest heart there is brilliant perspicuity, while its subject is firm and correct, waiting by the great stream in its proper channel, and there will be sublime success.",
-      "image": "The waters in the sky wait for the (time appointed by) Heaven. Thus the superior man eats and drinks, feasts in cheerfulness and merriment, and (so) keeps himself unanxious."
+      "image": "The waters in the sky wait for the (time appointed by) Heaven. Thus the superior man eats and drinks, feasts in cheerfulness and merriment, and (so) keeps himself unanxious.",
+      "summary": "Waiting places water above heaven: the great symbolism pictures clouds rising in the sky, while the commentary reads strength facing danger ahead. Legge describes a situation in which the power to act is present but is held back rather than committed to an immediate struggle. Waiting is therefore not simply inactivity; it includes sincerity, firmness, and deliberation in the presence of difficulty. The image of eating and drinking in ease gives the interval a composed quality, contrasting anxious haste with a settled mind."
     },
     {
       "number": 6,
@@ -50,7 +55,8 @@
       "name": "Sung",
       "english": "Conflict about what is really Doubtful",
       "judgement": "Sung shows that in such a case as it contemplates there will be difficulty in obtaining a hearing. If we look to the real state of the doubtful question, with a moderate and cautious treatment there will be fortunate result; if the case be carried to an issue there will be evil. It will be advantageous to see the great man; it will not be advantageous (to attempt) to cross the great stream.",
-      "image": "Heaven and water go their ways in opposite directions. The superior man, at the beginning of every affair, takes thought as to the root of possible disputes, and so keeps litigation from arising."
+      "image": "Heaven and water go their ways in opposite directions. The superior man, at the beginning of every affair, takes thought as to the root of possible disputes, and so keeps litigation from arising.",
+      "summary": "Conflict sets heaven above water. In the great symbolism their movements diverge; in Legge's explanation, strength outside meets danger within. The judgement allows that a person may be sincere in a dispute and still encounter obstruction. It contrasts caution and impartial judgment with a quarrel pursued to its bitter end. The image turns attention to the beginnings of affairs, before differences have hardened into contention. Legge also treats the figure as a general reflection on strife, not merely as a record of a particular historical dispute."
     },
     {
       "number": 7,
@@ -58,7 +64,8 @@
       "name": "Shih",
       "english": "The Army. Many Soldiers",
       "judgement": "Shih (leads us) to put ourselves in trust with (such an one as can command) many soldiers, firm and correct, and there will be no error.",
-      "image": "In the middle of the earth is water. Thus does the ruler of a people cherish his people, and thus he nourishes the multitude."
+      "image": "In the middle of the earth is water. Thus does the ruler of a people cherish his people, and thus he nourishes the multitude.",
+      "summary": "The Army concerns the organization of a multitude under an experienced leader. Earth above water supplies the image of water held within the earth; the great symbolism relates this to caring for and educating the people from whom an army is drawn. Legge's commentary stresses both the risks of military action and the need for a just purpose and disciplined conduct. The figure is not an unqualified celebration of force: it asks how authority, responsibility, and the welfare of the people stand together in a dangerous undertaking."
     },
     {
       "number": 8,
@@ -66,7 +73,8 @@
       "name": "Pi",
       "english": "Holding Together (Union)",
       "judgement": "Pi (denotes) him to whom all (do rightly) hold. He will be pronounced (worthy of) the great (submission). It will be further advantageous to be firm and correct. Those who come to him, as it were, without stop, will meet with no (cause for) sorrow; he whose period is not yet arrived will meet with evil.",
-      "image": "The waters are by the side of the lake. Thus did the ancient kings (draw) to (them) the various states, and gave encouragement to their friendship towards their lords."
+      "image": "The waters are by the side of the lake. Thus did the ancient kings (draw) to (them) the various states, and gave encouragement to their friendship towards their lords.",
+      "summary": "Holding Together considers the bonds among members of a community. Water above earth gives the great symbolism its image of water on the earth's surface, suggesting close union. Legge describes a ruler as a center around whom others gather, but the judgement also calls for an examination of the constancy and firmness of that person's character. The commentary connects lasting association with mutual confidence and benevolence rather than mere proximity. Union is presented as a relationship involving both the one who gathers and those who join."
     },
     {
       "number": 9,
@@ -74,7 +82,8 @@
       "name": "Hsiao Ch'u",
       "english": "The Taming Power of the Small",
       "judgement": "Hsiao Ch'u (denotes) that the course will be carried out. Dense clouds, but no rain! They come from our western region.",
-      "image": "The (vast) clouds move over Heaven. The superior man studies to make (the display of) his (virtuous) character varied and elegant."
+      "image": "The (vast) clouds move over Heaven. The superior man studies to make (the display of) his (virtuous) character varied and elegant.",
+      "summary": "This figure depicts a small restraining influence. Wind above heaven combines flexibility with strength; Legge understands the restraint as limited rather than powerful enough to hold back movement indefinitely. The judgement's dense clouds have not yet produced rain, an image he relates to beneficial influence that has gathered but has not spread. The great symbolism shifts attention to the outward expression of character. Its theme is the tension between accumulated possibility and a check that delays its wider realization."
     },
     {
       "number": 10,
@@ -82,7 +91,8 @@
       "name": "Lu",
       "english": "Treading under the Foot; Stepping",
       "judgement": "Lu treads on the tiger's tail; the tiger does not bite the man: sublime success.",
-      "image": "Heaven above, the lake below. The superior man discriminates properly between high and low, and settles the (proper) plans (of the) people."
+      "image": "Heaven above, the lake below. The superior man discriminates properly between high and low, and settles the (proper) plans (of the) people.",
+      "summary": "Treading places heaven above the lake. Legge reads the lower trigram as relatively yielding beneath the strength of heaven, an arrangement that suggests a hazardous step. The judgement expresses this in the striking image of treading on a tiger's tail without being bitten. In the commentary, the theme broadens into propriety: the conduct and courtesies that give shape to relations amid disorder. The great symbolism sees distinctions of place and responsibility in the sky above and marsh below, joining careful movement with attention to the order of a community."
     },
     {
       "number": 11,
@@ -90,7 +100,8 @@
       "name": "T'ai",
       "english": "Peace; Prosperity",
       "judgement": "The little goes and the great comes: good fortune and (abundance of) success.",
-      "image": "It is Heaven that sends down (its influences) and Earth that ascends (to meet them). Thus (the great) ruler completes (the ideas of) heaven and earth, and (thus) he assists (their) operations, so that peace and harmony reach through all beneath."
+      "image": "It is Heaven that sends down (its influences) and Earth that ascends (to meet them). Thus (the great) ruler completes (the ideas of) heaven and earth, and (thus) he assists (their) operations, so that peace and harmony reach through all beneath.",
+      "summary": "Peace places earth above heaven. The commentary sees the two in communication, with strength within and receptivity outside; it also pictures high and low sharing a common purpose. Legge connects the figure with spring and the growth made possible by cooperation between heaven and earth. The great symbolism extends that harmony to government, whose arrangements assist the natural seasons for the benefit of the people. Peace is not described as an isolated possession but as a condition sustained through relations among different forces."
     },
     {
       "number": 12,
@@ -98,7 +109,8 @@
       "name": "Pi",
       "english": "Obstruction; Decay",
       "judgement": "The great go away and the little come, and the (men of) virtue cease (to be employed); (the time) is not one favorable to the advance of the superior man.",
-      "image": "It is Heaven and Earth which do not hold (intercourse). Thus the (ruler) limits himself by his (moderate) measures of rule, and thus he tries to avoid (the difficulties of) his charge."
+      "image": "It is Heaven and Earth which do not hold (intercourse). Thus the (ruler) limits himself by his (moderate) measures of rule, and thus he tries to avoid (the difficulties of) his charge.",
+      "summary": "This figure reverses the arrangement of Peace: heaven is above earth, and their influences are described as no longer in communication. The judgement speaks of a lack of understanding among people, while the commentary associates the situation with obstruction and decay. In the great symbolism, the person of character keeps that character from outward display amid threatening circumstances. The contrast with the preceding figure makes the quality of relationships, rather than strength alone, central to the difference between openness and blockage."
     },
     {
       "number": 13,
@@ -106,7 +118,8 @@
       "name": "T'ung Jên",
       "english": "Fellowship with Men. Community in Knowledge and Feeling",
       "judgement": "Fellowship with men in an open way brings success. It will be advantageous (to attempt to) cross the great stream. (In such work) the firm correctness of the superior man (is required).",
-      "image": "Heaven and fire unite in the same tendency. The superior man discriminates properly between the families (of men), and gives an accurate survey of the differences of things."
+      "image": "Heaven and fire unite in the same tendency. The superior man discriminates properly between the families (of men), and gives an accurate survey of the differences of things.",
+      "summary": "Fellowship places heaven above fire. Legge sees the upward tendency of fire joining with heaven as an image of union, in contrast to the obstruction of the preceding figure. The judgement sets fellowship in the open country, which he interprets as an association directed toward public rather than selfish ends. The great symbolism speaks of distinguishing things by kind; Legge finds its connection to the figure difficult to explain. The theme is a fellowship broad enough to reach beyond private attachment."
     },
     {
       "number": 14,
@@ -114,7 +127,8 @@
       "name": "Ta Yu",
       "english": "Possession in Great Measure. Great Property",
       "judgement": "Ta Yu (indicates) sublime success.",
-      "image": "Fire is High in Heaven. The superior man represses what is evil, exalts what is good, and thus yields obediently to the benign (ordinance of Heaven)."
+      "image": "Fire is High in Heaven. The superior man represses what is evil, exalts what is good, and thus yields obediently to the benign (ordinance of Heaven).",
+      "summary": "Possession in Great Measure shows fire above heaven. Its great symbolism connects the light in the sky with distinguishing what is good from what is harmful. Legge describes the figure as a condition of abundance, accompanied by the danger that possessions may encourage pride. His explanation emphasizes a humble center met by the cooperative strength of others. The figure therefore joins ample resources with the character and relationships that shape their use, rather than treating wealth alone as the whole meaning of the situation."
     },
     {
       "number": 15,
@@ -122,7 +136,8 @@
       "name": "Ch'ien (Modesty)",
       "english": "Modesty. Self-Depreciation",
       "judgement": "Modesty (possesses) creative (elements), success, and the (due) regard to the firm correctness (of its course). (The superior man) carries (his work) to completion.",
-      "image": "In the (bosom of the) earth is a mountain. The superior man takes away from what in himself is excessive, and adds to what in himself is little; he weighs the (various) cases (with care), and deals equitably with them."
+      "image": "In the (bosom of the) earth is a mountain. The superior man takes away from what in himself is excessive, and adds to what in himself is little; he weighs the (various) cases (with care), and deals equitably with them.",
+      "summary": "Modesty places earth above mountain. The great symbolism describes a mountain within the earth and connects the image with reducing excess, making up deficiency, and treating different cases equitably. Legge notes that the high mountain inside the low earth does not by itself make the symbolic connection obvious. His commentary nevertheless presents humility as strength that does not exalt itself, and as a quality valued by others. Following the figure of great possessions, this one considers how achievement and influence may be held without pride."
     },
     {
       "number": 16,
@@ -130,7 +145,8 @@
       "name": "Yü",
       "english": "Pleasing and Delight. Ease and Contentment",
       "judgement": "Yü (indicates) favorable event in the installation of auxiliaries and the (moving of) armies.",
-      "image": "Thunder comes quickly forth from the earth in the spring. Thus the ancient kings (ordered their) music, did honor to (all) virtue, and thereby made (their) offering to (Heaven), and (so) made their (great) ancestor (to appear) and (accept) the (sacrifice)."
+      "image": "Thunder comes quickly forth from the earth in the spring. Thus the ancient kings (ordered their) music, did honor to (all) virtue, and thereby made (their) offering to (Heaven), and (so) made their (great) ancestor (to appear) and (accept) the (sacrifice).",
+      "summary": "Enthusiasm joins thunder above earth: thunder issues from the earth with a stirring sound. Legge describes a condition of harmony and shared satisfaction in which people respond readily to their ruler. The commentary on the judgement relates movement to willing cooperation, while the great symbolism recalls music composed to honor virtue and used in ancestral worship. The figure brings collective feeling, movement, and the ordering of public life together. Its emphasis is not merely private excitement but a mood shared by a community."
     },
     {
       "number": 17,
@@ -138,7 +154,8 @@
       "name": "Sui",
       "english": "Follow; the Followed. The Yielding; the Accommodating",
       "judgement": "Sui possessed (the attributes of) creative (energy), untiring progress, and (a) true (heart), (and the) joy of (an) upright (course): it had no (cause for) error.",
-      "image": "Thunder hidden in the lake (and) resting. The superior man, when night approaches, goes in (to his chamber) for rest, (and gives himself) to quiet."
+      "image": "Thunder hidden in the lake (and) resting. The superior man, when night approaches, goes in (to his chamber) for rest, (and gives himself) to quiet.",
+      "summary": "Following places lake above thunder, with the great symbolism picturing thunder hidden within the marsh. The commentary brings together movement and pleasure to explain the figure. Legge understands following in both directions: a person may follow others or be followed by them. In either case he connects the relationship with a shared willingness and with what is proper, rather than compliance without regard to character. The image of returning indoors to rest as evening approaches adds an example of responding to the time and its changing conditions."
     },
     {
       "number": 18,
@@ -146,7 +163,8 @@
       "name": "Ku",
       "english": "Work upon What Is Spoiled. Decay; Corruption",
       "judgement": "Ku (denotes) that there will be great progress and success; (and that it will be) advantageous to cross the great stream. (In such work) three days before (the beginning), and three days after (the end).",
-      "image": "Below the mountain (bloweth) the wind. The superior man stirs the dull (spirit of the people), and (so) braces their (souls)."
+      "image": "Below the mountain (bloweth) the wind. The superior man stirs the dull (spirit of the people), and (so) braces their (souls).",
+      "summary": "Work upon What Is Spoiled places mountain above wind. The commentary describes the combination as pliancy beneath arrest, and the name as a condition of troublesome decay. Legge treats the figure as an account of restoring soundness where affairs have fallen into disorder. The judgement's time before and after a turning point directs attention both to the causes of the damage and to the measures taken afterward. In the great symbolism the work includes helping the people and nourishing one's own character."
     },
     {
       "number": 19,
@@ -154,7 +172,8 @@
       "name": "Lin",
       "english": "Approach; Draw Near. Inspection, Visitation",
       "judgement": "Lin (has the attributes of the) creative and progress and that which is true and correct, and there (comes) success. (But) in the eighth (month) evil will appear (in the time).",
-      "image": "Over the lake is the earth. Thus (unexhausted) is the purpose of the teacher, and the method of his instruction of the people, and his (wise) government of them."
+      "image": "Over the lake is the earth. Thus (unexhausted) is the purpose of the teacher, and the method of his instruction of the people, and his (wise) government of them.",
+      "summary": "Approach presents earth above lake. Legge explains the name through the coming near of authority to inspect, comfort, or govern. The commentary on the judgement combines the attributes of pleasure and compliance; the great symbolism relates the figure to patient instruction and support for the people. Although the judgement describes an advance, it also marks a later change in circumstances. Legge reads that qualification as a reminder that conditions do not remain fixed, even when influence is increasing."
     },
     {
       "number": 20,
@@ -162,7 +181,8 @@
       "name": "Kuan",
       "english": "Survey and Inspection. The Act of Contemplation",
       "judgement": "The (presiding) host washed his hands in the ablutions, (and) had not (yet) presented his offering; (his) sincerity and dignity (were before all): from those above down to those below all were grave and composed.",
-      "image": "The (wind) moves within the region of the earth. Thus the ancient kings visited the various states (of the kingdom), and (so) gave their instructions to the people."
+      "image": "The (wind) moves within the region of the earth. Thus the ancient kings visited the various states (of the kingdom), and (so) gave their instructions to the people.",
+      "summary": "Contemplation places wind above earth. Its name has two senses in Legge's explanation: showing oneself and looking carefully at what is shown. He describes a ruler whose conduct is visible to the people, and people who observe that example. The judgement's worshipper, poised between washing and the offering, gives the moment a quality of sincerity and dignity. The great symbolism depicts ancient rulers visiting the regions, observing the people's ways, and offering instruction. Looking and being looked upon belong to the same relationship."
     },
     {
       "number": 21,
@@ -170,7 +190,8 @@
       "name": "Shih Ho",
       "english": "Biting and Penetration. Legal Chastisement",
       "judgement": "Shih Ho (indicates) success. It will be advantageous to let judgments be (duly) carried out.",
-      "image": "Thunder and lightning. Thus the ancient kings made (their) penalties complete, and (their) laws clear and manifest."
+      "image": "Thunder and lightning. Thus the ancient kings made (their) penalties complete, and (their) laws clear and manifest.",
+      "summary": "This figure depicts a mouth with an obstruction between its jaws. Legge explains the emblem as union made possible by biting through what stands in the way. Fire above thunder gives the image of lightning and thunder, which the great symbolism associates with clearly established laws and penalties. The judgement addresses legal restraint in a divided community. In the commentary, removing an obstacle is not presented as an end apart from society: it serves the restoration of understanding between those who have been separated."
     },
     {
       "number": 22,
@@ -178,7 +199,8 @@
       "name": "Pi",
       "english": "Grace, Adornment. Embellishment, Decoration",
       "judgement": "Adornment (shows) success. In (everything) which is not the (essential) business, (that) should be ornamented and adorned.",
-      "image": "Fire (blazes) at the foot of the mountain. The superior man, while he takes care to show clearly all (the details of his) government, does not (presume), on slight (ground), to decide (any) real litigation."
+      "image": "Fire (blazes) at the foot of the mountain. The superior man, while he takes care to show clearly all (the details of his) government, does not (presume), on slight (ground), to decide (any) real litigation.",
+      "summary": "Adornment places mountain above fire. The image of fire at the mountain's foot introduces the relation between what gives an appearance distinction and what lies beneath it. Legge recognizes a place for ornament in nature and society, but treats it as secondary to substance. The great symbolism applies clarity and brilliance to the conduct of government while distinguishing that from the serious judgment of criminal cases. The figure holds beauty and restraint together, asking what happens when outward embellishment is allowed to take the leading place."
     },
     {
       "number": 23,
@@ -186,7 +208,8 @@
       "name": "Po",
       "english": "Lopping Off; Detachment. Rupture and Dividedness",
       "judgement": "Po (indicates that there will not be the advantage) to go anywhere (and seek for gain).",
-      "image": "The mountain rests upon the earth. Thus those in high places make sure of their (own) resting-places, and (so) find tranquillity for the people beneath them."
+      "image": "The mountain rests upon the earth. Thus those in high places make sure of their (own) resting-places, and (so) find tranquillity for the people beneath them.",
+      "summary": "This figure concerns stripping away and decay. Mountain above earth gives the great symbolism an image of the mountain resting upon its foundation; it connects the security of those above with care for those below. Legge describes a process that begins underneath and rises, comparing it with the fading of the year toward winter and with decline in public life. The judgement does not picture this as a time for easy advance. The commentary places the situation within the larger alternation of increase and decrease."
     },
     {
       "number": 24,
@@ -194,7 +217,8 @@
       "name": "Fu",
       "english": "Return. Reversion. Reproduction",
       "judgement": "Fu (indicates) success. (Men) go forth and come in without (perceiving any) injury; friends come, and there is no error. The (proper) course is repeated and completed; on the seventh (day) comes the return (of the departing Yang). It will be advantageous (to go) whithersoever (the subject of the hexagram) may (go).",
-      "image": "The thunder rolls and moves in the middle of the earth. Thus the ancient kings, on the (day of the) Solstice, shut (the passes); merchants did not pursue their gains, and (the rulers) did not stir (the people to any) enterprises."
+      "image": "The thunder rolls and moves in the middle of the earth. Thus the ancient kings, on the (day of the) Solstice, shut (the passes); merchants did not pursue their gains, and (the rulers) did not stir (the people to any) enterprises.",
+      "summary": "Return places earth above thunder, with movement beginning within the receptive earth. Legge associates the figure with the winter solstice and the turning of the sun's course after the season of decline. The great symbolism recalls a pause in travel and official activity at that time. The judgement speaks of coming and going and of a course beginning again; the commentary places this return within recurring changes in nature and society. Legge does not treat the cycle as a promise of a perfect, unchanging community."
     },
     {
       "number": 25,
@@ -202,7 +226,8 @@
       "name": "Wu Wang",
       "english": "The Unexpected, or What Comes Without Expectation. Sincerity",
       "judgement": "Wu Wang possesses (the attributes of) creative (energy), untiring progress, and that which is true and correct. (But where the hexagram tells of) the calamity of the (merely) self-cultivator, (that calamity is not) his (proper) occupation.",
-      "image": "Under the sky the thunder (moves), and all things (follow). The ancient Kings, in accordance with this, flourished and nourished all things, timing their operations with the (advance of the) seasons."
+      "image": "Under the sky the thunder (moves), and all things (follow). The ancient Kings, in accordance with this, flourished and nourished all things, timing their operations with the (advance of the) seasons.",
+      "summary": "This figure concerns freedom from recklessness and insincerity. Heaven above thunder combines strength with movement; the great symbolism pictures thunder under the sky and describes rulers nourishing things in accordance with the seasons. Legge reads the name as simplicity and sincerity joined to rectitude, qualities he associates with the action of heaven as well as human conduct. The judgement joins this quality to what is right, and the commentary questions claims to sincerity when conduct departs from it. Its concern is the integrity of the whole course."
     },
     {
       "number": 26,
@@ -210,7 +235,8 @@
       "name": "Ta Ch'u",
       "english": "The Taming Power of the Great. Great Restraint",
       "judgement": "Ta Ch'u favors (the maintenance of) firm correctness. (To one in such a position it is) fortunate not to remain at home (seeking only his own support). It will be advantageous to cross the great stream.",
-      "image": "In the mountain is (the storing energy of) Heaven. The superior man studies the speech and deeds of antiquity, and by them builds (the fabric of) his (virtuous) character."
+      "image": "In the mountain is (the storing energy of) Heaven. The superior man studies the speech and deeds of antiquity, and by them builds (the fabric of) his (virtuous) character.",
+      "summary": "This figure joins mountain above heaven, presenting strength held within what can arrest it. Legge explains its name through two related meanings: restraint and accumulation. What is held back gathers force, and in the great symbolism the accumulation is one of character rather than material possessions. The figure turns to the words and deeds of earlier people as resources for that cultivation. Its judgement also looks beyond remaining within the household, placing developed capacity in relation to wider service and difficult undertakings."
     },
     {
       "number": 27,
@@ -218,7 +244,8 @@
       "name": "I (the Jaw)",
       "english": "The Jaw; or the Mouth. The Members of the Mouth",
       "judgement": "I (should be thought of and inspected). We see the nourishing (favor) which (the subject) enjoys, and (learn) what it is which the (wise) man seeks to nourish (in himself).",
-      "image": "Below the mountain is the thunder. The superior man is careful of his words, and temperate in his eating and drinking."
+      "image": "Below the mountain is the thunder. The superior man is careful of his words, and temperate in his eating and drinking.",
+      "summary": "The Jaw places mountain above thunder. Legge sees the figure as resembling an open mouth, with the mobile lower jaw and the more fixed upper jaw suggesting its work. The judgement asks what is being nourished and what nourishment is appropriate. His commentary extends the question beyond food to the care of body and mind, oneself and others. The great symbolism brings speech as well as eating and drinking into view. Nourishment is considered in relation to both its object and the manner in which it is given."
     },
     {
       "number": 28,
@@ -226,7 +253,8 @@
       "name": "Ta Kuo",
       "english": "The Great Exceeding. Great Excess",
       "judgement": "Ta Kuo (represents) the ridgepole of the roof (as) bending in the middle. (For such a case) there will be advantage in (energetic action); (thus to act is) success. (The hexagram presents the idea of) free intercourse (with the times).",
-      "image": "The lake rises above the trees. The superior man, (though) standing alone, (feels) no dread; (though he were to) quit the world, he (would feel) no grief."
+      "image": "The lake rises above the trees. The superior man, (though) standing alone, (feels) no dread; (though he were to) quit the world, he (would feel) no grief.",
+      "summary": "This figure presents an exceptional excess through the image of a bending beam. Lake above wind is rendered in the great symbolism as water covering trees. Legge describes unusually difficult times requiring unusual qualities in the conduct of affairs, while noting that what exceeds the ordinary need not for that reason be wrong. The image also portrays a person able to stand alone or withdraw without fear or regret. Weight, strain, and the character needed in an extraordinary situation are held together."
     },
     {
       "number": 29,
@@ -234,7 +262,8 @@
       "name": "K'an",
       "english": "What is Dangerous; the Double Abyss. Repeat Peril",
       "judgement": "K'an (indicates the reappearance of) what is dangerous. (However, if) with sincerity (the heart) is bound (to what is right, one will) get (through the difficulty); (and) what is thus done will be valued.",
-      "image": "Water, pressing on (and following on) in successive waves of volume and depth. The superior man (is) constant in virtuous course, and (so) in the practice of (his) virtue (he finds his) lesson."
+      "image": "Water, pressing on (and following on) in successive waves of volume and depth. The superior man (is) constant in virtuous course, and (so) in the practice of (his) virtue (he finds his) lesson.",
+      "summary": "The repeated water trigram places water above water. Legge explains its name as a pit or dangerous defile and takes the doubling to suggest one peril following another. The commentary pictures water flowing through a difficult passage without losing its nature. Sincerity is central to the judgement, while the great symbolism connects the continuous flow with constancy of character, conduct, and instruction. The figure reflects on how a steady inner quality relates to circumstances marked by repeated danger."
     },
     {
       "number": 30,
@@ -242,10 +271,12 @@
       "name": "Li",
       "english": "The Brightness. The Adherence (of Fire). Clinging",
       "judgement": "Li favors (the maintenance of) firm correctness: (so we find) success. (The care of) the cow (is the emblem here presented to us).",
-      "image": "The series of flames (illuminating) the region of Li. Thus the great man carries on (the series of his) bright (intelligence), and (so) his light is spread abroad over the four (quarters)."
+      "image": "The series of flames (illuminating) the region of Li. Thus the great man carries on (the series of his) bright (intelligence), and (so) his light is spread abroad over the four (quarters).",
+      "summary": "The repeated fire trigram places fire above fire. Legge explains that its name carries both the sense of brightness and that of adhering or being attached. The commentary compares this attachment to the sun and moon in the sky and plants rooted in the earth. Legge's note and the commentary on the judgement connect firmness with docility, illustrated by a cow; the great symbolism turns repeated brightness into the cultivation and sharing of understanding. Illumination here is considered together with the support and correctness on which it depends."
     },
     {
       "number": 31,
+      "summary": "Influence places lake above mountain. Legge identifies its central subject as mutual influence: the ways beings move or affect one another, and the character of that relationship. The judgement uses marriage as an illustration of such a bond, while his commentary considers whether both the influence and its purpose are right. The great symbolism turns to the receptive mind, free of preoccupation and open to the influence of others. The figure brings together responsiveness and the care with which influence is exercised.",
       "chinese": "咸",
       "name": "Hsien",
       "english": "Influence. Wooing; the Mutual Action of (two beings)",
@@ -254,6 +285,7 @@
     },
     {
       "number": 32,
+      "summary": "Duration places thunder above wind. The commentary on the judgement describes these forces as communicating with one another, joining movement with a yielding quality. Legge explains the figure as perseverance in doing what is right, rather than mere persistence in any chosen course. He also discusses an older interpretation of enduring relations within a household, while questioning whether that was the original author's intention. The great symbolism presents a person who stands firm and maintains a consistent way of acting.",
       "chinese": "恆",
       "name": "Hêng",
       "english": "Persistence. Long Enduring. Perseverance",
@@ -262,6 +294,7 @@
     },
     {
       "number": 33,
+      "summary": "Retreat places heaven above mountain. Legge describes a time when harmful influences gain ground in public life and people of character withdraw before them. The commentary on the judgement understands the withdrawal as a response to the requirements of the time, not simply as defeat. In the great symbolism, distance from those who act badly is maintained through dignity rather than hatred. The figure considers how integrity may be preserved when circumstances no longer support open participation in affairs.",
       "chinese": "遯",
       "name": "Tun",
       "english": "The Yielding. Retirement. Escape",
@@ -270,6 +303,7 @@
     },
     {
       "number": 34,
+      "summary": "Power of the Great places thunder above heaven. The commentary on the judgement joins heaven's strength to thunder's movement, giving the figure its sense of vigor. Legge asks whether strength alone is enough for the conduct of affairs and answers by placing it under the demands of what is right. The great symbolism expresses this through conduct governed by propriety. The figure does not treat power as a value independent of its direction; its concern is the relationship between capacity to act and the manner of acting.",
       "chinese": "大壯",
       "name": "Ta Chuang",
       "english": "The Power of the Great. Great Strength",
@@ -278,6 +312,7 @@
     },
     {
       "number": 35,
+      "summary": "Progress places fire above earth, pictured in the great symbolism as the bright sun rising over the ground. Legge compares the advance to increasing daylight and reads the judgement as an account of a prince whose service to the people earns the ruler's recognition. Gifts and repeated meetings express that relationship in the historical setting of the text. The image also turns inward, relating outward brightness to the cultivation of character. Advancement here is associated with service and acknowledged merit, not movement alone.",
       "chinese": "晉",
       "name": "Chin",
       "english": "Progress. The Advance",
@@ -286,6 +321,7 @@
     },
     {
       "number": 36,
+      "summary": "This figure places earth above fire: the great symbolism describes brightness entering the earth and becoming obscured. Legge reads the situation as one in which an able and conscientious officer serves under an unsympathetic ruler. The judgement joins awareness of difficulty to firmness of purpose. In the image, intelligence is kept from conspicuous display while affairs are managed. Contrasted with the preceding figure's advancing light, this one considers how a good purpose may be maintained when the surrounding conditions do not welcome it.",
       "chinese": "明夷",
       "name": "Ming I",
       "english": "The Decline (of the Light). Smothered and Wounded Light",
@@ -294,6 +330,7 @@
     },
     {
       "number": 37,
+      "summary": "The Family places wind above fire. The great symbolism speaks of wind coming forth from fire and connects the image with truthful words and consistent conduct. Legge describes the figure as concerned with the ordering of a household through cooperation among its members, and he relates that order to the wider life of the state. His explanation reflects the prescribed family roles of the text's historical setting. The broader theme is the connection between relationships at home, dependable conduct, and public order.",
       "chinese": "家人",
       "name": "Chia Jên",
       "english": "A Family. People in a House",
@@ -302,6 +339,7 @@
     },
     {
       "number": 38,
+      "summary": "Opposition places fire above lake. The commentary observes that fire tends upward while water tends downward, using their different movements as an image of separation. Legge describes a social condition marked by division and estrangement; the judgement speaks of what may be accomplished in small matters even within that condition. The great symbolism adds a different emphasis: agreement need not eliminate diversity. The figure considers both the difficulty of separation and the possibility of recognizing differences within a shared life.",
       "chinese": "睽",
       "name": "K'uei",
       "english": "Opposition; Separation. Contrariety",
@@ -310,6 +348,7 @@
     },
     {
       "number": 39,
+      "summary": "Obstruction places water above mountain. The name evokes difficulty in walking, which Legge applies to the arduous task of governing in a troubled condition. The commentary on the judgement sees danger ahead and the ability to stop in the lower trigram's mountain. Legge discusses both action and restraint as possible responses to difficulty, depending on the circumstances. The great symbolism turns attention back toward self-examination and the cultivation of character. The figure holds external obstacles alongside the inward work of meeting them.",
       "chinese": "蹇",
       "name": "Chien",
       "english": "Obstruction; Distress. Lame; Halt",
@@ -318,6 +357,7 @@
     },
     {
       "number": 40,
+      "summary": "Deliverance places thunder above water, with the great symbolism presenting thunder and rain in action. Legge explains the name through the loosening of a knot or the unravelling of a complication, following the obstruction of the preceding figure. The judgement distinguishes between a situation in which no further work is needed and one in which work remains. The image associates release with forgiveness and gentleness in dealing with wrongdoing. The theme is not only the removal of difficulty but the care taken in settling affairs afterward.",
       "chinese": "解",
       "name": "Hsieh",
       "english": "Deliverance. Unbinding; Solution",
@@ -326,6 +366,7 @@
     },
     {
       "number": 41,
+      "summary": "Diminution places mountain above lake. The judgement speaks of sincerity expressed through a simple offering, even when its material means are modest. Legge notes differing interpretations of the figure and favors a broad reading: reducing what is excessive so that it accords with what is right. The great symbolism applies this to anger and desire. The figure therefore considers the relation between lessening and value: what is reduced, the spirit in which it is given up, and the purpose served by that reduction.",
       "chinese": "損",
       "name": "Sun",
       "english": "Diminution. Decrease",
@@ -334,6 +375,7 @@
     },
     {
       "number": 42,
+      "summary": "Increase places wind above thunder. Legge contrasts it with Diminution and describes a ruler or government acting to benefit the people and enlarge their resources. The great symbolism turns the theme toward personal conduct: moving toward what is good and turning away from error. In both settings, increase is understood through an active relationship, not merely the possession of more. The figure brings the sharing of resources and the growth of character into the same field of reflection.",
       "chinese": "益",
       "name": "I (Increase)",
       "english": "Increase. Gain",
@@ -342,6 +384,7 @@
     },
     {
       "number": 43,
+      "summary": "This figure places lake above heaven. Legge reads its central situation as the removal of corrupt influence from public affairs. The judgement calls for an open declaration and a sincere appeal for support while recognizing the danger involved; it does not favor an immediate resort to arms. Legge emphasizes the force of character and the gathering of common support. The great symbolism presents resources being shared with those below rather than accumulated. The figure relates decisive action to openness, restraint, and responsibility toward others.",
       "chinese": "夬",
       "name": "Kuai",
       "english": "Break-through. Issue. Decision",
@@ -350,6 +393,7 @@
     },
     {
       "number": 44,
+      "summary": "Coming to Meet places heaven above wind. Legge explains the name as a sudden or unexpected encounter and reads the judgement as an image of an unwelcome influence entering public life. His historical interpretation considers how such an influence might spread through government if left unchecked. The great symbolism offers another image: the ruler's announcements carried throughout the realm. The figure brings attention to the first appearance of a relationship or influence and to the effect it may have on the wider order.",
       "chinese": "遘",
       "name": "Kou",
       "english": "Meeting. Issue. Coming Upon; Encounter",
@@ -358,6 +402,7 @@
     },
     {
       "number": 45,
+      "summary": "Gathering Together places lake above earth. Legge describes the figure as a condition of union among ruler, ministers, and people. The judgement brings the king to the ancestral temple, joining communal gathering with the ritual life of the state. It also mentions the meeting with a person of wisdom and the need for firmness. The great symbolism adds preparation for unforeseen events. Together these images present a community gathered around shared purposes while remaining attentive to the responsibilities that accompany its cohesion.",
       "chinese": "萃",
       "name": "Ts'ui",
       "english": "Gathering Together. The Collection",
@@ -366,6 +411,7 @@
     },
     {
       "number": 46,
+      "summary": "Pushing Upward places earth above wind; the lower trigram also represents wood. The great symbolism pictures a tree growing within the earth and connects its ascent with the gradual accumulation of small acts of character. Legge reads the judgement as the advancement of a capable officer whose modesty and strength meet a welcoming ruler. The emphasis is on an upward course supported by both personal qualities and opportunity. Growth is shown as something built up, rather than a single isolated leap.",
       "chinese": "升",
       "name": "Sheng",
       "english": "Pushing Upward. The Going Upward",
@@ -374,6 +420,7 @@
     },
     {
       "number": 47,
+      "summary": "Oppression places lake above water. In the great symbolism, water has drained from the marsh, giving an image of depletion; the name also suggests a tree confined within an enclosure. Legge relates the figure to circumstances in which good government is constrained and hard to carry out. The judgement holds open the possibility of integrity under distress; Legge contrasts speeches with the need for action. The image of remaining committed to a purpose gives the figure its moral center amid limitation.",
       "chinese": "困",
       "name": "K'un (Oppression)",
       "english": "Lying Under; Oppression. Distress",
@@ -382,6 +429,7 @@
     },
     {
       "number": 48,
+      "summary": "The Well places water above wind; the lower trigram also represents wood. The commentary on the judgement sees wood used to raise water, and a well that nourishes without being exhausted. Legge describes it as a shared resource whose usefulness depends on the water actually being drawn. Towns may change while the well remains a common source for those who come and go. The great symbolism relates this enduring provision to comforting the people and encouraging mutual help. Principles of care matter through their practical use.",
       "chinese": "井",
       "name": "Ching",
       "english": "The Well. The Well for Water",
@@ -390,6 +438,7 @@
     },
     {
       "number": 49,
+      "summary": "This figure concerns change, an idea associated with the shedding of a skin. Lake above fire brings water and fire into opposition; the commentary uses their interaction to explain the figure's meaning. Legge discusses changes in the affairs of a state as matters that call for demonstrated necessity and careful conduct, rather than haste. The judgement recognizes that people may believe in a change only after seeing it accomplished. The great symbolism turns to the ordering of the calendar and the clear marking of seasons.",
       "chinese": "革",
       "name": "Ko",
       "english": "Change. Molting or Transformation",
@@ -398,6 +447,7 @@
     },
     {
       "number": 50,
+      "summary": "The Cauldron places fire above wind; the lower trigram also signifies wood, and the commentary pictures wood feeding a cooking fire. The vessel prepares food for ordinary meals and ritual offerings. Legge compares it with the well: both concern nourishment, but he associates the cauldron particularly with the support of people of talent and character who serve the wider community. The great symbolism connects the figure with maintaining a secure and proper position. A household object becomes an image of the shared work of sustaining society.",
       "chinese": "鼎",
       "name": "Ting",
       "english": "The Cauldron or Vessel for the preparation of food; (in sacrificial services)",
@@ -406,6 +456,7 @@
     },
     {
       "number": 51,
+      "summary": "The repeated thunder trigram places thunder above thunder, suggesting a startling peal and the power of movement. Legge extends that image to a time of upheaval in public affairs. The judgement depicts apprehension followed by composure, and a worshipper who holds the sacrificial vessels steady amid a great shock. In the great symbolism, fear prompts self-examination and the cultivation of character. The figure considers the meeting of sudden disturbance with a mind that remains aware, attentive, and capable of steadiness.",
       "chinese": "震",
       "name": "Chên",
       "english": "The Exciting. Arouse; Thunder",
@@ -414,6 +465,7 @@
     },
     {
       "number": 52,
+      "summary": "The repeated mountain trigram places mountain above mountain. Legge associates the mountain both with resting and with arresting movement, and reads the figure as a study of inward steadiness grounded in what is right. The judgement's image of the back suggests freedom from absorbing concern with oneself or distraction by external things. The commentary on the judgement distinguishes rest at its proper time from action at its proper time. Legge does not describe this steadiness as withdrawal from society, but as a way of remaining oriented amid it.",
       "chinese": "艮",
       "name": "Kên",
       "english": "The Keep-still. A Mountain; the power of arresting",
@@ -422,6 +474,7 @@
     },
     {
       "number": 53,
+      "summary": "Gradual Progress places wind above mountain; the upper trigram also represents a tree. The judgement uses marriage as an example of a significant event reached through ordered stages. Legge applies the same idea to advancement into public responsibility, emphasizing steps taken over time rather than sudden promotion. He notes that explanations linking the trigram image to gradual advance do not fully convince him. The great symbolism relates the figure to sustained character and the improvement of public manners. The central emphasis remains the manner of progress.",
       "chinese": "漸",
       "name": "Chien (Gradual Progress)",
       "english": "Gradual Advance. Advance by Stages",
@@ -430,6 +483,7 @@
     },
     {
       "number": 54,
+      "summary": "This figure places thunder above lake. Its judgement uses the marriage of a younger sister as an illustration within the social arrangements of the historical text. Legge does not read the figure simply as a statement about marriage: he sees the example as a way of considering relations between a ruler and those who serve. The commentary combines pleasure with movement, while the great symbolism looks from the beginning of an undertaking toward its distant end. The figure attends to the consequences of how a relationship is formed.",
       "chinese": "归妹",
       "name": "Kuei Mei",
       "english": "The (younger) sister coming to (the older as a concubine). The Maiden who marries",
@@ -438,6 +492,7 @@
     },
     {
       "number": 55,
+      "summary": "Abundance places thunder above fire. The commentary combines movement with the clarity represented by fire, and the great symbolism presents thunder and lightning together in connection with careful judgments. Legge describes a condition of prosperity and the work of maintaining it for the people. The judgement's image of the sun at noon suggests brightness at its fullest, while the commentary recognizes that prosperous conditions are subject to change. The figure joins fullness with intelligent action and responsibility for the community it affects.",
       "chinese": "豐",
       "name": "Fêng",
       "english": "Abundance. Fulness; Fulness of the day",
@@ -446,6 +501,7 @@
     },
     {
       "number": 56,
+      "summary": "The Wanderer places fire above mountain. Legge understands the figure as concerning a traveler or stranger away from home, a person whose position is necessarily less secure than that of one settled in a community. The judgement speaks of limited progress and firmness of character; his commentary emphasizes humility and integrity in unfamiliar circumstances. The great symbolism connects the image with caution in the use of penalties and the handling of disputes. The figure considers conduct when belonging and protection cannot be taken for granted.",
       "chinese": "旅",
       "name": "Lu (The Traveler)",
       "english": "The Traveler; The Straggler. Wanderings; sojourning",
@@ -454,6 +510,7 @@
     },
     {
       "number": 57,
+      "summary": "The repeated wind trigram places wind above wind. Legge describes wind finding its way into many places and associates the figure with flexibility and penetration. He applies the image to the influence of government and its efforts to correct what is wrong, while noting that one proposed division of command and obedience between the trigrams is not clearly supported by the text. The great symbolism speaks of orders reiterated and affairs carried through. Influence appears here as a continuing, measured process rather than a single dramatic act.",
       "chinese": "巽",
       "name": "Hsün",
       "english": "The Yielding: or, the Uniform (Wind). Penetration",
@@ -462,6 +519,7 @@
     },
     {
       "number": 58,
+      "summary": "The repeated lake trigram places lake above lake. Legge identifies pleasure and satisfaction as the figure's subject, while observing that the connection between the water image and that quality is not easy to explain. The judgement joins pleasure with firmness and correctness; the commentary asks what happens when agreeable feeling is separated from sincerity and integrity. The great symbolism turns toward the conversation of friends and the encouragement found in shared practice. The figure considers enjoyment in relation to character and companionship.",
       "chinese": "兌",
       "name": "Tui",
       "english": "The Joyous; a Lake. Sway",
@@ -470,6 +528,7 @@
     },
     {
       "number": 59,
+      "summary": "Dispersion places wind above water. Legge sees the wind moving over water as an image of scattering and applies it to the estrangement of people's minds and the disorder that may follow. The judgement brings the king to the ancestral temple, which his commentary associates with sincerity and the restoration of common bonds. The great symbolism recalls offerings and the establishment of that temple. The figure considers both the experience of separation and the work of drawing people together around what they share.",
       "chinese": "渙",
       "name": "Huan",
       "english": "Dissolution. (Dissipated, and so, Dissipating).",
@@ -478,6 +537,7 @@
     },
     {
       "number": 60,
+      "summary": "Limitation places water above lake. Legge explains the name through divisions such as the joints of bamboo and applies it to regulation in the life of a state. The judgement qualifies the value of rules: those made excessively severe cannot endure. The great symbolism associates the figure with measurement and reflection on character and conduct. Its concern is not restriction for its own sake, but the fitting of limits to circumstances. Order depends on proportion as well as on the existence of boundaries.",
       "chinese": "節",
       "name": "Chieh",
       "english": "Regulation. Limitation; Restrained Desire",
@@ -486,6 +546,7 @@
     },
     {
       "number": 61,
+      "summary": "This figure places wind above lake and concerns sincerity at the center of a person. The judgement uses pigs and fish to suggest the reach of that quality; Legge discusses an interpretation in which they stand for those least readily affected by others. He describes sincerity as a mind free of preoccupation and selfishness, joined to firmness in conduct. The great symbolism applies the theme to careful consideration of legal cases and the postponement of capital punishment. Inner quality is shown through its effect on relationships and judgment.",
       "chinese": "中孚",
       "name": "Chung Fu",
       "english": "Internal Sincerity. Central Confidence",
@@ -494,6 +555,7 @@
     },
     {
       "number": 62,
+      "summary": "This figure places thunder above mountain and concerns exceeding ordinary limits in small matters. The judgement's bird is better heard descending than ascending, an image Legge associates with humility. His commentary distinguishes essential right from convention: a departure in minor forms may be considered, but not a departure from what is right. The great symbolism gives examples of exceptional humility, sorrow in mourning, and economy in spending. The emphasis is on proportion and careful attention to what kind of matter is at stake.",
       "chinese": "小過",
       "name": "Hsiao Kuo",
       "english": "The Small (things) which pass Beyond Ordinary Limits. Preponderance of the Small",
@@ -502,6 +564,7 @@
     },
     {
       "number": 63,
+      "summary": "After Completion places water above fire. The commentary on the great symbolism describes the two elements as occupying fitting positions and interacting, while Legge questions how directly that image yields its practical application. The judgement speaks of an accomplished beginning and the possibility of later disorder. Legge compares the situation to a state brought across a dangerous stream: much has been achieved, but its order still needs quiet consolidation. The great symbolism turns attention to difficulties that may arise even after an undertaking appears complete.",
       "chinese": "既濟",
       "name": "Chi Chi",
       "english": "Complete Change. The Completion of what was (to be done)",
@@ -510,6 +573,7 @@
     },
     {
       "number": 64,
+      "summary": "Before Completion reverses the preceding arrangement, placing fire above water. Legge explains that in this position the two do not act on one another, an image of affairs not yet brought into harmonious order. The judgement's young fox nearly crosses a stream but wets its tail, suggesting the danger of treating an unfinished passage as finished. Legge relates the closing figure to the recurring changes of society rather than a permanent final settlement. The great symbolism emphasizes careful distinction among things and their proper places.",
       "chinese": "未濟",
       "name": "Wei Chi",
       "english": "Not Yet Complete. Before Completion; The Uncompleted",

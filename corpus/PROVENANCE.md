@@ -15,8 +15,8 @@ order, assembled without network access to a machine-readable source copy; the
 runtime environment had no access to the downloadable Gutenberg/Wikisource
 transcriptions, so research R-2's approved hand-curated transcription fallback
 was used in full. Wording may deviate from the printed original; the text is
-offered with that caveat, and regeneration from a machine-readable copy remains
-possible by dropping it into `corpus/` and re-running `scripts/gen-corpus.mjs`.**
+offered with that caveat. The runtime corpus is regenerated from the archive by
+running `scripts/gen-corpus.mjs`.**
 
 ## Explicit exclusions
 
@@ -24,8 +24,17 @@ possible by dropping it into `corpus/` and re-running `scripts/gen-corpus.mjs`.*
   it). No rendered text from that translation was consulted during assembly, and
   `tests/corpus.test.ts` scans for its distinctive signature strings as a guard.
 - No other modern rendering was used as a source.
-- Line texts, the Tuan commentary, Wen Yen, and the Great Sequence appendices are
-  out of scope (spec A-5: judgement + image only).
+- Individual line texts are not included in the archive. Whole-hexagram
+  commentary and appendices are permitted sources for the editorial summaries.
+
+## Editorial summaries
+
+The archive contains an editorial summary for each of the 64 hexagrams.
+They are modern-English syntheses based exclusively on the local cleansed
+Legge edition below, not quotations.
+The existing `judgement` and `image` transcriptions retain the earlier caveat.
+The historical `scripts/assemble-corpus.mjs` recreates the original seed and
+would discard summaries; it must not be used to regenerate the extended archive.
 
 ## Structure
 
@@ -33,7 +42,7 @@ possible by dropping it into `corpus/` and re-running `scripts/gen-corpus.mjs`.*
 `assembly_method`, and `hexagrams[64]` in King Wen order; each entry: `number`,
 `chinese` (the Chinese character of the hexagram name), `name` (Legge's
 Wade-Giles transliteration), `english` (Legge's English title), `judgement`, and
-`image` (both trimmed non-empty).
+`image` (both trimmed non-empty), and `summary` (editorial synthesis).
 
 ## Audit trail
 

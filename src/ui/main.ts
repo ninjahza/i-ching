@@ -86,6 +86,12 @@ export function mountApp(options: BootOptions): App {
   shell.explainToggle.addEventListener("click", () => {
     steps.toggleExplanation();
   });
+  shell.primarySummary.toggle.addEventListener("click", () => {
+    steps.togglePrimarySummary();
+  });
+  shell.relatedSummary.toggle.addEventListener("click", () => {
+    steps.toggleRelatedSummary();
+  });
 
   // US2 (C-9, FR-022): method selection is in-session unless consent is on;
   // writes happen ONLY through these explicit consent-gated paths.

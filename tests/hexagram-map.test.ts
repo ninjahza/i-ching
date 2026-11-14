@@ -4,8 +4,21 @@ import assert from "node:assert/strict";
 import { PATTERN_TO_KW, KW_TO_PATTERN } from "../src/data/king-wen.ts";
 import { TRIGRAMS } from "../src/data/trigrams.ts";
 import { HEXAGRAM_NAMES } from "../src/data/hexagram-names.ts";
-import { hexagramSymbol } from "../src/core/hexagram.ts";
+import { hexagramSymbol, hexagramByPattern, relatedHexagram, patternOfKw } from "../src/core/hexagram.ts";
+import { CORPUS } from "../src/data/texts.ts";
 import { chineseName } from "../src/data/hexagram-chinese.ts";
+
+test("primary and related hexagrams expose their own corpus summaries", () => {
+  for (let n = 1; n <= 64; n++) {
+    const pattern = patternOfKw(n);
+    const primary = hexagramByPattern(pattern);
+    assert.equal(primary.summary, CORPUS[n]?.summary);
+    const related = relatedHexagram(pattern, 63);
+    assert.ok(related);
+    assert.equal(related.summary, CORPUS[related.kwNumber]?.summary);
+    assert.equal(relatedHexagram(pattern, 0), null);
+  }
+});
 
 test("PATTERN_TO_KW is a bijection onto {1..64}", () => {
   assert.equal(PATTERN_TO_KW.length, 64);
