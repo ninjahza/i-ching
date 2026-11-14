@@ -68,6 +68,10 @@ export const LEGGE_WIKI_MARKER = "James Legge, \"The Yi King\"";
 export const LEGGE_WIKI_URL = "https://en.wikipedia.org/wiki/James_Legge";
 export const LEGGE_WIKI_HINT = "Opens in a new tab: Wikipedia article on James Legge, translator of \"The Yi King\"";
 
+/** The standalone feature 003 publication, deliberately linked without consultation state. */
+export const MODERN_GUIDE_URL = "modern-guide.html";
+export const MODERN_GUIDE_LINK_LABEL = "Read the modern guide (opens separately)";
+
 /** Consent disclosures announced when the toggle flips (FR-022 plain language). */
 export const CONSENT_ON = "Your method choice will be remembered on this device.";
 export const CONSENT_OFF = "Your stored method choice has been deleted from this device.";

@@ -10,8 +10,19 @@ import {
   FOOTER_NOTE,
   LEGGE_WIKI_HINT,
   LEGGE_WIKI_MARKER,
-  LEGGE_WIKI_URL
+  LEGGE_WIKI_URL,
+  MODERN_GUIDE_LINK_LABEL,
+  MODERN_GUIDE_URL
 } from "../data/app-strings.ts";
+
+function appendModernGuideLink(into: HTMLElement): void {
+  const guideLink = document.createElement("a");
+  guideLink.href = MODERN_GUIDE_URL;
+  guideLink.target = "_blank";
+  guideLink.rel = "noopener noreferrer";
+  guideLink.textContent = MODERN_GUIDE_LINK_LABEL;
+  into.appendChild(guideLink);
+}
 
 export function renderAttribution(into: HTMLElement): void {
   into.replaceChildren();
@@ -20,6 +31,8 @@ export function renderAttribution(into: HTMLElement): void {
   if (parts.length !== 2 || before === undefined || after === undefined) {
     // Copy drifted from the marker in source review: fall back to plain text.
     into.textContent = CORPUS_ATTRIBUTION + FOOTER_NOTE;
+    into.appendChild(document.createTextNode(" "));
+    appendModernGuideLink(into);
     return;
   }
   const link = document.createElement("a");
@@ -30,5 +43,6 @@ export function renderAttribution(into: HTMLElement): void {
   link.textContent = LEGGE_WIKI_MARKER;
   into.appendChild(document.createTextNode(before));
   into.appendChild(link);
-  into.appendChild(document.createTextNode(after + FOOTER_NOTE));
+  into.appendChild(document.createTextNode(after + FOOTER_NOTE + " "));
+  appendModernGuideLink(into);
 }
