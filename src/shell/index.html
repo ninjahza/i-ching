@@ -123,7 +123,7 @@ button:not(.primary) {
 button:not(.primary):active:not(:disabled) { background: var(--bg); }
 /* A disclosure at rest is quiet; open, it stays marked while expanded. */
 #explain-toggle[aria-expanded="true"] { border-color: var(--accent); }
-/* The primary act of its step: casting, and casting again. */
+/* Shared primary action treatment. */
 .primary {
   background: var(--accent);
   border-color: var(--accent);
@@ -389,7 +389,7 @@ footer a:hover { text-decoration-thickness: 2px; }
       <p class="muted" id="primary-trigrams"></p>
       <blockquote id="primary-judgement"><p></p></blockquote>
       <blockquote id="primary-image"><p></p></blockquote>
-      <button id="primary-summary-toggle" class="summary-toggle" type="button" aria-expanded="false" aria-controls="primary-summary">Read more</button>
+      <button id="primary-summary-toggle" class="primary summary-toggle" type="button" aria-expanded="false" aria-controls="primary-summary">Read more</button>
       <div id="primary-summary" class="hexagram-summary" hidden>
         <h3>Overview of Legge's 1882 commentary</h3>
         <p id="primary-summary-p1"></p>
@@ -408,7 +408,7 @@ footer a:hover { text-decoration-thickness: 2px; }
       <p class="muted" id="related-trigrams"></p>
       <blockquote id="related-judgement"><p></p></blockquote>
       <blockquote id="related-image"><p></p></blockquote>
-      <button id="related-summary-toggle" class="summary-toggle" type="button" aria-expanded="false" aria-controls="related-summary">Read more</button>
+      <button id="related-summary-toggle" class="primary summary-toggle" type="button" aria-expanded="false" aria-controls="related-summary">Read more</button>
       <div id="related-summary" class="hexagram-summary" hidden>
         <h3>Overview of Legge's 1882 commentary</h3>
         <p id="related-summary-p1"></p>
