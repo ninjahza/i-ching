@@ -22,6 +22,7 @@ export interface Shell {
   primaryTrigrams: HTMLElement;
   primaryJudgement: HTMLElement;
   primaryImage: HTMLElement;
+  primarySummary: SummaryElements;
   relatedCard: HTMLElement;
   relatedFigure: HTMLElement;
   relatedSymbol: HTMLElement;
@@ -30,6 +31,7 @@ export interface Shell {
   relatedTrigrams: HTMLElement;
   relatedJudgement: HTMLElement;
   relatedImage: HTMLElement;
+  relatedSummary: SummaryElements;
   stableMessage: HTMLElement;
   echoCard: HTMLElement;
   questionEcho: HTMLElement;
@@ -40,6 +42,13 @@ export interface Shell {
   methodCoins: HTMLInputElement;
   methodYarrow: HTMLInputElement;
   rememberMethod: HTMLInputElement;
+}
+
+export interface SummaryElements {
+  toggle: HTMLButtonElement;
+  region: HTMLElement;
+  first: HTMLElement;
+  second: HTMLElement;
 }
 
 function el(id: string): HTMLElement {
@@ -58,6 +67,15 @@ function checkboxOrRadio(id: string): HTMLInputElement {
   const node = el(id);
   if (node instanceof HTMLInputElement) return node;
   throw new Error(`shell input missing: ${id}`);
+}
+
+function summary(prefix: "primary" | "related"): SummaryElements {
+  return {
+    toggle: btn(`${prefix}-summary-toggle`),
+    region: el(`${prefix}-summary`),
+    first: el(`${prefix}-summary-p1`),
+    second: el(`${prefix}-summary-p2`)
+  };
 }
 
 export function queryShell(): Shell {
@@ -87,6 +105,7 @@ export function queryShell(): Shell {
     primaryTrigrams: el("primary-trigrams"),
     primaryJudgement: el("primary-judgement"),
     primaryImage: el("primary-image"),
+    primarySummary: summary("primary"),
     relatedCard: el("related-card"),
     relatedFigure: el("related-figure"),
     relatedSymbol: el("related-symbol"),
@@ -95,6 +114,7 @@ export function queryShell(): Shell {
     relatedTrigrams: el("related-trigrams"),
     relatedJudgement: el("related-judgement"),
     relatedImage: el("related-image"),
+    relatedSummary: summary("related"),
     stableMessage: el("stable-message"),
     echoCard: el("echo-card"),
     questionEcho: el("question-echo"),

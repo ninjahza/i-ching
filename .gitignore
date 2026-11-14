@@ -6,6 +6,7 @@ node_modules/
 # is committed so it can be opened directly or served (e.g. GitHub Pages).
 # If you later publish releases from CI, move dist/ here.
 *.tsbuildinfo
+build/
 
 # Logs
 *.log

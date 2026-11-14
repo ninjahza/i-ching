@@ -291,6 +291,10 @@ blockquote {
   font-style: normal;
 }
 blockquote p { margin: 0.3rem 0; }
+.summary-toggle { margin-top: 0.5rem; }
+.hexagram-summary { margin-top: 1.25rem; }
+.hexagram-summary h3 { margin-bottom: 0.6rem; }
+.hexagram-summary p { overflow-wrap: anywhere; }
 /* The stable line stands alone after the primary card; give it its own air. */
 .stable-note { font-style: italic; margin: 1.6rem 0.25rem; }
 .question-echo { white-space: pre-wrap; }
@@ -385,6 +389,12 @@ footer a:hover { text-decoration-thickness: 2px; }
       <p class="muted" id="primary-trigrams"></p>
       <blockquote id="primary-judgement"><p></p></blockquote>
       <blockquote id="primary-image"><p></p></blockquote>
+      <button id="primary-summary-toggle" class="summary-toggle" type="button" aria-expanded="false" aria-controls="primary-summary">Read more</button>
+      <div id="primary-summary" class="hexagram-summary" hidden>
+        <h3>Overview of Legge's 1882 commentary</h3>
+        <p id="primary-summary-p1"></p>
+        <p id="primary-summary-p2" hidden></p>
+      </div>
     </div>
     <div class="card" id="related-card" hidden>
       <h3 id="related-heading" tabindex="-1">The changing lines bring forth</h3>
@@ -398,6 +408,12 @@ footer a:hover { text-decoration-thickness: 2px; }
       <p class="muted" id="related-trigrams"></p>
       <blockquote id="related-judgement"><p></p></blockquote>
       <blockquote id="related-image"><p></p></blockquote>
+      <button id="related-summary-toggle" class="summary-toggle" type="button" aria-expanded="false" aria-controls="related-summary">Read more</button>
+      <div id="related-summary" class="hexagram-summary" hidden>
+        <h3>Overview of Legge's 1882 commentary</h3>
+        <p id="related-summary-p1"></p>
+        <p id="related-summary-p2" hidden></p>
+      </div>
     </div>
     <p class="stable-note muted" id="stable-message" hidden></p>
     <div class="card" id="echo-card" hidden>

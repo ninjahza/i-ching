@@ -7,6 +7,7 @@ import { showStep } from "./shell-bind.ts";
 import type { Announcer } from "./announce.ts";
 import { prepareFigureSlots, fillSlot, labelFigure } from "./line-view.ts";
 import { echoQuestion, clearQuestionEcho } from "./question-echo.ts";
+import { presentSummary, toggleSummary, clearSummary } from "./summary-disclosure.ts";
 import type { Consultation } from "../core/consultation.ts";
 import { QUESTION_MAX } from "../core/consultation.ts";
 import { hexagramSymbol } from "../core/hexagram.ts";
@@ -29,6 +30,8 @@ export interface Steps {
   revealAll(): void;
   castAgain(): void;
   toggleExplanation(): void;
+  togglePrimarySummary(): void;
+  toggleRelatedSummary(): void;
 }
 
 export function createSteps(deps: StepsDeps): Steps {
@@ -64,6 +67,7 @@ export function createSteps(deps: StepsDeps): Steps {
       `${primary.lower.name} (${primary.lower.nature})`);
     setQuote(shell.primaryJudgement, primary.judgement);
     setQuote(shell.primaryImage, primary.image);
+    presentSummary(shell.primarySummary, primary.summary, primary.kwNumber);
     // The result's visual is the Unicode hexagram itself (clearer than redrawing
     // the bars); the accessible label still names the lines and changes (C-8).
     shell.primarySymbol.textContent = hexagramSymbol(primary.kwNumber);
@@ -81,11 +85,13 @@ export function createSteps(deps: StepsDeps): Steps {
         `${related.lower.name} (${related.lower.nature})`);
       setQuote(shell.relatedJudgement, related.judgement);
       setQuote(shell.relatedImage, related.image);
+      presentSummary(shell.relatedSummary, related.summary, related.kwNumber);
       labelFigure(shell.relatedFigure, related.kwNumber, related.name, []);
       shell.relatedSymbol.textContent = hexagramSymbol(related.kwNumber);
       shell.relatedChinese.textContent = chineseName(related.kwNumber);
       announcer.announceStatus(announceResultText(primary.kwNumber, primary.name, { num: related.kwNumber, name: related.name }));
     } else {
+      clearSummary(shell.relatedSummary);
       // FR-010: neutral stable message; no related section.
       shell.relatedSymbol.textContent = "";
       shell.relatedChinese.textContent = "";
@@ -164,12 +170,14 @@ export function createSteps(deps: StepsDeps): Steps {
       shell.primaryTrigrams.textContent = "";
       setQuote(shell.primaryJudgement, "");
       setQuote(shell.primaryImage, "");
+      clearSummary(shell.primarySummary);
       shell.relatedSymbol.textContent = "";
       shell.relatedChinese.textContent = "";
       shell.relatedIdentity.textContent = "";
       shell.relatedTrigrams.textContent = "";
       setQuote(shell.relatedJudgement, "");
       setQuote(shell.relatedImage, "");
+      clearSummary(shell.relatedSummary);
       shell.relatedCard.hidden = true;
       shell.stableMessage.textContent = "";
       shell.stableMessage.hidden = true;
@@ -178,6 +186,19 @@ export function createSteps(deps: StepsDeps): Steps {
       shell.explainToggle.setAttribute("aria-expanded", "false");
       announcer.announceStatus("");
       steps.showQuestion();
+    },
+
+    togglePrimarySummary(): void {
+      if (consultation !== null && consultation.state === "complete") {
+        toggleSummary(shell.primarySummary, consultation.hexagram.kwNumber);
+      }
+    },
+
+    toggleRelatedSummary(): void {
+      if (consultation !== null && consultation.state === "complete") {
+        const related = consultation.related;
+        if (related !== null) toggleSummary(shell.relatedSummary, related.kwNumber);
+      }
     },
 
     toggleExplanation(): void {

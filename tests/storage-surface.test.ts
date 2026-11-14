@@ -69,6 +69,8 @@ test("question/cast code paths never import the persistence module", () => {
     join(SRC, "ui", "shell-bind.ts"),
     join(SRC, "ui", "line-view.ts"),
     join(SRC, "ui", "announce.ts"),
+    join(SRC, "ui", "steps.ts"),
+    join(SRC, "ui", "summary-disclosure.ts"),
   ];
   for (const f of seesQuestion) {
     const text = readFileSync(f, "utf8");

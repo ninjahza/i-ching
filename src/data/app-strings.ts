@@ -1,10 +1,13 @@
 // T030 — all app-authored copy in one audited place (C-7, FR-011, T034 review gate).
 // Every string here was reviewed against the US3 content checklist: sober and
 // neutral, no predictions, no guarantees, no medical/legal/financial advice,
-// neutral across beliefs; corpus texts appear only as attributed quotations.
+// neutral across beliefs; corpus quotations and summaries are attributed.
 // Pure data: no DOM (purity.test.ts covers src/data/**).
 
 export const APP_TITLE = "I Ching — a consultation for reflection";
+
+export const SUMMARY_READ_MORE = "Read more";
+export const SUMMARY_SHOW_LESS = "Show less";
 
 /** One paragraph of the FR-014 explanation (rendered as <p>, <strong> if flagged). */
 export interface ExplanationParagraph {
