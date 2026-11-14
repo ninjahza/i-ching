@@ -68,21 +68,31 @@ test("standalone publication renders all guide content, citations, entries, and 
   }
 });
 
-test("the eight trigrams show their Chinese names alongside the matching transliterations", () => {
+test("the eight trigrams show their Chinese names and images without duplication", () => {
   const list = html.match(/<ul class="trigrams">([\s\S]*?)<\/ul>/)?.[1];
   assert.ok(list);
-  const names = [...list.matchAll(/<li><span class="trigram-chinese" lang="zh">([^<]+)<\/span><span><strong>([^<]+)<\/strong>/g)]
-    .map((match) => [match[1], match[2]]);
+  const names = [...list.matchAll(/<li><span class="trigram-chinese" lang="zh">([^<]+)<\/span><span><strong>([^<]+)<\/strong> — ([^<]+)<\/span><\/li>/g)]
+    .map((match) => [match[1], match[2], match[3]]);
   assert.deepEqual(names, [
-    ["坤", "K'un"], ["震", "Chen"], ["坎", "K'an"], ["兌", "Tui"],
-    ["艮", "Ken"], ["離", "Li"], ["巽", "Hsün"], ["乾", "Ch'ien"]
-  ].map(([chinese, name]) => [chinese, escape(name!)]));
+    ["坤", "K'un", "Earth"], ["震", "Chen", "Thunder"], ["坎", "K'an", "Water"], ["兌", "Tui", "Lake"],
+    ["艮", "Ken", "Mountain"], ["離", "Li", "Fire"], ["巽", "Hsün", "Wind"], ["乾", "Ch'ien", "Heaven"]
+  ].map(([chinese, name, image]) => [chinese, escape(name!), image]));
 
   const missingPair = {
     ...canonical,
     pairs: canonical.pairs.filter((pair: { upper: number; lower: number }) => pair.upper !== 0 || pair.lower !== 0)
   };
   assert.throws(() => renderGuide(source, sourceHash, missingPair), /Missing Chinese name for trigram id 0/);
+});
+
+test("trigram entries retain distinct image and nature descriptions", () => {
+  const differentNature = {
+    ...canonical,
+    trigrams: canonical.trigrams.map((trigram: { id: number; nature: string }) =>
+      trigram.id === 0 ? { ...trigram, nature: "Ground & soil" } : trigram)
+  };
+  const rendered = renderGuide(source, sourceHash, differentNature) as string;
+  assert.ok(rendered.includes("<strong>K&#39;un</strong> — Earth; Ground &amp; soil</span>"));
 });
 
 test("HTML profile is offline, keyboard-operable, scalable, and WCAG AA contrast passes", () => {

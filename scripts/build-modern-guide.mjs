@@ -41,7 +41,8 @@ function renderBlock(block, canonical) {
       const pair = canonical.pairs.find((candidate) => candidate.upper === trigram.id && candidate.lower === trigram.id);
       const chinese = pair ? canonical.archive[pair.number - 1]?.chinese : null;
       if (typeof chinese !== "string" || !chinese.trim()) throw new Error(`Missing Chinese name for trigram id ${item.id}`);
-      return `<li><span class="trigram-chinese" lang="zh">${esc(chinese)}</span><span><strong>${esc(item.name)}</strong> — ${esc(item.image)}; ${esc(trigram.nature)}</span></li>`;
+      const nature = item.image === trigram.nature ? "" : `; ${esc(trigram.nature)}`;
+      return `<li><span class="trigram-chinese" lang="zh">${esc(chinese)}</span><span><strong>${esc(item.name)}</strong> — ${esc(item.image)}${nature}</span></li>`;
     }).join("")}</ul>`;
   } else if (block.kind === "probabilityTable") {
     detail = `<div class="table-wrap"><table><caption>Probability of each line value by method</caption><thead><tr><th scope="col">Method</th><th scope="col">6 — changing yin</th><th scope="col">7 — stable yang</th><th scope="col">8 — stable yin</th><th scope="col">9 — changing yang</th></tr></thead><tbody>${Object.entries(block.distributions).map(([method, values]) => `<tr><th scope="row">${esc(method === "coins" ? "Three coins" : "Yarrow stalks")}</th>${[6, 7, 8, 9].map((n) => `<td>${esc(values[n])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
