@@ -52,6 +52,14 @@ export function fillSlot(container: HTMLElement, line: CastLine): void {
   slot.hidden = false;
 }
 
+/** Clear one rendered line slot and hide it without rebuilding or reordering sibling slots (T017). */
+export function clearSlot(container: HTMLElement, position: number): void {
+  const slot = container.querySelector(`.hex-row[data-position="${String(position)}"]`);
+  if (!(slot instanceof HTMLElement)) return;
+  slot.textContent = "";
+  slot.hidden = true;
+}
+
 /**
  * Whole-figure labelling (R-6): bars stay decorative (aria-hidden on rows is
  * unnecessary since the figure exposes role=img + aria-label text), and the

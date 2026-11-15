@@ -16,21 +16,21 @@ A single-purpose consultation of the I Ching (Book of Changes): optionally hold 
 
 ## Positioning
 
-Honest and private by construction: one offline HTML file, zero network/tracking, real crypto randomness (coins or yarrow probabilities), public-domain Legge text, explicitly no predictions.
+Honest and private by construction: one offline HTML file, zero network/tracking, real crypto randomness for automatic casts (coins or yarrow probabilities) alongside manual physical-cast entry (User cast), public-domain Legge text, explicitly no predictions.
 
 ## Operating Context
 
 - Opened directly from disk (`file://`) or served as a single static file; works fully offline.
-- Three steps: question → casting (paced, bottom-up line reveals, with "Reveal all") → result (primary hexagram, related hexagram or stable message, question echo, "Cast again").
-- Two casting methods: three coins (default) and yarrow stalks, with distinct probability profiles.
+- Three steps: question → casting (paced bottom-up automatic line reveals with "Reveal all", or manual bottom-up selection of final values 6–9 with "Add line" and "Undo last line") → result (primary hexagram, related hexagram or stable message, question echo, "Cast again").
+- Three casting methods: Three coins (default), Yarrow stalks (distinct classical probability profile), and User cast (tappable final-value choices 6–9 for physical coins or yarrow stalks, requiring no random source).
 
 ## Capabilities and Constraints
 
 - Ships as one self-contained `dist/index.html` (~50 KB), built from strict TypeScript with zero runtime dependencies; build must stay byte-deterministic.
 - Strict CSP (`default-src 'none'`; no external fonts, images, or connections). Visual work is limited to inline CSS, system fonts, Unicode glyphs, and inline markup.
 - `npm run verify` enforces security invariants B-1…B-14 (no `innerHTML`, `eval`, `fetch`, storage probes, external resource attributes, etc.).
-- Only persistence: the casting-method word, stored only after explicit consent. The question and casts are never stored or sent.
-- `crypto.getRandomValues` only; casting is declined rather than weakened when unavailable.
+- Only persistence: the selected casting-method identifier (`coins`, `yarrow`, or `user`) under `iching.method`, stored only after explicit consent. Questions, entered line values, and results are never stored or sent.
+- Automatic casting (`coins`, `yarrow`) uses `crypto.getRandomValues` only and is declined rather than weakened when unavailable; `User cast` uses no randomness and remains available without `crypto.getRandomValues`.
 - All authored copy lives in `src/data/app-strings.ts` and is review-gated.
 
 ## Brand Commitments

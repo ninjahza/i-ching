@@ -8,7 +8,14 @@ import type { CastingMethod } from "../core/casting.ts";
 /** Allowed localStorage keys — frozen allow-list used by the audit scan (T029/B-8). */
 export const STORAGE_KEYS: readonly string[] = Object.freeze(["iching.method"]);
 
-export type MethodId = CastingMethod["id"]; // "coins" | "yarrow"
+export const USER_METHOD_ID = "user" as const;
+export type AutomaticMethodId = CastingMethod["id"]; // "coins" | "yarrow"
+export type ManualMethodId = typeof USER_METHOD_ID;
+export type MethodId = AutomaticMethodId | ManualMethodId;
+
+export function isMethodId(value: unknown): value is MethodId {
+  return value === "coins" || value === "yarrow" || value === USER_METHOD_ID;
+}
 
 const METHOD_KEY = STORAGE_KEYS[0] as string; // "iching.method"
 
@@ -43,7 +50,7 @@ function readString(key: string): string | null {
 /** Valid stored method id, or null when absent/corrupt/disabled. */
 export function readStoredMethod(): MethodId | null {
   const v = readString(METHOD_KEY);
-  return v === "coins" || v === "yarrow" ? v : null;
+  return isMethodId(v) ? v : null;
 }
 
 /** Has the seeker opted in? (true only while the key exists.) */
@@ -53,6 +60,7 @@ export function isPersistenceOptedIn(): boolean {
 
 /** Write the method — ONLY through an explicit opt-in UI path (FR-022). */
 export function writeMethod(id: MethodId): void {
+  if (!isMethodId(id)) return;
   safely(() => {
     const holder = globalThis as { localStorage?: Storage };
     holder.localStorage?.setItem(METHOD_KEY, id);

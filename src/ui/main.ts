@@ -4,14 +4,14 @@ import type { Shell } from "./shell-bind.ts";
 import { createAnnouncer } from "./announce.ts";
 import { createSteps } from "./steps.ts";
 import type { Steps } from "./steps.ts";
-import { createConsultation } from "../core/consultation.ts";
+import { createConsultation, createManualConsultation } from "../core/consultation.ts";
 import type { Consultation } from "../core/consultation.ts";
 import { COINS, YARROW } from "../core/casting.ts";
 import type { CastingMethod, RandomSource } from "../core/casting.ts";
 import { renderExplanation } from "./explanation.ts";
 import { renderAttribution } from "./attribution.ts";
-import type { MethodId } from "./method-pref.ts";
-import { readStoredMethod, writeMethod, forgetMethod } from "./method-pref.ts";
+import type { AutomaticMethodId, MethodId } from "./method-pref.ts";
+import { USER_METHOD_ID, readStoredMethod, writeMethod, forgetMethod } from "./method-pref.ts";
 import { DECLINE_NO_RANDOM, CONSENT_ON, CONSENT_OFF, EXPLANATION } from "../data/app-strings.ts";
 
 export interface BootOptions {
@@ -36,7 +36,29 @@ export function mountApp(options: BootOptions): App {
   const announcer = createAnnouncer(shell.live);
 
   let methodId: MethodId = options.initialMethodId;
-  const methodFor = (id: MethodId): CastingMethod => (id === "yarrow" ? YARROW : COINS);
+  const methodFor = (id: AutomaticMethodId): CastingMethod => (id === "yarrow" ? YARROW : COINS);
+
+  const syncMethodRadios = (id: MethodId): void => {
+    shell.methodCoins.checked = id === "coins";
+    shell.methodYarrow.checked = id === "yarrow";
+    shell.methodUser.checked = id === USER_METHOD_ID;
+  };
+
+  const hasSecureRandom = options.secureRandomAvailable && options.randomSource !== null;
+  const canStartCast = (): boolean => methodId === USER_METHOD_ID || hasSecureRandom;
+
+  // User cast never needs randomness; only automatic methods decline when crypto is absent.
+  const syncStartAvailability = (): void => {
+    const allowed = canStartCast();
+    shell.castButton.disabled = !allowed;
+    if (allowed) {
+      shell.noRandom.textContent = "";
+      shell.noRandom.hidden = true;
+    } else {
+      shell.noRandom.textContent = DECLINE_NO_RANDOM;
+      shell.noRandom.hidden = false;
+    }
+  };
 
   // US2/C-9: consent-gated restore — stored value applies only because the key
   // exists (opt-in wrote it); otherwise the default (coins) stands, and the UI
@@ -44,17 +66,9 @@ export function mountApp(options: BootOptions): App {
   const stored = readStoredMethod();
   const optedInAtBoot = stored !== null;
   if (stored !== null) methodId = stored;
-  shell.methodCoins.checked = methodId === "coins";
-  shell.methodYarrow.checked = methodId === "yarrow";
+  syncMethodRadios(methodId);
   shell.rememberMethod.checked = optedInAtBoot;
-
-  // Honest decline on boot (C-3, FR-003): control disabled + plain message,
-  // set via textContent; never attempted, never a weak fallback.
-  if (!options.secureRandomAvailable || options.randomSource === null) {
-    shell.castButton.disabled = true;
-    shell.noRandom.textContent = DECLINE_NO_RANDOM;
-    shell.noRandom.hidden = false;
-  }
+  syncStartAvailability();
 
   renderExplanation(shell.introCard, EXPLANATION);
   renderExplanation(shell.reExplanation, EXPLANATION);
@@ -62,10 +76,15 @@ export function mountApp(options: BootOptions): App {
   const steps = createSteps({
     shell,
     announcer,
+    canStartCast,
     beginConsultation(question: string | null): Consultation {
-      const source = options.randomSource;
-      if (source === null) throw new Error("casting without a secure source is refused");
-      return createConsultation({ method: methodFor(methodId), random: source, question });
+      if (methodId === USER_METHOD_ID) {
+        return createManualConsultation({ question });
+      }
+      if (!hasSecureRandom || options.randomSource === null) {
+        throw new Error("automatic casting without a secure random source is refused");
+      }
+      return createConsultation({ method: methodFor(methodId), random: options.randomSource, question });
     }
   });
 
@@ -80,6 +99,20 @@ export function mountApp(options: BootOptions): App {
   shell.revealAllButton.addEventListener("click", () => {
     steps.revealAll();
   });
+  shell.addLineButton.addEventListener("click", () => {
+    steps.addLine();
+  });
+  shell.undoLineButton.addEventListener("click", () => {
+    steps.undoLastLine();
+  });
+  shell.changeMethodButton.addEventListener("click", () => {
+    steps.cancelManualCast();
+  });
+  for (const radio of shell.lineValueRadios) {
+    radio.addEventListener("change", () => {
+      steps.selectLineValue(radio.value);
+    });
+  }
   shell.castAgainButton.addEventListener("click", () => {
     steps.castAgain();
   });
@@ -95,13 +128,24 @@ export function mountApp(options: BootOptions): App {
 
   // US2 (C-9, FR-022): method selection is in-session unless consent is on;
   // writes happen ONLY through these explicit consent-gated paths.
-  const readRadio = (): MethodId => (shell.methodYarrow.checked ? "yarrow" : "coins");
+  const readRadio = (): MethodId =>
+    shell.methodUser.checked
+      ? USER_METHOD_ID
+      : shell.methodYarrow.checked
+        ? "yarrow"
+        : "coins";
   const onMethodChange = (): void => {
+    if (!shell.steps.casting.hidden) {
+      syncMethodRadios(methodId);
+      return;
+    }
     methodId = readRadio();
+    syncStartAvailability();
     if (shell.rememberMethod.checked) writeMethod(methodId);
   };
   shell.methodCoins.addEventListener("change", onMethodChange);
   shell.methodYarrow.addEventListener("change", onMethodChange);
+  shell.methodUser.addEventListener("change", onMethodChange);
   shell.rememberMethod.addEventListener("change", () => {
     if (shell.rememberMethod.checked) {
       methodId = readRadio();
@@ -119,7 +163,13 @@ export function mountApp(options: BootOptions): App {
     steps,
     shell,
     setMethod(id: MethodId): void {
+      if (!shell.steps.casting.hidden) {
+        syncMethodRadios(methodId);
+        return;
+      }
       methodId = id;
+      syncMethodRadios(id);
+      syncStartAvailability();
     },
     methodId(): MethodId {
       return methodId;
