@@ -1,18 +1,39 @@
-// T025 — step controllers: question / casting / result (C-1..C-6, C-8; FR-001..FR-013).
+// T025 / T010 / T012 — step controllers: question / casting / result (automatic & manual).
 // The composition root (src/ui/main.ts) supplies the consultation factory and
-// the announcer; this module owns reveal pacing and result rendering only.
+// the announcer; this module owns reveal pacing, manual entry state, and result rendering.
 
 import type { Shell } from "./shell-bind.ts";
 import { showStep } from "./shell-bind.ts";
 import type { Announcer } from "./announce.ts";
-import { prepareFigureSlots, fillSlot, labelFigure } from "./line-view.ts";
+import { prepareFigureSlots, fillSlot, clearSlot, labelFigure } from "./line-view.ts";
 import { echoQuestion, clearQuestionEcho } from "./question-echo.ts";
 import { presentSummary, toggleSummary, clearSummary } from "./summary-disclosure.ts";
 import type { Consultation } from "../core/consultation.ts";
 import { QUESTION_MAX } from "../core/consultation.ts";
+import type { CastLine } from "../core/pattern.ts";
+import type { LineValue } from "../core/line-values.ts";
 import { hexagramSymbol } from "../core/hexagram.ts";
 import { chineseName } from "../data/hexagram-chinese.ts";
-import { STABLE_MESSAGE, TRUNCATION_NOTICE, announceCastingBegins, announceResultText, identityText, trigramsText } from "../data/app-strings.ts";
+import {
+  AUTOMATIC_CAST_SUBTITLE,
+  DECLINE_NO_RANDOM,
+  MANUAL_CANCEL_ANNOUNCEMENT,
+  MANUAL_INVALID_VALUE_ERROR,
+  MANUAL_SELECTION_NONE,
+  STABLE_MESSAGE,
+  TRUNCATION_NOTICE,
+  USER_CAST_GUIDE,
+  USER_CAST_GUIDE_HEADING,
+  USER_CAST_SUBTITLE,
+  announceCastingBegins,
+  announceManualCastingBegins,
+  announceResultText,
+  identityText,
+  manualPositionPhrase,
+  manualProgressText,
+  manualSelectionText,
+  trigramsText,
+} from "../data/app-strings.ts";
 import type { Hexagram } from "../core/hexagram.ts";
 
 const REVEAL_INTERVAL_MS = 400; // R-5
@@ -20,6 +41,8 @@ const REVEAL_INTERVAL_MS = 400; // R-5
 export interface StepsDeps {
   shell: Shell;
   announcer: Announcer;
+  /** Method-aware start availability: true always for User cast; requires secure random only for automatic methods. */
+  canStartCast(): boolean;
   /** Starts a fresh Consultation (question captured here, null on re-cast). */
   beginConsultation(question: string | null): Consultation;
 }
@@ -27,6 +50,10 @@ export interface StepsDeps {
 export interface Steps {
   showQuestion(): void;
   startCast(): void;
+  selectLineValue(raw: unknown): boolean;
+  addLine(...args: readonly unknown[]): boolean;
+  undoLastLine(): boolean;
+  cancelManualCast(): void;
   revealAll(): void;
   castAgain(): void;
   toggleExplanation(): void;
@@ -34,10 +61,30 @@ export interface Steps {
   toggleRelatedSummary(): void;
 }
 
+function parseStrictLineValue(raw: unknown): LineValue | null {
+  if (typeof raw === "number") {
+    return raw === 6 || raw === 7 || raw === 8 || raw === 9 ? raw : null;
+  }
+  if (typeof raw === "string") {
+    if (raw === "6") return 6;
+    if (raw === "7") return 7;
+    if (raw === "8") return 8;
+    if (raw === "9") return 9;
+  }
+  return null;
+}
+
 export function createSteps(deps: StepsDeps): Steps {
   const { shell, announcer } = deps;
   let consultation: Consultation | null = null;
   let timer: ReturnType<typeof setInterval> | null = null;
+  let pendingValue: LineValue | null = null;
+
+  renderManualGuide(shell.manualInstructions);
+
+  function canStart(): boolean {
+    return deps.canStartCast();
+  }
 
   function stopTimer(): void {
     if (timer !== null) {
@@ -46,15 +93,50 @@ export function createSteps(deps: StepsDeps): Steps {
     }
   }
 
+  function clearManualError(): void {
+    shell.manualError.textContent = "";
+    shell.manualError.hidden = true;
+  }
+
+  function showManualError(message: string): void {
+    shell.manualError.textContent = message;
+    shell.manualError.hidden = false;
+    announcer.announceStatus(message);
+  }
+
+  function clearManualSelectionUi(): void {
+    pendingValue = null;
+    for (const radio of shell.lineValueRadios) {
+      radio.checked = false;
+    }
+    shell.addLineButton.disabled = true;
+    shell.manualSelection.textContent = MANUAL_SELECTION_NONE;
+  }
+
+  function syncManualProgressUi(confirmedCount: number): void {
+    shell.manualProgress.textContent = manualProgressText(confirmedCount);
+    shell.undoLineButton.disabled = confirmedCount === 0 || confirmedCount >= 6;
+    shell.castingFigure.setAttribute(
+      "aria-label",
+      `The emerging hexagram, ${String(confirmedCount)} of 6 lines recorded.`,
+    );
+    shell.manualValuesLegend.textContent =
+      confirmedCount < 6
+        ? `Final line value for ${manualPositionPhrase(confirmedCount + 1)}`
+        : "Final line value (6–9)";
+  }
+
   function revealNext(): boolean {
-    if (consultation === null || consultation.state === "complete") return false;
+    if (consultation === null || consultation.mode !== "automatic" || consultation.state === "complete") {
+      return false;
+    }
     const line = consultation.castNextLine();
     fillSlot(shell.castingFigure, line);
     announcer.announceLine(line.position, line.value);
     return consultation.revealedCount < 6;
   }
 
-  function presentResult(): void {
+  function presentResult(finalManualLine?: CastLine): void {
     if (consultation === null) return;
     const primary = consultation.hexagram;
     const related = consultation.related;
@@ -89,7 +171,12 @@ export function createSteps(deps: StepsDeps): Steps {
       labelFigure(shell.relatedFigure, related.kwNumber, related.name, []);
       shell.relatedSymbol.textContent = hexagramSymbol(related.kwNumber);
       shell.relatedChinese.textContent = chineseName(related.kwNumber);
-      announcer.announceStatus(announceResultText(primary.kwNumber, primary.name, { num: related.kwNumber, name: related.name }));
+      const relatedInfo = { num: related.kwNumber, name: related.name };
+      if (finalManualLine !== undefined) {
+        announcer.announceManualCompletion(finalManualLine.value, primary.kwNumber, primary.name, relatedInfo);
+      } else {
+        announcer.announceStatus(announceResultText(primary.kwNumber, primary.name, relatedInfo));
+      }
     } else {
       clearSummary(shell.relatedSummary);
       // FR-010: neutral stable message; no related section.
@@ -98,7 +185,11 @@ export function createSteps(deps: StepsDeps): Steps {
       shell.relatedCard.hidden = true;
       shell.stableMessage.hidden = false;
       shell.stableMessage.textContent = STABLE_MESSAGE;
-      announcer.announceStatus(announceResultText(primary.kwNumber, primary.name, null));
+      if (finalManualLine !== undefined) {
+        announcer.announceManualCompletion(finalManualLine.value, primary.kwNumber, primary.name, null);
+      } else {
+        announcer.announceStatus(announceResultText(primary.kwNumber, primary.name, null));
+      }
     }
 
     // inert echo (C-10)
@@ -122,13 +213,22 @@ export function createSteps(deps: StepsDeps): Steps {
     showQuestion(): void {
       stopTimer();
       consultation = null;
+      pendingValue = null;
       // C-2: nothing editable mid-cast is guaranteed by C-1 step visibility.
-      shell.castButton.disabled = !randomAvailable();
+      const allowed = canStart();
+      shell.castButton.disabled = !allowed;
+      if (allowed) {
+        shell.noRandom.textContent = "";
+        shell.noRandom.hidden = true;
+      } else {
+        shell.noRandom.textContent = DECLINE_NO_RANDOM;
+        shell.noRandom.hidden = false;
+      }
       showStep(shell, "question");
     },
 
     startCast(): void {
-      if (!randomAvailable()) return;
+      if (!canStart()) return;
       const raw = shell.questionInput.value;
       if (raw.length > QUESTION_MAX) {
         // defensive: maxlength normally enforces this (C-2 notice)
@@ -138,7 +238,27 @@ export function createSteps(deps: StepsDeps): Steps {
         shell.truncationNotice.hidden = true;
       }
       consultation = deps.beginConsultation(raw);
+      echoQuestion(shell.castingQuestionEcho, shell.castingEchoCard, consultation.question);
       prepareFigureSlots(shell.castingFigure);
+
+      if (consultation.mode === "manual") {
+        stopTimer();
+        shell.castingSub.textContent = USER_CAST_SUBTITLE;
+        shell.autoControls.hidden = true;
+        shell.revealAllButton.hidden = true;
+        shell.manualCasting.hidden = false;
+        clearManualError();
+        clearManualSelectionUi();
+        syncManualProgressUi(0);
+        showStep(shell, "casting");
+        announcer.announceStatus(announceManualCastingBegins());
+        return;
+      }
+
+      shell.castingSub.textContent = AUTOMATIC_CAST_SUBTITLE;
+      shell.manualCasting.hidden = true;
+      shell.autoControls.hidden = false;
+      shell.revealAllButton.hidden = false;
       shell.castingFigure.removeAttribute("aria-label");
       showStep(shell, "casting");
       announcer.announceStatus(announceCastingBegins());
@@ -148,7 +268,126 @@ export function createSteps(deps: StepsDeps): Steps {
       else presentResult();
     },
 
+    selectLineValue(raw: unknown): boolean {
+      if (consultation === null || consultation.mode !== "manual" || consultation.state === "complete") {
+        return false;
+      }
+      const parsed = parseStrictLineValue(raw);
+      if (parsed === null) {
+        clearManualSelectionUi();
+        showManualError(MANUAL_INVALID_VALUE_ERROR);
+        return false;
+      }
+      let matchedRadio = false;
+      for (const radio of shell.lineValueRadios) {
+        const matches = parseStrictLineValue(radio.value) === parsed;
+        radio.checked = matches;
+        if (matches) matchedRadio = true;
+      }
+      if (!matchedRadio) {
+        clearManualSelectionUi();
+        showManualError(MANUAL_INVALID_VALUE_ERROR);
+        return false;
+      }
+      pendingValue = parsed;
+      clearManualError();
+      shell.addLineButton.disabled = false;
+      const nextPos = consultation.revealedCount + 1;
+      shell.manualSelection.textContent = manualSelectionText(parsed, nextPos);
+      announcer.announceManualSelection(parsed, nextPos);
+      return true;
+    },
+
+    addLine(...args: readonly unknown[]): boolean {
+      if (consultation === null || consultation.mode !== "manual" || consultation.state === "complete") {
+        return false;
+      }
+      let chosen: LineValue | null = null;
+      if (args.length > 0) {
+        chosen = parseStrictLineValue(args[0]);
+        if (chosen === null) {
+          showManualError(MANUAL_INVALID_VALUE_ERROR);
+          return false;
+        }
+      } else {
+        const checkedRadios = shell.lineValueRadios.filter((r) => r.checked);
+        if (checkedRadios.length !== 1 || pendingValue === null) {
+          clearManualSelectionUi();
+          showManualError(MANUAL_INVALID_VALUE_ERROR);
+          return false;
+        }
+        const checkedVal = parseStrictLineValue(checkedRadios[0]?.value);
+        if (checkedVal === null || checkedVal !== pendingValue) {
+          clearManualSelectionUi();
+          showManualError(MANUAL_INVALID_VALUE_ERROR);
+          return false;
+        }
+        chosen = checkedVal;
+      }
+
+      const line = consultation.addLine(chosen);
+      clearManualError();
+      clearManualSelectionUi();
+      fillSlot(shell.castingFigure, line);
+      syncManualProgressUi(consultation.revealedCount);
+
+      if (consultation.revealedCount === 6) {
+        presentResult(line);
+      } else {
+        announcer.announceManualLine(line.position, line.value);
+        shell.lineValueRadios[0].focus();
+      }
+      return true;
+    },
+
+    undoLastLine(): boolean {
+      if (
+        consultation === null ||
+        consultation.mode !== "manual" ||
+        consultation.state === "complete" ||
+        consultation.revealedCount === 0
+      ) {
+        return false;
+      }
+      const removed = consultation.undoLastLine();
+      clearManualError();
+      clearManualSelectionUi();
+      clearSlot(shell.castingFigure, removed.position);
+      syncManualProgressUi(consultation.revealedCount);
+      announcer.announceManualUndo(removed.position, removed.value);
+      shell.lineValueRadios[0].focus();
+      return true;
+    },
+
+    cancelManualCast(): void {
+      if (consultation === null || consultation.mode !== "manual" || consultation.state === "complete") {
+        return;
+      }
+      stopTimer();
+      consultation = null;
+      clearManualError();
+      clearManualSelectionUi();
+      shell.manualSelection.textContent = "";
+      shell.undoLineButton.disabled = true;
+      shell.castingFigure.textContent = "";
+      shell.castingFigure.setAttribute("aria-label", "The emerging hexagram");
+      clearQuestionEcho(shell.castingQuestionEcho, shell.castingEchoCard);
+      shell.manualProgress.textContent = "";
+      shell.manualCasting.hidden = true;
+      shell.autoControls.hidden = false;
+      shell.revealAllButton.hidden = false;
+      steps.showQuestion();
+      const activeMethodRadio = shell.methodUser.checked
+        ? shell.methodUser
+        : shell.methodYarrow.checked
+          ? shell.methodYarrow
+          : shell.methodCoins;
+      activeMethodRadio.focus();
+      announcer.announceStatus(MANUAL_CANCEL_ANNOUNCEMENT);
+    },
+
     revealAll(): void {
+      if (consultation === null || consultation.mode !== "automatic") return;
       // C-4: immediate completion, keyboard operable.
       stopTimer();
       while (consultation !== null && consultation.state !== "complete") {
@@ -158,12 +397,24 @@ export function createSteps(deps: StepsDeps): Steps {
     },
 
     castAgain(): void {
-      // C-8 / FR-012: discard the Consultation, clear (not hide) result DOM.
+      // C-8 / FR-012 / FR-014: discard the Consultation, clear (not hide) result & manual DOM.
       stopTimer();
       consultation = null;
+      clearManualError();
+      clearManualSelectionUi();
+      shell.manualSelection.textContent = "";
+      shell.undoLineButton.disabled = true;
+      shell.castingFigure.textContent = "";
+      shell.castingFigure.setAttribute("aria-label", "The emerging hexagram");
+      clearQuestionEcho(shell.castingQuestionEcho, shell.castingEchoCard);
+      shell.manualProgress.textContent = "";
+      shell.manualCasting.hidden = true;
+      shell.autoControls.hidden = false;
+      shell.revealAllButton.hidden = false;
       shell.questionInput.value = "";
       shell.truncationNotice.textContent = "";
       shell.truncationNotice.hidden = true;
+      shell.primaryFigure.setAttribute("aria-label", "");
       shell.primarySymbol.textContent = "";
       shell.primaryChinese.textContent = "";
       shell.primaryIdentity.textContent = "";
@@ -171,6 +422,7 @@ export function createSteps(deps: StepsDeps): Steps {
       setQuote(shell.primaryJudgement, "");
       setQuote(shell.primaryImage, "");
       clearSummary(shell.primarySummary);
+      shell.relatedFigure.setAttribute("aria-label", "");
       shell.relatedSymbol.textContent = "";
       shell.relatedChinese.textContent = "";
       shell.relatedIdentity.textContent = "";
@@ -211,15 +463,26 @@ export function createSteps(deps: StepsDeps): Steps {
   return steps;
 }
 
+function renderManualGuide(container: HTMLElement): void {
+  container.replaceChildren();
+  const heading = document.createElement("h3");
+  heading.textContent = USER_CAST_GUIDE_HEADING;
+  container.appendChild(heading);
+  for (const item of USER_CAST_GUIDE) {
+    const p = document.createElement("p");
+    const strong = document.createElement("strong");
+    strong.textContent = item.lead;
+    p.appendChild(strong);
+    p.appendChild(document.createTextNode(item.body));
+    container.appendChild(p);
+  }
+}
+
 function setQuote(blockquote: HTMLElement, text: string): void {
   const first = blockquote.firstElementChild;
   if (first instanceof HTMLParagraphElement) {
     first.textContent = text;
   }
-}
-
-function randomAvailable(): boolean {
-  return typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function";
 }
 
 function positionsOfMask(positions: readonly number[]): readonly number[] {

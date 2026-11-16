@@ -150,6 +150,7 @@ fieldset {
   border-radius: 6px;
   margin: 0.75rem 0;
   padding: 0.5rem 0.9rem;
+  min-width: 0;
 }
 input[type="radio"], input[type="checkbox"] {
   accent-color: var(--accent);
@@ -162,6 +163,64 @@ input[type="radio"], input[type="checkbox"] {
 .consent-row { margin-top: 0.7rem; border-top: 1px solid var(--border); padding-top: 0.7rem; }
 legend { padding: 0 0.4rem; }
 .controls { display: flex; gap: 0.75rem; flex-wrap: wrap; margin: 1.1rem 0; }
+.manual-progress { font-weight: 600; margin: 1.25rem 0 0.35rem; }
+.manual-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0.65rem;
+  margin: 0.5rem 0;
+}
+label.value-choice {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 3.25rem;
+  min-width: 3.25rem;
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+}
+label.value-choice:hover { border-color: var(--accent); }
+label.value-choice input[type="radio"] { flex-shrink: 0; margin: 0; }
+label.value-choice:has(input:checked) {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  background: var(--bg);
+}
+label.value-choice:has(input:focus-visible) {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.value-number {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+  min-width: 1.2rem;
+  text-align: center;
+}
+.value-meaning {
+  font-size: 0.95rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.manual-error {
+  color: var(--accent);
+  font-weight: 600;
+}
+.manual-help { margin-top: 0.75rem; font-size: 0.95rem; }
+.manual-help h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0.9rem 0 0.4rem;
+}
+.manual-help p { margin: 0.45rem 0; }
+.manual-help strong { color: var(--fg); }
 figure.hexagram { margin: 1rem auto; width: fit-content; }
 /* The result's single visual: the Unicode hexagram as the figure, with the
    classical Chinese name beneath it, both centered.
@@ -297,7 +356,7 @@ blockquote p { margin: 0.3rem 0; }
 .hexagram-summary p { overflow-wrap: anywhere; }
 /* The stable line stands alone after the primary card; give it its own air. */
 .stable-note { font-style: italic; margin: 1.6rem 0.25rem; }
-.question-echo { white-space: pre-wrap; }
+.question-echo { white-space: pre-wrap; overflow-wrap: anywhere; }
 .visually-live {
   /* live region stays in the accessibility tree and always displayed (announcements
      must fire) — but collapse to zero height while empty so it adds no dead space */
@@ -338,7 +397,7 @@ footer a:hover { text-decoration-thickness: 2px; }
 
   <section id="step-question" aria-labelledby="question-heading">
     <div class="card" id="intro-card"></div>
-    <h2 id="question-heading">Hold a question (optional)</h2>
+    <h2 id="question-heading" tabindex="-1">Hold a question (optional)</h2>
     <label for="question">Your question, in your own words. It stays on this page and in memory only — never saved, never sent.</label>
     <textarea id="question" maxlength="500" rows="4"></textarea>
     <p class="muted" id="question-help">Up to 500 characters. Anything longer is shortened to 500.</p>
@@ -352,6 +411,10 @@ footer a:hover { text-decoration-thickness: 2px; }
       <div class="radio-row">
         <label><input type="radio" name="method" id="method-yarrow" value="yarrow">
           Yarrow stalks — the older probability profile</label>
+      </div>
+      <div class="radio-row">
+        <label><input type="radio" name="method" id="method-user" value="user">
+          User cast — record six lines cast by hand</label>
       </div>
       <div class="radio-row consent-row">
         <label><input type="checkbox" id="remember-method">
@@ -370,8 +433,48 @@ footer a:hover { text-decoration-thickness: 2px; }
   <section id="step-casting" aria-labelledby="casting-heading" hidden>
     <h2 id="casting-heading" tabindex="-1">Casting</h2>
     <p class="muted" id="casting-sub">Six lines arrive from the bottom up, as they were always cast.</p>
+    <div class="card" id="casting-echo-card" hidden>
+      <h3>Your question</h3>
+      <p id="casting-question-echo" class="question-echo"></p>
+    </div>
     <figure class="hexagram" id="casting-figure" role="img" aria-label="The emerging hexagram"></figure>
-    <div class="controls">
+    <div id="manual-casting" hidden>
+      <fieldset id="manual-values" aria-describedby="manual-progress manual-instructions">
+        <legend id="manual-values-legend">Final line value (6–9)</legend>
+        <div class="manual-choices">
+          <label class="value-choice" for="line-value-6">
+            <input type="radio" name="line-value" id="line-value-6" value="6">
+            <span class="value-number">6</span>
+            <span class="value-meaning">Old yin — broken line, changing</span>
+          </label>
+          <label class="value-choice" for="line-value-7">
+            <input type="radio" name="line-value" id="line-value-7" value="7">
+            <span class="value-number">7</span>
+            <span class="value-meaning">Young yang — solid line, stable</span>
+          </label>
+          <label class="value-choice" for="line-value-8">
+            <input type="radio" name="line-value" id="line-value-8" value="8">
+            <span class="value-number">8</span>
+            <span class="value-meaning">Young yin — broken line, stable</span>
+          </label>
+          <label class="value-choice" for="line-value-9">
+            <input type="radio" name="line-value" id="line-value-9" value="9">
+            <span class="value-number">9</span>
+            <span class="value-meaning">Old yang — solid line, changing</span>
+          </label>
+        </div>
+      </fieldset>
+      <p class="muted" id="manual-selection"></p>
+      <p class="manual-error" id="manual-error" role="note" hidden></p>
+      <div class="controls" id="manual-controls">
+        <button id="add-line" type="button" class="primary" disabled>Add line</button>
+        <button id="undo-line" type="button" disabled>Undo last line</button>
+        <button id="change-method" type="button">Change method</button>
+      </div>
+      <p id="manual-progress" class="manual-progress"></p>
+      <div class="manual-help muted" id="manual-instructions"></div>
+    </div>
+    <div class="controls" id="auto-controls">
       <button id="reveal-all" type="button">Reveal all</button>
     </div>
   </section>

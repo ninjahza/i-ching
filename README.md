@@ -45,8 +45,10 @@ One self-contained HTML file (~50 KB):
   verifier fail-closes on banned tokens (`eval`, `innerHTML`, `fetch`, dynamic
   import…), external resource attributes, hosting-context APIs
   (`location`, `postMessage`, storage probes…), and markup-smuggling tricks.
-- **Honest cryptography** — casts use `crypto.getRandomValues` only; when no
-  secure source exists, casting is declined rather than weakened.
+- **Honest cryptography** — automatic casts (Three coins and Yarrow stalks) use
+  `crypto.getRandomValues` only; when no secure source exists, automatic casting
+  is declined rather than weakened, while User cast remains available because
+  you supply your own line values.
 - **One external link, by design** — the footer attribution links to
   [James Legge's Wikipedia article](https://en.wikipedia.org/wiki/James_Legge)
   in a new tab with `rel="noopener noreferrer"` and no referrer.
@@ -56,42 +58,55 @@ after explicit consent; unchecking deletes it immediately.
 
 ## Casting methods
 
-Six lines are drawn one at a time and revealed **bottom-up**, as they were
+Six lines are recorded or drawn one at a time **bottom-up**, as they were
 always cast. Each line is one of four values — **7 young yang** (solid),
 **8 young yin** (broken), **9 old yang** and **6 old yin** — the latter two
 being *changing* lines, visibly marked in the figure. Changing lines flip to
 produce the related (transformed) hexagram shown alongside the primary one; a
 cast with no changing lines is simply stable.
 
-Both methods draw from `crypto.getRandomValues` only — one random byte per
-line, mapped by a fixed partition (no rejection, no modulo bias) — and differ
-only in how the byte is read:
+The app offers two automatic methods and one manual method:
 
-| Line value | Three coins (default) | Yarrow stalks |
-|---|---|---|
-| 6 — old yin (changing) | 1/8 | 1/16 |
-| 7 — young yang | 3/8 | 5/16 |
-| 8 — young yin | 3/8 | 7/16 |
-| 9 — old yang (changing) | 1/8 | 3/16 |
+- **Automatic casting (Three coins and Yarrow stalks)** draws from
+  `crypto.getRandomValues` only — one random byte per line, mapped by a fixed
+  partition (no rejection, no modulo bias) — and declines casting rather than
+  falling back to a weaker source if `crypto.getRandomValues` is unavailable:
 
-- **Three coins** is the later, quicker custom: three virtual coins
-  (head 3 / tail 2) sum to 6–9, giving every changing line the same 1-in-8
-  chance — a total change probability of 1/4 per line. Symmetric and easy to
-  do by hand with real coins.
-- **Yarrow stalks** reproduces the probability profile of the classical
-  stalk-counting ritual: changing yin (6) is rarest at 1/16, changing yang
-  (9) three times as likely at 3/16, and young yin (8) the most common line.
-  The stalk method historically favours yang change over yin change; a coin
-  cast cannot reproduce that asymmetry, which is why the app offers both.
+  | Line value | Three coins (default) | Yarrow stalks |
+  | --- | --- | --- |
+  | 6 — old yin (changing) | 1/8 | 1/16 |
+  | 7 — young yang | 3/8 | 5/16 |
+  | 8 — young yin | 3/8 | 7/16 |
+  | 9 — old yang (changing) | 1/8 | 3/16 |
 
-The profile of each method is declared next to its implementation in
-[`src/core/casting.ts`](src/core/casting.ts) and asserted by the test suite.
+  - **Three coins** is the later, quicker custom: three virtual coins
+    (head 3 / tail 2) sum to 6–9, giving every changing line the same 1-in-8
+    chance — a total change probability of 1/4 per line. Symmetric and easy to
+    do by hand with real coins.
+  - **Yarrow stalks** reproduces the probability profile of the classical
+    stalk-counting ritual: changing yin (6) is rarest at 1/16, changing yang
+    (9) three times as likely at 3/16, and young yin (8) the most common line.
+    The stalk method historically favours yang change over yin change; a coin
+    cast cannot reproduce that asymmetry, which is why the app offers both.
 
-**Remembering your method:** selecting coins or yarrow applies to the session
-by default. Only if you tick *Remember my method on this device* is exactly
-one word (your method choice) written to this browser's local storage;
-unchecking deletes it immediately. Your question and your casts are never
-stored under any setting.
+  The profile of each automatic method is declared next to its implementation in
+  [`src/core/casting.ts`](src/core/casting.ts) and asserted by the test suite.
+
+- **User cast** is for casting by hand with physical coins or yarrow stalks.
+  For each of the six lines (from line 1 at the bottom to line 6 at the top),
+  tap or click one of four numbered final-value choices (**6**, **7**, **8**,
+  or **9** — no text or numeric keyboard entry required) and confirm with
+  **Add line**; **Undo last line** removes the most recent entry before the
+  sixth line is confirmed. User cast uses the same canonical hexagram and
+  changing-line derivation without invoking any random number generator, so it
+  remains available even on devices without `crypto.getRandomValues`.
+
+**Remembering your method:** selecting Three coins, Yarrow stalks, or User cast
+applies to the current session by default. Only if you tick *Remember my method
+on this device* is that single method identifier (`coins`, `yarrow`, or `user`)
+written to this browser's local storage under `iching.method`; unchecking
+deletes it immediately. Your question, entered line values, and consultation
+results are never stored under any setting.
 
 ## Project layout
 

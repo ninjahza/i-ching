@@ -3,6 +3,7 @@
 // neutral, no predictions, no guarantees, no medical/legal/financial advice,
 // neutral across beliefs; corpus quotations and summaries are attributed.
 // Pure data: no DOM (purity.test.ts covers src/data/**).
+import type { LineValue } from "../core/line-values.ts";
 
 export const APP_TITLE = "I Ching — a consultation for reflection";
 
@@ -43,11 +44,11 @@ export const EXPLANATION: readonly ExplanationParagraph[] = [
   }
 ];
 
-/** C-3 / FR-003: honest decline when no secure random source exists. */
+/** C-3 / FR-003 / FR-012: method-specific messaging when no secure random source exists. */
 export const DECLINE_NO_RANDOM =
-  "Casting is unavailable on this device: it offers no secure random source " +
-  "(crypto.getRandomValues), and this app will not cast from a weaker one. " +
-  "Nothing else about the page is affected.";
+  "Automatic casting (Three coins and Yarrow stalks) is unavailable on this device: " +
+  "it offers no secure random source (crypto.getRandomValues), and this app will not " +
+  "cast from a weaker one. Select User cast above to record lines cast by hand.";
 
 /** C-2: notice when a question longer than the bound was shortened. */
 export const TRUNCATION_NOTICE =
@@ -116,3 +117,159 @@ export function identityText(num: number, name: string): string {
 export function trigramsText(upperName: string, lowerName: string): string {
   return `Trigrams: ${upperName} above · ${lowerName} below`;
 }
+
+/** Feature 004: User cast reviewed copy and accessible builders (FR-002..FR-008, FR-016). */
+export const AUTOMATIC_CAST_SUBTITLE =
+  "Six lines arrive from the bottom up, as they were always cast.";
+
+export const USER_CAST_SUBTITLE =
+  "Record six lines from the bottom up, one throw at a time.";
+
+export interface ManualGuideItem {
+  readonly lead: string;
+  readonly body: string;
+}
+
+export const USER_CAST_GUIDE_HEADING = "How to count a throw (6–9)";
+
+export const USER_CAST_GUIDE: readonly ManualGuideItem[] = [
+  {
+    lead: "Three coins: ",
+    body:
+      "Toss 3 coins together. Count heads = 3 and tails = 2, then add them up — " +
+      "3 tails = 6 · 2 tails + 1 head = 7 · 2 heads + 1 tail = 8 · 3 heads = 9.",
+  },
+  {
+    lead: "Yarrow stalks: ",
+    body:
+      "Start with 50 stalks and set 1 aside. Do 3 rounds: split into two piles, hold 1 " +
+      "from the right, clear groups of 4 from each pile, and put the leftovers aside. " +
+      "Divide the stalks left in your hand by 4 — 24 = 6 · 28 = 7 · 32 = 8 · 36 = 9.",
+  },
+  {
+    lead: "Six lines, bottom to top: ",
+    body:
+      "Pick that final 6–9 number (not a raw coin or stalk count) and press Add line " +
+      "six times. This app simply records what you choose.",
+  },
+];
+
+export interface ManualValueChoice {
+  readonly value: LineValue;
+  readonly name: string;
+  readonly lineKind: string;
+  readonly stability: string;
+  readonly summary: string;
+  readonly accessibleLabel: string;
+}
+
+export const MANUAL_VALUE_CHOICES: readonly ManualValueChoice[] = [
+  {
+    value: 6,
+    name: "Old yin",
+    lineKind: "broken line",
+    stability: "changing",
+    summary: "Old yin — broken, changing",
+    accessibleLabel: "6: Old yin, broken line, changing",
+  },
+  {
+    value: 7,
+    name: "Young yang",
+    lineKind: "solid line",
+    stability: "stable",
+    summary: "Young yang — solid, stable",
+    accessibleLabel: "7: Young yang, solid line, stable",
+  },
+  {
+    value: 8,
+    name: "Young yin",
+    lineKind: "broken line",
+    stability: "stable",
+    summary: "Young yin — broken, stable",
+    accessibleLabel: "8: Young yin, broken line, stable",
+  },
+  {
+    value: 9,
+    name: "Old yang",
+    lineKind: "solid line",
+    stability: "changing",
+    summary: "Old yang — solid, changing",
+    accessibleLabel: "9: Old yang, solid line, changing",
+  },
+];
+
+export function manualChoiceFor(value: LineValue): ManualValueChoice {
+  for (const choice of MANUAL_VALUE_CHOICES) {
+    if (choice.value === value) return choice;
+  }
+  throw new Error(`unknown manual line value: ${String(value)}`);
+}
+
+const POSITION_ORIENTATIONS = [
+  "bottom line",
+  "second from bottom",
+  "third from bottom",
+  "fourth from bottom",
+  "fifth from bottom",
+  "top line",
+] as const;
+
+export function manualPositionPhrase(position: number): string {
+  const orientation = POSITION_ORIENTATIONS[position - 1] ?? "line";
+  return `line ${String(position)} of 6 (${orientation})`;
+}
+
+export function manualProgressText(confirmedCount: number): string {
+  if (confirmedCount >= 6) {
+    return "All 6 of 6 lines recorded (bottom to top).";
+  }
+  const nextPos = confirmedCount + 1;
+  const orientation = POSITION_ORIENTATIONS[nextPos - 1] ?? "line";
+  const noun = confirmedCount === 1 ? "line" : "lines";
+  return `Line ${String(nextPos)} of 6 (${orientation}) — ${String(confirmedCount)} of 6 ${noun} recorded.`;
+}
+
+export const MANUAL_SELECTION_NONE =
+  "No line value selected yet. Choose 6, 7, 8, or 9, then activate Add line.";
+
+export function manualSelectionText(value: LineValue, position: number): string {
+  const choice = manualChoiceFor(value);
+  return `Selected for ${manualPositionPhrase(position)}: ${choice.accessibleLabel}. Activate Add line to record it.`;
+}
+
+export const MANUAL_INVALID_VALUE_ERROR =
+  "Choose one of the final line values — 6, 7, 8, or 9 — before adding a line. Recorded lines and progress were not changed.";
+
+export const MANUAL_CANCEL_ANNOUNCEMENT =
+  "Returned to casting method selection. Unfinished lines were discarded.";
+
+export function announceManualCastingBegins(): string {
+  return "User cast begins. Choose 6, 7, 8, or 9 for line 1 of 6 (bottom line), then activate Add line.";
+}
+
+export function announceManualSelection(value: LineValue, position: number): string {
+  const choice = manualChoiceFor(value);
+  return `Selected ${choice.accessibleLabel} for ${manualPositionPhrase(position)}. Activate Add line to record it.`;
+}
+
+export function announceManualLineAdded(position: number, value: LineValue, lineName: string): string {
+  const choice = manualChoiceFor(value);
+  return `Recorded line ${String(position)} of 6: ${lineName} (${choice.accessibleLabel}). Next: ${manualPositionPhrase(position + 1)}.`;
+}
+
+export function announceManualFinalLineAndResult(
+  value: LineValue,
+  lineName: string,
+  num: number,
+  name: string,
+  related: { readonly num: number; readonly name: string } | null,
+): string {
+  const choice = manualChoiceFor(value);
+  return `Recorded line 6 of 6 (top line): ${lineName} (${choice.accessibleLabel}). ${announceResultText(num, name, related)}`;
+}
+
+export function announceManualUndo(removedPosition: number, removedValue: LineValue): string {
+  const choice = manualChoiceFor(removedValue);
+  return `Removed line ${String(removedPosition)} of 6 (${choice.accessibleLabel}). Now on ${manualPositionPhrase(removedPosition)}.`;
+}
+

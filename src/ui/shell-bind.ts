@@ -11,8 +11,24 @@ export interface Shell {
   castButton: HTMLButtonElement;
   noRandom: HTMLElement;
   castingHeading: HTMLElement;
+  castingSub: HTMLElement;
+  castingEchoCard: HTMLElement;
+  castingQuestionEcho: HTMLElement;
   castingFigure: HTMLElement;
+  autoControls: HTMLElement;
   revealAllButton: HTMLButtonElement;
+  manualCasting: HTMLElement;
+  manualProgress: HTMLElement;
+  manualInstructions: HTMLElement;
+  manualValuesFieldset: HTMLElement;
+  manualValuesLegend: HTMLElement;
+  lineValueRadios: readonly [HTMLInputElement, HTMLInputElement, HTMLInputElement, HTMLInputElement];
+  manualSelection: HTMLElement;
+  manualError: HTMLElement;
+  manualControls: HTMLElement;
+  addLineButton: HTMLButtonElement;
+  undoLineButton: HTMLButtonElement;
+  changeMethodButton: HTMLButtonElement;
   resultSection: HTMLElement;
   resultHeading: HTMLElement;
   primaryFigure: HTMLElement;
@@ -41,6 +57,7 @@ export interface Shell {
   appAttribution: HTMLElement;
   methodCoins: HTMLInputElement;
   methodYarrow: HTMLInputElement;
+  methodUser: HTMLInputElement;
   rememberMethod: HTMLInputElement;
 }
 
@@ -94,8 +111,29 @@ export function queryShell(): Shell {
     castButton: btn("cast"),
     noRandom: el("no-random"),
     castingHeading: el("casting-heading"),
+    castingSub: el("casting-sub"),
+    castingEchoCard: el("casting-echo-card"),
+    castingQuestionEcho: el("casting-question-echo"),
     castingFigure: el("casting-figure") as HTMLElement,
+    autoControls: el("auto-controls"),
     revealAllButton: btn("reveal-all"),
+    manualCasting: el("manual-casting"),
+    manualProgress: el("manual-progress"),
+    manualInstructions: el("manual-instructions"),
+    manualValuesFieldset: el("manual-values"),
+    manualValuesLegend: el("manual-values-legend"),
+    lineValueRadios: [
+      checkboxOrRadio("line-value-6"),
+      checkboxOrRadio("line-value-7"),
+      checkboxOrRadio("line-value-8"),
+      checkboxOrRadio("line-value-9"),
+    ],
+    manualSelection: el("manual-selection"),
+    manualError: el("manual-error"),
+    manualControls: el("manual-controls"),
+    addLineButton: btn("add-line"),
+    undoLineButton: btn("undo-line"),
+    changeMethodButton: btn("change-method"),
     resultSection: result,
     resultHeading: el("result-heading"),
     primaryFigure: el("primary-figure"),
@@ -124,6 +162,7 @@ export function queryShell(): Shell {
     appAttribution: el("app-attribution"),
     methodCoins: checkboxOrRadio("method-coins"),
     methodYarrow: checkboxOrRadio("method-yarrow"),
+    methodUser: checkboxOrRadio("method-user"),
     rememberMethod: checkboxOrRadio("remember-method")
   };
 }
@@ -138,5 +177,8 @@ export function showStep(shell: Shell, which: "question" | "casting" | "result")
     : which === "casting"
       ? shell.castingHeading
       : shell.resultHeading;
+  if (!heading.hasAttribute("tabindex")) {
+    heading.setAttribute("tabindex", "-1");
+  }
   heading.focus();
 }
