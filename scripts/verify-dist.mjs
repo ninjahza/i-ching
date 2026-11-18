@@ -49,8 +49,8 @@ const BANNED = [
   [/\bWebAssembly\b/, "WebAssembly"],
   [/(?<![\w$.])Function\s*\(/, "Function( constructor call"],
   [/(?:^|[^\w$.])import\s*\(/, "dynamic import("],
-  [/(?:^|[;\s{}])import\s*[{*\w]/m, "leftover module import"],
-  [/(?:^|[;\s{}])export\s*[{*\w]/m, "leftover module export"],
+  [/(?:^|[^\w$.])import(?:\s|[\{*"'])/, "leftover module import"],
+  [/(?:^|[^\w$.])export(?:\s|[\{*"'])/, "leftover module export"],
   // F-5: computed-member obfuscation gadgets — legitimate compiled code never emits these.
   [/\b(?:document|window|self|top|parent|frames|globalThis|localStorage|sessionStorage|navigator|indexedDB|location)\s*\[/, "computed member access on a web/API global"],
   [/\bMath\s*\[/, "computed Math access"],
