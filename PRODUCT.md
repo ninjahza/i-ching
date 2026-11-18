@@ -26,7 +26,7 @@ Honest and private by construction: one offline HTML file, zero network/tracking
 
 ## Capabilities and Constraints
 
-- Ships as one self-contained `dist/index.html` (~50 KB), built from strict TypeScript with zero runtime dependencies; build must stay byte-deterministic.
+- Ships as one self-contained `dist/index.html` (~105 KB), built from strict TypeScript with zero runtime dependencies; build must stay byte-deterministic.
 - Strict CSP (`default-src 'none'`; no external fonts, images, or connections). Visual work is limited to inline CSS, system fonts, Unicode glyphs, and inline markup.
 - `npm run verify` enforces security invariants B-1…B-14 (no `innerHTML`, `eval`, `fetch`, storage probes, external resource attributes, etc.).
 - Only persistence: the selected casting-method identifier (`coins`, `yarrow`, or `user`) under `iching.method`, stored only after explicit consent. Questions, entered line values, and results are never stored or sent.

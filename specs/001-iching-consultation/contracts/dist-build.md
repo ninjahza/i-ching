@@ -32,7 +32,7 @@ This is the production contract for the build pipeline: any artifact failing **a
 
 ## Release checklist gate
 
-Before shipping any dist: B-1…B-12 green via automated run · quickstart §6 offline acceptance pass recorded · content review (§7) recorded · accessibility pass (§6 step 6) recorded.
+Before shipping any dist: B-1…B-14 green via automated run · quickstart §6 offline acceptance pass recorded · content review (§7) recorded · accessibility pass (§6 step 6) recorded. (B-13/B-14 binding per Hosting lockdown below, which applies to this project's public deployment.)
 
 ## Hosting lockdown (public URL)
 

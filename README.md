@@ -36,7 +36,7 @@ output isn't reproducible or a runtime dependency sneaks in.
 
 ## What ships
 
-One self-contained HTML file (~50 KB):
+One self-contained HTML file (~105 KB):
 
 - **Zero runtime dependencies** — the bundle is built with esbuild from strict
   TypeScript; nothing is fetched at runtime (CSP `default-src 'none'`).
