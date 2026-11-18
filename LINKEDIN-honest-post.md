@@ -46,7 +46,8 @@ slot machine with a serif font.
 One rule for product and process: say what it does, do what you said, let anyone check.
 Invariants first, generate second, verify mechanically.
 
-MIT-licensed, runs offline on a phone forever. Open the verifier first — it's the only
-part that can't be charmed.
+MIT-licensed, runs offline on a phone forever. Or try it now: i-ching.co.za — same app,
+carries its own CSP, nothing can leave the page. The verifier is the only part that
+can't be charmed.
 
 #IChing #PrivacyByDesign #BuildInPublic #AIEngineering #TypeScript #WebSecurity

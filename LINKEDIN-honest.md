@@ -108,7 +108,10 @@ does, do what you said, and let anyone check.** Reflection, not prediction. Trus
 can prove, not ask for. Invariants first, generate second, verify mechanically.
 
 It's MIT-licensed: one HTML file, ~105 KB, runs offline on a phone from your Downloads
-folder, forever. Open the verifier first if you like. It's the most honest part of the
-whole thing, because it's the only part that can't be charmed.
+folder, forever. Or don't download anything yet — [i-ching.co.za](https://i-ching.co.za)
+is live, and it is as private as every sentence above claims: the page carries its own
+CSP and cannot call home even if it wanted to — no `fetch`, no XHR, no beacons, verified
+in the shipped artifact itself. Open the verifier first if you like. It's the most
+honest part of the whole thing, because it's the only part that can't be charmed.
 
 #IChing #PrivacyByDesign #BuildInPublic #AIEngineering #TypeScript #WebSecurity
